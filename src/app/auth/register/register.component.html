@@ -1,0 +1,15 @@
+<form [formGroup]="registerPage" (ngSubmit)="submitForm(registerPage.value)">
+
+    <input type="text" class="spacing" formControlName="email" placeholder="enter email"><br>
+   <div class="emailValidation" *ngIf=" emailSubmitStatus && registerPage.controls['email'].invalid">enter valid email</div><br>
+    <input type="text" class="spacing" formControlName="password" placeholder="enter password"><br>
+    <div class="emailValidation" *ngIf=" emailSubmitStatus && registerPage.controls['password'].invalid">enter valid password</div><br>
+    <input type="text" class="spacing" formControlName="fullname" placeholder="enter fullname"><br>
+    <div class="emailValidation" *ngIf=" emailSubmitStatus && registerPage.controls['fullname'].invalid">enter valid name</div><br>
+
+    <input type="text" class="spacing" formControlName="companyname" placeholder="enter companyname"><br>
+    <div class="emailValidation" *ngIf=" emailSubmitStatus && registerPage.controls['companyname'].invalid">enter valid companyname</div><br>
+
+    <button type="submit">Register</button>
+
+</form>

@@ -1,0 +1,13 @@
+
+<form [formGroup]="loginPage" (ngSubmit)="submitLoginForm(loginPage.value)">
+
+    <input type="text" class="loginFieldStyle" formControlName="loginEmail" placeholder="enter email"><br>
+    <div class="emailValidation" *ngIf=" emailSubmitStatus1 && loginPage.controls['loginEmail'].invalid">enter valid email</div><br>
+
+    <input type="text" class="loginFieldStyle" formControlName="loginPassword" placeholder="enter password"><br>
+    <div class="emailValidation" *ngIf=" emailSubmitStatus1 && loginPage.controls['loginPassword'].invalid">enter valid email</div><br>
+
+    <button class="spaceForButton" type="submit">Login</button>
+    <button class="spaceForButton" routerLink="register">register</button>
+
+</form>
