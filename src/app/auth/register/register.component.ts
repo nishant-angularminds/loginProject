@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -11,8 +12,9 @@ export class RegisterComponent implements OnInit{
   registerPage:FormGroup;
   emailSubmitStatus:any;
   addData:any;
+  registerSave:any=false;
 
-  constructor() {
+  constructor(private router1:Router) {
 
 
   }
@@ -53,9 +55,29 @@ export class RegisterComponent implements OnInit{
             this.addData = tempArrayR;
           }
 
+          this.addData.find((data:any)=> {
+
+            console.log(data['email']);
+
+            if(data['email']==formData.email) {
+
+              this.registerSave = true;
+              alert("are you mad")
+
+            }
+            
+
+          });
+
+          if(this.registerSave==false) {
+
           this.addData.push(formData);
 
+          }
+
           localStorage.setItem('userList',JSON.stringify(this.addData));
+          this.router1.navigateByUrl('');
+
       
     }
 

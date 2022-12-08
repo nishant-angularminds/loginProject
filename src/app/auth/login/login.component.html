@@ -1,13 +1,31 @@
+<div class="main" style="background-color: #56baed;height: 100vh;">
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+      <h2 class="active"> Sign In </h2>
+      <h2 class="inactive underlineHover spaceForButton" routerLink="register">Sign Up</h2>
+  
+      <!-- Icon -->
+     
+  
+      <!-- Login Form -->
+     <form [formGroup]="loginPage" (ngSubmit)="submitLoginForm(loginPage.value)">
 
-<form [formGroup]="loginPage" (ngSubmit)="submitLoginForm(loginPage.value)">
+    <input type="text" id="login" class="fadeIn second loginFieldStyle" formControlName="loginEmail" placeholder="Email"><br>
+    <div class="emailValidation" *ngIf=" emailSubmitStatus1 && loginPage.controls['loginEmail'].invalid">Invalid Email</div><br>
 
-    <input type="text" class="loginFieldStyle" formControlName="loginEmail" placeholder="enter email"><br>
-    <div class="emailValidation" *ngIf=" emailSubmitStatus1 && loginPage.controls['loginEmail'].invalid">enter valid email</div><br>
+    <input type="text" id="password" class="fadeIn third loginFieldStyle" formControlName="loginPassword" placeholder="Password"><br>
+    <div class="emailValidation" *ngIf=" emailSubmitStatus1 && loginPage.controls['loginPassword'].invalid">Invalid Password</div><br>
 
-    <input type="text" class="loginFieldStyle" formControlName="loginPassword" placeholder="enter password"><br>
-    <div class="emailValidation" *ngIf=" emailSubmitStatus1 && loginPage.controls['loginPassword'].invalid">enter valid email</div><br>
-
-    <button class="spaceForButton" type="submit">Login</button>
-    <button class="spaceForButton" routerLink="register">register</button>
+    <input class="spaceForButton fadeIn fourth" type="submit"  value="Log In">
 
 </form>
+  
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+        <a class="underlineHover" href="#">Forgot Password?</a>
+      </div>
+  
+    </div>
+  </div>
+</div>
