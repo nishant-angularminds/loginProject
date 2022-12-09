@@ -62,7 +62,7 @@ export class RegisterComponent implements OnInit{
             if(data['email']==formData.email) {
 
               this.registerSave = true;
-              alert("are you mad")
+              alert("you are already register")
 
             }
             

@@ -302,3 +302,56 @@ font-family: 'Inter', sans-serif;
 font-family: 'Montserrat', sans-serif;
 color: red;
 }
+
+#formContent {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  padding: 0px;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+@media screen and (max-width:720px) {
+  
+  #formContent {
+
+    width: 60%;
+
+  }
+
+  input[type=button], input[type=submit], input[type=reset]  {
+  
+  padding: 13px 50px;
+  }
+
+}
+
+@media screen and (max-width:360px) {
+  
+  #formContent {
+
+    width: 80%;
+    /* padding: 20px; */
+
+  }
+
+  input[type=button], input[type=submit], input[type=reset]  {
+
+    padding: 10px 30px;
+
+
+  }
+
+  input[type=text] {
+
+    padding: 10px 22px;
+
+  }
+
+}

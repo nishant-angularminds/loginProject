@@ -9,6 +9,8 @@ import { DataInfoService } from 'src/app/data-info.service';
 })
 export class ProfileComponent implements OnInit{
 
+  currentUserEmail:any;
+
   constructor(private routerforlogin:Router,private serviceForProfile:DataInfoService) {
 
     var tempArray = JSON.parse(localStorage.getItem('loginUser')!);
@@ -21,20 +23,25 @@ export class ProfileComponent implements OnInit{
 
     else {
 
+      this.currentUserEmail = tempArray['email'];
+      
       this.routerforlogin.navigateByUrl('home/profile');
 
     }
 
     console.log("i am profile");
-    
-    
+   
 
   }
+
 
   ngOnInit(): void {
   
 
   }
+
+ 
+
 
   deleteLocal() {
 
