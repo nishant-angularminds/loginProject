@@ -1,24 +1,41 @@
-
 <nav class="navbar navbar-expand-lg customNavBar">
   <div class="container-fluid">
     <a class="navbar-brand" href="#"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-        <li class="nav-item" style="justify-content: space-between;"   data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-          <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-solid fa-user"></i>
+        <li
+          class="nav-item"
+          style="justify-content: space-between"
+          data-bs-toggle="offcanvas"
+          href="#offcanvasExample"
+          role="button"
+          aria-controls="offcanvasExample"
+        >
+          <a
+            class="nav-link"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img
+              src="assets/profile.png"
+              class="profileIcon"
+              alt=""
+              width="30px"
+            />
           </a>
-          
         </li>
-      
       </ul>
-      <form class="d-flex" role="search" style="margin-right:600px ;">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="sButton" type="submit">Search</button>
+      <form class="d-flex serachData" role="search" style="margin-right: 600px">
+        <input
+          class="form-control me-2 searchElement searchTextData"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="sButton mobileSearchButton" type="submit">Search</button>
       </form>
 
       <span class="companyName">NjCompany</span>
@@ -26,29 +43,42 @@
   </div>
 </nav>
 
-  
-  <div class="offcanvas offcanvas-start customSideNav" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasExampleLabel"></h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
+<div
+  class="offcanvas offcanvas-start customSideNav"
+  tabindex="-1"
+  id="offcanvasExample"
+  aria-labelledby="offcanvasExampleLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel"></h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
 
-    <div class="image"><img src="assets/steve.jpeg" class="imgData" alt=""></div>
-    <div class="name"><h6>{{currentUserEmail}}</h6></div>
+  <div class="image">
+    <img src="assets/steve.jpeg" class="imgData" alt="" />
+  </div>
+  <div class="name">
+    <h6>{{ currentUserEmail }}</h6>
+  </div>
 
-    <div class="menus">
-      <div>
+  <div class="menus">
+    <div>
       <div class="menuLinks">Home</div>
-      <div class="menuLinks">Profile</div>
+      <div class="menuLinks" routerLink="my-profile">Profile</div>
       <div class="menuLinks">Setting</div>
-      <div class="menuLinks" >About</div>
-        </div>
-
+      <div class="menuLinks">About</div>
     </div>
+  </div>
 
-    <div class="logOut" (click)="deleteLocal()" class="logImg">
+  <div class="logOut" (click)="deleteLocal()" class="logImg">
+    <i class="fa-solid fa-right-from-bracket"></i>
+  </div>
+</div>
 
-      <i class="fa-solid fa-right-from-bracket"></i>
-    </div>
-
-    </div>
+<h1>hello</h1>
+<router-outlet></router-outlet>

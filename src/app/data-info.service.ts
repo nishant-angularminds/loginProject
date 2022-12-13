@@ -1,39 +1,20 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DataInfoService {
+  statusSer: any = false;
 
-  statusSer:any=false;
+  profileAvailable: any = false;
 
-  profileAvailable:any = false;
+  constructor() {}
 
-  constructor() { }
-
-
-  setData(ss:any) {
-
+  setData(ss: any) {
     this.statusSer = ss;
-
   }
 
   getData() {
-
     return this.statusSer;
   }
-
-
-  // setProfileData(profileData:any) {
-
-  //   this.profileAvailable = profileData;
-
-  // }
-
-  // getProfileData() {
-
-  //   return this.profileAvailable;
-  // }
-
-
 }

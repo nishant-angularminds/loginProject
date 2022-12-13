@@ -1,25 +1,75 @@
-<div class="main" style="background-color: #56baed;height: 100vh;">
-
-<div class="wrapper fadeInDown">
+<div class="main" style="background-color: #56baed; height: 100vh">
+  <div class="wrapper fadeInDown">
     <div id="formContent">
+      <h2 class="active">Sign Up</h2>
 
-        <h2 class="active"> Sign Up </h2>
+      <form
+        [formGroup]="registerPage"
+        (ngSubmit)="submitForm(registerPage.value)"
+      >
+        <input
+          type="text"
+          id="login"
+          class="fadeIn first spacing"
+          formControlName="email"
+          placeholder="Email"
+        /><br />
+        <div
+          class="emailValidation"
+          *ngIf="emailSubmitStatus && registerPage.controls['email'].invalid"
+        >
+          Invalid Email
+        </div>
+        <br />
+        <input
+          type="text"
+          id="password"
+          class="fadeIn second spacing"
+          formControlName="password"
+          placeholder="Password"
+          autocomplete="off"
+        /><br />
+        <div
+          class="emailValidation"
+          *ngIf="emailSubmitStatus && registerPage.controls['password'].invalid"
+        >
+          Invalid Password
+        </div>
+        <br />
+        <input
+          type="text"
+          class="spacing fadeIn third"
+          formControlName="fullname"
+          placeholder="FullName"
+          autocomplete="off"
+        /><br />
+        <div
+          class="emailValidation"
+          *ngIf="emailSubmitStatus && registerPage.controls['fullname'].invalid"
+        >
+          Invalid Name
+        </div>
+        <br />
 
-<form [formGroup]="registerPage" (ngSubmit)="submitForm(registerPage.value)">
+        <input
+          type="text"
+          class="spacing fadeIn fourth"
+          formControlName="companyname"
+          placeholder="Company Name"
+          autocomplete="off"
+        /><br />
+        <div
+          class="emailValidation"
+          *ngIf="
+            emailSubmitStatus && registerPage.controls['companyname'].invalid
+          "
+        >
+          Invalid CompanyName
+        </div>
+        <br />
 
-    <input type="text" id="login" class="fadeIn first spacing" formControlName="email" placeholder="Email"><br>
-   <div class="emailValidation" *ngIf=" emailSubmitStatus && registerPage.controls['email'].invalid">Invalid Email</div><br>
-    <input type="text" id="password" class="fadeIn second spacing" formControlName="password" placeholder="Password"><br>
-    <div class="emailValidation" *ngIf=" emailSubmitStatus && registerPage.controls['password'].invalid">Invalid Password</div><br>
-    <input type="text" class="spacing fadeIn third" formControlName="fullname" placeholder="FullName"><br>
-    <div class="emailValidation" *ngIf=" emailSubmitStatus && registerPage.controls['fullname'].invalid">Invalid Name</div><br>
-
-    <input type="text" class="spacing fadeIn fourth" formControlName="companyname" placeholder="Company Name"><br>
-    <div class="emailValidation" *ngIf=" emailSubmitStatus && registerPage.controls['companyname'].invalid">Invalid CompanyName</div><br>
-
-    <input type="submit" class="fadeIn fisth" value="Sign Up">
-
-</form>
-</div>
-</div>
+        <input type="submit" class="fadeIn fisth" value="Sign Up" />
+      </form>
+    </div>
+  </div>
 </div>

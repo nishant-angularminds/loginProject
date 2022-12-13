@@ -5,50 +5,32 @@ import { DataInfoService } from 'src/app/data-info.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent implements OnInit{
+export class ProfileComponent implements OnInit {
+  currentUserEmail: any;
 
-  currentUserEmail:any;
-
-  constructor(private routerforlogin:Router,private serviceForProfile:DataInfoService) {
-
+  constructor(
+    private routerforlogin: Router,
+    private serviceForProfile: DataInfoService
+  ) {
     var tempArray = JSON.parse(localStorage.getItem('loginUser')!);
 
-    if(tempArray==null) {
-
+    if (tempArray == null) {
       this.routerforlogin.navigateByUrl('');
-      
-    }
-
-    else {
-
+    } else {
       this.currentUserEmail = tempArray['email'];
-      
-      this.routerforlogin.navigateByUrl('home/profile');
 
+      this.routerforlogin.navigateByUrl('home/profile');
     }
 
-    console.log("i am profile");
-   
-
+    console.log('i am profile');
   }
 
-
-  ngOnInit(): void {
-  
-
-  }
-
- 
-
+  ngOnInit(): void {}
 
   deleteLocal() {
-
-    localStorage.removeItem('loginUser')
+    localStorage.removeItem('loginUser');
     this.routerforlogin.navigateByUrl('');
-
-
   }
-
 }

@@ -1,55 +1,52 @@
-
 * {
-
   margin: 0%;
-  /* padding: 0%; */
 }
 
 .customNavBar {
-
   background-color: skyblue;
 }
 
-.companyName {
+.customNavBarResponsive {
+  display: none;
+}
 
+.profileIcon {
+  border-radius: 10px;
+}
+
+.companyName {
   color: white;
-  font-family: 'Arimo', sans-serif;
-font-family: 'Inter', sans-serif;
-font-family: 'Kdam Thmor Pro', sans-serif;
-font-family: 'Montserrat', sans-serif;
-font-family: 'Oswald', sans-serif;
-font-size: 30px;
+  font-family: "Arimo", sans-serif;
+  font-family: "Inter", sans-serif;
+  font-family: "Kdam Thmor Pro", sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-family: "Oswald", sans-serif;
+  font-size: 30px;
 }
 
 .customSideNav {
-
   background-color: skyblue;
   display: flex;
   width: 300px;
 }
 
 .imgData {
-
-  width:140px;
-  height:120px;
+  width: 140px;
+  height: 120px;
   border-radius: 200px;
-
 }
 
 .image {
-
   display: flex;
   justify-content: center;
 }
 
 .name {
-
-text-align: center;
-margin-top: 10px;
+  text-align: center;
+  margin-top: 10px;
 }
 
 .menus {
-
   width: auto;
   height: auto;
   display: flex;
@@ -58,7 +55,6 @@ margin-top: 10px;
 }
 
 .menuLinks {
-
   width: 230px;
   height: 24px;
   background-color: white;
@@ -67,31 +63,26 @@ margin-top: 10px;
   border-radius: 3px;
   display: flex;
   align-items: center;
-  font-family: 'Arimo', sans-serif;
-font-family: 'Inter', sans-serif;
-font-family: 'Kdam Thmor Pro', sans-serif;
-font-family: 'Montserrat', sans-serif;
-font-family: 'Oswald', sans-serif;
-padding-left: 10px;
-font-size: 20px;
+  font-family: "Arimo", sans-serif;
+  font-family: "Inter", sans-serif;
+  font-family: "Kdam Thmor Pro", sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-family: "Oswald", sans-serif;
+  padding-left: 10px;
+  font-size: 20px;
 }
 
 .menuLinks:hover {
-
   background-color: rgb(255, 218, 218);
 }
 
 .logImg {
-
   font-size: 50px;
-  /* margin:auto 0px; */
   margin: auto auto;
   cursor: pointer;
-
 }
 
 .sButton {
-
   width: 80px;
   height: 35px;
   color: black;
@@ -104,8 +95,75 @@ font-size: 20px;
 }
 
 .sButton:hover {
-
-  background-color:sandybrown;
+  background-color: sandybrown;
   color: white;
+}
 
+.searchElement {
+  font-family: "Arimo", sans-serif;
+  font-family: "Inter", sans-serif;
+  font-family: "Kdam Thmor Pro", sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-family: "Oswald", sans-serif;
+  font-family: "Roboto Slab", serif;
+}
+
+@media screen and (max-width: 720px) {
+  #navbarSupportedContent {
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+  }
+
+  .customNavBar {
+    width: 720px;
+  }
+
+  .serachData {
+    margin-left: 150px;
+  }
+
+  .searchTextData {
+    width: 240px;
+  }
+
+  .customSideNav {
+    width: 250px;
+  }
+
+  .companyName {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .customNavBar {
+    width: 100vw;
+  }
+
+  .serachData {
+    margin-left: 30px;
+    width: 100vw;
+  }
+
+  #navbarSupportedContent {
+    width: 230px;
+  }
+
+  .searchTextData {
+    width: 180px;
+    height: 30px;
+  }
+
+  .mobileSearchButton {
+    height: 30px;
+  }
+
+  .customSideNav {
+    width: 230px;
+  }
+
+  .menuLinks {
+    width: 200px;
+  }
 }
