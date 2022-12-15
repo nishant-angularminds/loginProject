@@ -49,7 +49,7 @@
   id="offcanvasExample"
   aria-labelledby="offcanvasExampleLabel"
 >
-  <div class="offcanvas-header">
+  <div class="offcanvas-header p-3">
     <h5 class="offcanvas-title" id="offcanvasExampleLabel"></h5>
     <button
       type="button"
@@ -69,7 +69,7 @@
   <div class="menus">
     <div>
       <div class="menuLinks">Home</div>
-      <div class="menuLinks" routerLink="my-profile">Profile</div>
+      <div class="menuLinks">Profile</div>
       <div class="menuLinks">Setting</div>
       <div class="menuLinks">About</div>
     </div>
@@ -80,5 +80,39 @@
   </div>
 </div>
 
-<h1>hello</h1>
-<router-outlet></router-outlet>
+<div class="w-100 d-flex justify-content-center align-items-center h-75 mt-5">
+  <div
+    class="w-50 h-75 d-flex justify-content-center bg-info text-white align-items-center rounded"
+  >
+    <div class="">
+      <img
+        src="assets/steve.jpeg"
+        class="rounded-circle mb-5"
+        width="180px"
+        height="160px"
+      />
+    </div>
+    <div class="p-3 mt-5 ms-5">
+      <div class="fontStyle mb-4"><b>Name: </b>{{data1?.['name']}}</div>
+      <div class="fontStyle mb-4">
+        <b>Gmail: </b>{{data1?.['_org']['email']}}
+      </div>
+      <div class="fontStyle mb-4">
+        <b>Company Name: </b>{{data1?.['_org']['name']}}
+      </div>
+      <div class="d-flex justify-content-end">
+        <button
+          type="button"
+          routerLink=""
+          (click)="deleteLocal()"
+          class="btn btn-light py-2 px-3"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MzlhZGFmMGQ2M2Y4NmU5NzllMjlhZjYiLCJpYXQiOjE2NzEwOTQyNTMsImV4cCI6MTY3MTE4MDY1MywidHlwZSI6ImFjY2VzcyJ9.slTOlFr5ZiNOyPVd1U0g-Onzc5cBI8UQ2xUHq7zpVRU -->
+<!-- // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2Mzk5N2NhMGQ2M2Y4NmU5NzllMjZiZTUiLCJpYXQiOjE2NzEwOTQzMjYsImV4cCI6MTY3MTE4MDcyNiwidHlwZSI6ImFjY2VzcyJ9.YxUqqhZYIHMdgEODKuRNTJo12OX0rVneL3Z3yJlSTRk -->

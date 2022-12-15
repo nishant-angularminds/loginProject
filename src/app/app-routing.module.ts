@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { MyProfileComponent } from './home/my-profile/my-profile.component';
 import { ProfileComponent } from './home/profile/profile.component';
 import { LoginAuthGuard, RegisterAuthGuard } from './login-auth.guard';
 
@@ -10,6 +9,7 @@ const routes: Routes = [
   {
     path: 'Auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+
   },
   {
     path: 'home',
@@ -19,7 +19,7 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
-    canActivate: [RegisterAuthGuard],
+    canActivate: [RegisterAuthGuard]
   },
   {
     path: 'home/profile',

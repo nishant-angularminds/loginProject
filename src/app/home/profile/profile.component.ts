@@ -9,28 +9,39 @@ import { DataInfoService } from 'src/app/data-info.service';
 })
 export class ProfileComponent implements OnInit {
   currentUserEmail: any;
+  data1: any;
 
   constructor(
     private routerforlogin: Router,
     private serviceForProfile: DataInfoService
   ) {
-    var tempArray = JSON.parse(localStorage.getItem('loginUser')!);
+    console.log('hello');
+    console.log(localStorage.getItem('tokenList'));
 
-    if (tempArray == null) {
-      this.routerforlogin.navigateByUrl('');
-    } else {
-      this.currentUserEmail = tempArray['email'];
+    this.serviceForProfile.getLoginData().subscribe(
+      (data) => {
+        this.data1 = data;
+        console.log(this.data1);
+      },
+      (error) => {
+        console.log(error['message']);
+      }
+    );
 
-      this.routerforlogin.navigateByUrl('home/profile');
-    }
+    // var tokenCheck = localStorage.getItem('tokenList');
 
-    console.log('i am profile');
+    // if (this.serviceForProfile.getTokenInLocalStorage() == null) {
+    //   console.log('blank');
+
+    //   this.routerforlogin.navigateByUrl('');
+    // } else {
+    //   this.routerforlogin.navigateByUrl('home/profile');
+    // }
   }
 
   ngOnInit(): void {}
 
   deleteLocal() {
-    localStorage.removeItem('loginUser');
-    this.routerforlogin.navigateByUrl('');
+    this.serviceForProfile.removeToken();
   }
 }

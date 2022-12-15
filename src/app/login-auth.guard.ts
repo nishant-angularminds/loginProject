@@ -24,14 +24,13 @@ export class LoginAuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    var statusLocal = JSON.parse(localStorage.getItem('loginUser')!);
-    console.log(statusLocal);
+    var statusLocal = localStorage.getItem('tokenList');
 
     if (statusLocal == null) {
       this.router1.navigateByUrl('');
+
       return false;
     } else {
-      // this.router1.navigateByUrl('home/profile');
       return true;
     }
   }
@@ -51,13 +50,12 @@ export class RegisterAuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    var statusLocal = JSON.parse(localStorage.getItem('loginUser')!);
-    console.log(statusLocal);
+    var tokenDemo = localStorage.getItem('tokenList');
 
-    if (statusLocal == null) {
+    if (tokenDemo == null) {
       return true;
     } else {
-      this.router2.navigateByUrl('home/profile');
+      this.router2.navigateByUrl('/home/profile');
       return false;
     }
   }

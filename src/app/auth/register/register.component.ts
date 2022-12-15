@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DataInfoService } from 'src/app/data-info.service';
 
 @Component({
   selector: 'app-register',
@@ -10,10 +11,8 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
   registerPage: FormGroup;
   emailSubmitStatus: any;
-  addData: any;
-  registerSave: any = false;
 
-  constructor(private router1: Router) {}
+  constructor(private router1: Router,private serviceObject:DataInfoService) {}
 
   ngOnInit(): void {
     this.registerPage = new FormGroup({
@@ -26,12 +25,12 @@ export class RegisterComponent implements OnInit {
         Validators.required,
         Validators.minLength(6),
       ]),
-      fullname: new FormControl('', [
+      name: new FormControl('', [
         Validators.required,
         Validators.maxLength(50),
         Validators.pattern('^[a-zA-Z ]*$'),
       ]),
-      companyname: new FormControl('', [
+      company: new FormControl('', [
         Validators.required,
         Validators.maxLength(50),
         Validators.pattern('^[a-zA-Z ]*$'),
@@ -41,37 +40,29 @@ export class RegisterComponent implements OnInit {
 
   submitForm(formData: any) {
     console.log(formData);
+    
     this.emailSubmitStatus = true;
 
+
     if (
-      this.registerPage.controls['fullname'].valid &&
+      this.registerPage.controls['name'].valid &&
       this.registerPage.controls['email'].valid &&
       this.registerPage.controls['password'].valid &&
-      this.registerPage.controls['companyname'].valid
+      this.registerPage.controls['company'].valid
     ) {
-      var tempArrayR = JSON.parse(localStorage.getItem('userList')!);
 
-      if (tempArrayR == null) {
-        this.addData = [];
-      } else {
-        this.addData = tempArrayR;
-      }
+       this.serviceObject.registerpostData(formData).subscribe((data)=> {
 
-      this.addData.find((data: any) => {
-        console.log(data['email']);
+        this.router1.navigateByUrl('');
+        
+       },(err)=>{
 
-        if (data['email'] == formData.email) {
-          this.registerSave = true;
-          alert('you are already register');
-        }
-      });
+        alert(err['error']['message']);        
+        this.router1.navigateByUrl('register');
 
-      if (this.registerSave == false) {
-        this.addData.push(formData);
-      }
+        });
 
-      localStorage.setItem('userList', JSON.stringify(this.addData));
-      this.router1.navigateByUrl('');
     }
+
   }
 }

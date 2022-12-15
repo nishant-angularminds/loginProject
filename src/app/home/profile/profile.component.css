@@ -1,5 +1,6 @@
 * {
   margin: 0%;
+  padding: 0%;
 }
 
 .customNavBar {
@@ -12,6 +13,11 @@
 
 .profileIcon {
   border-radius: 10px;
+}
+
+.fontStyle {
+
+  font-size: 30px;
 }
 
 .companyName {
@@ -33,6 +39,7 @@
 .imgData {
   width: 140px;
   height: 120px;
+  margin-top: 14px;
   border-radius: 200px;
 }
 

@@ -1,3 +1,5 @@
+import { JsonPipe } from '@angular/common';
+import { Token } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,27 +14,26 @@ export class LoginComponent implements OnInit {
   loginPage: FormGroup;
   emailSubmitStatus1: any;
   loginStatus: any = false;
+  tempTokenArray: any;
 
   constructor(private routerObject: Router, private service: DataInfoService) {
-    var tempArray = JSON.parse(localStorage.getItem('loginUser')!);
 
-    if (tempArray == null) {
+    if (this.service.getTokenInLocalStorage() == null) {
       this.routerObject.navigateByUrl('');
     } else {
       this.routerObject.navigateByUrl('home/profile');
-    }
+    }   
 
-    console.log('in login');
   }
 
   ngOnInit(): void {
     this.loginPage = new FormGroup({
-      loginEmail: new FormControl('', [
+      email: new FormControl('', [
         Validators.required,
         Validators.email,
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
       ]),
-      loginPassword: new FormControl('', [
+      password: new FormControl('', [
         Validators.required,
         Validators.minLength(6),
       ]),
@@ -40,48 +41,20 @@ export class LoginComponent implements OnInit {
   }
 
   submitLoginForm(loginData: any) {
-    console.log(loginData);
-
     this.emailSubmitStatus1 = true;
-
     if (
-      this.loginPage.controls['loginEmail'].valid &&
-      this.loginPage.controls['loginPassword'].valid
+      this.loginPage.controls['email'].valid &&
+      this.loginPage.controls['password'].valid
     ) {
-      var tempArray = JSON.parse(localStorage.getItem('userList')!);
-
-      if (tempArray == null) {
-        alert('no anyone register,first register!!');
-        console.log(loginData);
-      } else {
-        tempArray.find((data: any) => {
-          if (
-            data.email == loginData.loginEmail &&
-            data.password == loginData.loginPassword
-          ) {
-            console.log('success');
-
-            var temp = JSON.parse(localStorage.getItem('loginUser')!);
-
-            if (temp == null) {
-              localStorage.setItem('loginUser', JSON.stringify(data));
-            } else {
-              localStorage.removeItem('loinUser');
-              localStorage.setItem('loginUser', JSON.stringify(data));
-            }
-
-            this.loginStatus = true;
-          }
-        });
-
-        if (this.loginStatus == false) {
-          alert('your password is invalid');
-        } else {
-          this.routerObject.navigateByUrl('home/profile');
+      this.service.loginpostData(loginData).subscribe(
+        (data: any) => {
+          this.service.setTokenInLocalStorage(data);
+          this.routerObject.navigate(['/home/profile']);
+        },
+        (err) => {          
+          alert(err['error']['message']);
         }
-
-        this.loginStatus = false;
-      }
+      );
     }
   }
 }

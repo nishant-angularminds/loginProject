@@ -1,10 +1,11 @@
 
+
 <div class="main" style="background-color: #56baed; height: 100vh">
   <div class="wrapper fadeInDown">
     <div id="formContent">
       <!-- Tabs Titles -->
-      <h2 class="active">Sign In</h2>
-      <h2 class="inactive underlineHover spaceForButton" routerLink="register">
+      <h2 class="active text-center">Sign In</h2>
+      <h2 class="inactive underlineHover spaceForButton text-center" routerLink="register">
         Sign Up
       </h2>
 
@@ -19,13 +20,13 @@
           type="text"
           id="login"
           class="fadeIn second loginFieldStyle"
-          formControlName="loginEmail"
+          formControlName="email"
           placeholder="Email"
           autocomplete="on"
         /><br />
         <div
           class="emailValidation"
-          *ngIf="emailSubmitStatus1 && loginPage.controls['loginEmail'].invalid"
+          *ngIf="emailSubmitStatus1 && loginPage.controls['email'].invalid"
         >
           Invalid Email
         </div>
@@ -35,7 +36,7 @@
           type="text"
           id="password"
           class="fadeIn third loginFieldStyle"
-          formControlName="loginPassword"
+          formControlName="password"
           placeholder="Password"
           autocomplete="off"
 
@@ -43,7 +44,7 @@
         <div
           class="emailValidation"
           *ngIf="
-            emailSubmitStatus1 && loginPage.controls['loginPassword'].invalid
+            emailSubmitStatus1 && loginPage.controls['password'].invalid
           "
         >
           Invalid Password
@@ -62,7 +63,7 @@
 
       <!-- Remind Passowrd -->
       <div id="formFooter">
-        <a class="underlineHover" href="#">Forgot Password?</a>
+        <a class="underlineHover text-decoration-none" href="#">Forgot Password?</a>
       </div>
     </div>
   </div>

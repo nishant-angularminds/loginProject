@@ -162,14 +162,14 @@ input[type="text"]:placeholder {
 /* ANIMATIONS */
 
 /* Simple CSS3 Fade-in-down Animation */
-.fadeInDown {
+/* .fadeInDown {
   -webkit-animation-name: fadeInDown;
   animation-name: fadeInDown;
   -webkit-animation-duration: 1s;
   animation-duration: 1s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
-}
+} */
 
 @-webkit-keyframes fadeInDown {
   0% {
@@ -223,7 +223,7 @@ input[type="text"]:placeholder {
   }
 }
 
-.fadeIn {
+/* .fadeIn {
   opacity: 0;
   -webkit-animation: fadeIn ease-in 1;
   -moz-animation: fadeIn ease-in 1;
@@ -236,8 +236,8 @@ input[type="text"]:placeholder {
   -webkit-animation-duration: 1s;
   -moz-animation-duration: 1s;
   animation-duration: 1s;
-}
-
+} */
+/* 
 .fadeIn.first {
   -webkit-animation-delay: 0.4s;
   -moz-animation-delay: 0.4s;
@@ -266,7 +266,7 @@ input[type="text"]:placeholder {
   -webkit-animation-delay: 1.2s;
   -moz-animation-delay: 1.2s;
   animation-delay: 1.2s;
-}
+} */
 
 /* Simple CSS3 Fade-in Animation */
 .underlineHover:after {
