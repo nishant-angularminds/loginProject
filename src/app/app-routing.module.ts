@@ -18,6 +18,7 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
     canActivate: [LoginAuthGuard],
   },
+  { path: 'company', loadChildren: () => import('./company/company.module').then(m => m.CompanyModule) },
 
   { path: '**', component: PageNotFoundComponent },
 ];
