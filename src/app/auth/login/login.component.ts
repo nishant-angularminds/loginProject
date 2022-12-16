@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(private routerObject: Router, private service: DataInfoService) {
 
     if (this.service.getTokenInLocalStorage() == null) {
-      this.routerObject.navigateByUrl('');
+      this.routerObject.navigateByUrl('/auth/login');
     } else {
       this.routerObject.navigateByUrl('home/profile');
     }   
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
       this.service.loginpostData(loginData).subscribe(
         (data: any) => {
           this.service.setTokenInLocalStorage(data);
-          this.routerObject.navigate(['/home/profile']);
+          this.routerObject.navigate(['/my-profile']);
         },
         (err) => {          
           alert(err['error']['message']);

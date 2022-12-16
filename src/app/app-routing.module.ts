@@ -2,31 +2,24 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { ProfileComponent } from './home/profile/profile.component';
 import { LoginAuthGuard, RegisterAuthGuard } from './login-auth.guard';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  {
-    path: 'Auth',
-    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+  {path:'', redirectTo:'auth', pathMatch:'full'},
 
-  },
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
-  },
-  { path: '', component: LoginComponent },
-  {
-    path: 'register',
-    component: RegisterComponent,
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
     canActivate: [RegisterAuthGuard]
   },
   {
-    path: 'home/profile',
-    component: ProfileComponent,
-    canActivate: [LoginAuthGuard],
+    path: 'my-profile',
+    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
+    canActivate:[LoginAuthGuard]
   },
-  { path: '**', component: LoginComponent },
+
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

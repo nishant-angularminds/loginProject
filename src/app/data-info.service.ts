@@ -8,6 +8,7 @@ export class DataInfoService {
   statusSer: any = false;
   registerData: any;
   registerSave: any = false;
+  tempLoginObject:any;
 
   profileAvailable: any = false;
 
@@ -29,6 +30,7 @@ export class DataInfoService {
   }
 
   loginpostData(loginObject: any) {
+    this.tempLoginObject = loginObject;
     return this.httpObject.post(
       'https://shop-api.ngminds.com/auth/login?captcha=false',
       loginObject
@@ -46,6 +48,7 @@ export class DataInfoService {
 
   removeToken() {
     localStorage.removeItem('tokenList');
+    this.serviceRouter.navigateByUrl('/auth/login');
   }
 
   getLoginData() {
@@ -54,5 +57,20 @@ export class DataInfoService {
     return this.httpObject.get('https://shop-api.ngminds.com/auth/self', {
       headers: { Authorization: `Bearer ${tokenInfo}` },
     });
+  }
+
+  patchCompanyName(formInfo:any,editInfo:any) {
+
+    var editObject = {
+
+      email:formInfo['email'],
+      name:editInfo
+    }
+    
+    console.log(editObject);
+    
+    
+    // return this.httpObject.patch('',this.tempLoginObject);
+
   }
 }

@@ -27,7 +27,7 @@ export class LoginAuthGuard implements CanActivate {
     var statusLocal = localStorage.getItem('tokenList');
 
     if (statusLocal == null) {
-      this.router1.navigateByUrl('');
+      this.router1.navigateByUrl('/auth/login');
 
       return false;
     } else {
@@ -55,7 +55,7 @@ export class RegisterAuthGuard implements CanActivate {
     if (tokenDemo == null) {
       return true;
     } else {
-      this.router2.navigateByUrl('/home/profile');
+      this.router2.navigateByUrl('/my-profile');
       return false;
     }
   }

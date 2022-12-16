@@ -12,7 +12,8 @@ export class RegisterComponent implements OnInit {
   registerPage: FormGroup;
   emailSubmitStatus: any;
 
-  constructor(private router1: Router,private serviceObject:DataInfoService) {}
+  constructor(private router1: Router,private serviceObject:DataInfoService) {console.log("dkajda saaskldj");
+  }
 
   ngOnInit(): void {
     this.registerPage = new FormGroup({
@@ -53,7 +54,7 @@ export class RegisterComponent implements OnInit {
 
        this.serviceObject.registerpostData(formData).subscribe((data)=> {
 
-        this.router1.navigateByUrl('');
+        this.router1.navigateByUrl('/auth/login');
         
        },(err)=>{
 

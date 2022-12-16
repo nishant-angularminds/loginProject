@@ -1,7 +1,3 @@
-* {
-  margin: 0%;
-  padding: 0%;
-}
 
 .customNavBar {
   background-color: skyblue;
@@ -17,7 +13,7 @@
 
 .fontStyle {
 
-  font-size: 30px;
+  font-size: 20px;
 }
 
 .companyName {

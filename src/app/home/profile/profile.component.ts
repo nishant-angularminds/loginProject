@@ -10,6 +10,7 @@ import { DataInfoService } from 'src/app/data-info.service';
 export class ProfileComponent implements OnInit {
   currentUserEmail: any;
   data1: any;
+  editName:any = '';
 
   constructor(
     private routerforlogin: Router,
@@ -28,20 +29,19 @@ export class ProfileComponent implements OnInit {
       }
     );
 
-    // var tokenCheck = localStorage.getItem('tokenList');
-
-    // if (this.serviceForProfile.getTokenInLocalStorage() == null) {
-    //   console.log('blank');
-
-    //   this.routerforlogin.navigateByUrl('');
-    // } else {
-    //   this.routerforlogin.navigateByUrl('home/profile');
-    // }
   }
 
   ngOnInit(): void {}
 
   deleteLocal() {
     this.serviceForProfile.removeToken();
+  }
+
+  go(formData:any) {
+
+    // console.log(formData['editName']);
+    
+    this.serviceForProfile.patchCompanyName(this.data1,formData['editName']);
+
   }
 }
