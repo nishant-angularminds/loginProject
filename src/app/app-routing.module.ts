@@ -3,23 +3,23 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginAuthGuard, RegisterAuthGuard } from './login-auth.guard';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './home/page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  {path:'', redirectTo:'auth', pathMatch:'full'},
+  { path: '', redirectTo: 'auth', pathMatch: 'full' },
 
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
-    canActivate: [RegisterAuthGuard]
+    canActivate: [RegisterAuthGuard],
   },
   {
     path: 'my-profile',
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
-    canActivate:[LoginAuthGuard]
+    canActivate: [LoginAuthGuard],
   },
 
-  { path: '**', component: PageNotFoundComponent }
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

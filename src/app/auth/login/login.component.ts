@@ -3,7 +3,8 @@ import { Token } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DataInfoService } from 'src/app/data-info.service';
+import { ApiInfoService } from 'src/app/services/api-info.service';
+import { LocalstorageDataService } from 'src/app/services/localstorage-data.service';
 
 @Component({
   selector: 'app-login',
@@ -16,13 +17,7 @@ export class LoginComponent implements OnInit {
   loginStatus: any = false;
   tempTokenArray: any;
 
-  constructor(private routerObject: Router, private service: DataInfoService) {
-
-    if (this.service.getTokenInLocalStorage() == null) {
-      this.routerObject.navigateByUrl('/auth/login');
-    } else {
-      this.routerObject.navigateByUrl('home/profile');
-    }   
+  constructor(private routerObject: Router, private service: ApiInfoService,private localstorageObject:LocalstorageDataService) {
 
   }
 
@@ -48,7 +43,7 @@ export class LoginComponent implements OnInit {
     ) {
       this.service.loginpostData(loginData).subscribe(
         (data: any) => {
-          this.service.setTokenInLocalStorage(data);
+          this.localstorageObject.setTokenInLocalStorage(data);
           this.routerObject.navigate(['/my-profile']);
         },
         (err) => {          

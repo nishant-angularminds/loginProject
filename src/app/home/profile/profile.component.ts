@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataInfoService } from 'src/app/data-info.service';
+import { ApiInfoService } from 'src/app/services/api-info.service';
+import { LocalstorageDataService } from 'src/app/services/localstorage-data.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,34 +15,43 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private routerforlogin: Router,
-    private serviceForProfile: DataInfoService
+    private apiObject: ApiInfoService,
+    private localstorageObject:LocalstorageDataService
   ) {
-    console.log('hello');
-    console.log(localStorage.getItem('tokenList'));
 
-    this.serviceForProfile.getLoginData().subscribe(
-      (data) => {
-        this.data1 = data;
-        console.log(this.data1);
-      },
-      (error) => {
-        console.log(error['message']);
-      }
-    );
+    this.getLoginInfo();
 
   }
 
   ngOnInit(): void {}
 
   deleteLocal() {
-    this.serviceForProfile.removeToken();
+    this.localstorageObject.removeToken();
+  }
+
+  getLoginInfo() {
+
+    this.apiObject.getLoginData().subscribe(
+      (data) => {
+        this.data1 = data;
+        console.log(this.data1);
+      },
+      (error) => {
+        console.log(error['message']);
+      });
   }
 
   go(formData:any) {
-
-    // console.log(formData['editName']);
     
-    this.serviceForProfile.patchCompanyName(this.data1,formData['editName']);
+    this.apiObject.patchCompanyName(this.data1,formData['editName']).subscribe((data)=>{
+
+      this.getLoginInfo();
+
+    },(err)=> {
+
+      console.log(err);
+      
+    });
 
   }
 }

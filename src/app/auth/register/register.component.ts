@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DataInfoService } from 'src/app/data-info.service';
-
+import { ApiInfoService } from 'src/app/services/api-info.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -12,7 +11,7 @@ export class RegisterComponent implements OnInit {
   registerPage: FormGroup;
   emailSubmitStatus: any;
 
-  constructor(private router1: Router,private serviceObject:DataInfoService) {console.log("dkajda saaskldj");
+  constructor(private router1: Router,private serviceObject:ApiInfoService) {
   }
 
   ngOnInit(): void {

@@ -8,13 +8,13 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { DataInfoService } from './data-info.service';
+import { ApiInfoService } from './services/api-info.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginAuthGuard implements CanActivate {
-  constructor(private p: DataInfoService, private router1: Router) {}
+  constructor(private p: ApiInfoService, private router1: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -40,7 +40,7 @@ export class LoginAuthGuard implements CanActivate {
   providedIn: 'root',
 })
 export class RegisterAuthGuard implements CanActivate {
-  constructor(private p1: DataInfoService, private router2: Router) {}
+  constructor(private p1: ApiInfoService, private router2: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
