@@ -5,6 +5,7 @@ import { CompanyRoutingModule } from './company-routing.module';
 import { CompanyComponent } from './company.component';
 import { UserComponent } from './user/user.component';
 import { HomeModule } from '../home/home.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { HomeModule } from '../home/home.module';
   imports: [
     CommonModule,
     CompanyRoutingModule,
-    HomeModule
+    HomeModule,
+    ReactiveFormsModule
   ]
 })
 export class CompanyModule { }

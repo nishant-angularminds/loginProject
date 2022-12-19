@@ -1,1 +1,86 @@
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">User detail</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="userGroup" (ngSubmit)="submitUserForm(userGroup); userGroup.reset()">
+
+        <div class="modal-body text-center">
+                <input class="mb-5 p-1" type="text" formControlName="email" placeholder="Email">
+                <input class="mb-5 p-1" type="text" formControlName="password" placeholder="Password">
+                <input class="mb-5 p-1" type="text" formControlName="name" placeholder="Name"><br>
+
+                <div class="d-flex justify-content-center">
+
+                    <div class="me-2">
+
+                       Select Role:
+                    </div>
+
+                    <div>
+                <input type="radio" value="user" formControlName="role">User<br>
+                <input type="radio" value="admin" class="mt-2" formControlName="role">Admin
+                    </div>
+                    </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save user</button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModal1" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Edit UserName</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="userGroup" (ngSubmit)="submitEditUserForm(userGroup.value); userGroup.reset()">
+
+        <div class="modal-body text-center">
+                <input class="mb-5 p-1" type="text" formControlName="email" placeholder="Email">
+                <input class="mb-5 p-1" type="text" formControlName="password" placeholder="Password">
+                <input class="mb-5 p-1" type="text" formControlName="name" placeholder="Name"><br>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save user</button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+
+  
 <app-header></app-header>
+ <button type="button" class="btn btn-success mt-4 ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Create user</button>
+
+<div class="container mt-4">
+<table class="table table-success table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let userImpData of userDataArray">
+      <td>{{userImpData['name']}} <i class="fa-solid fa-pen-to-square" (click)="userId(userImpData)" data-bs-toggle="modal" data-bs-target="#exampleModal1"  style="cursor: pointer;"></i></td>
+      <td>{{userImpData['email']}}
+      </td>
+      <td>{{userImpData['role']}}
+      </td>
+    </tr>
+  
+  </tbody>
+</table>
+</div>

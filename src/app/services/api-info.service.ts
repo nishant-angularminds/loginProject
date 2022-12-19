@@ -9,6 +9,7 @@ import { LocalstorageDataService } from './localstorage-data.service';
 export class ApiInfoService {
   registerData: any;
   registerSave: any = false;
+  userIdInformation: any;
 
   profileAvailable: any = false;
 
@@ -52,6 +53,37 @@ export class ApiInfoService {
       'https://shop-api.ngminds.com/users/org',
       editObject,
       { headers: { Authorization: `Bearer ${tokenInfo1}` } }
+    );
+  }
+
+  sendUserData(userData: any) {
+    var tokenInfoUser = localStorage.getItem('tokenList');
+
+    return this.httpObject.post(
+      'https://shop-api.ngminds.com/users',
+      userData,
+      { headers: { Authorization: `Bearer ${tokenInfoUser}` } }
+    );
+  }
+
+  getUserData() {
+    var getTokenInfoUser = localStorage.getItem('tokenList');
+
+    return this.httpObject.get('https://shop-api.ngminds.com/users/?limit=30', {
+      headers: { Authorization: `Bearer ${getTokenInfoUser}` },
+    });
+  }
+
+  editUserName(editFormInfo: any) {
+    var getTokeneditInfoUser = localStorage.getItem('tokenList');
+    console.log(editFormInfo);
+
+    return this.httpObject.patch(
+      `https://shop-api.ngminds.com/users/${this.userIdInformation}`,
+      editFormInfo,
+      {
+        headers: { Authorization: `Bearer ${getTokeneditInfoUser}` },
+      }
     );
   }
 }
