@@ -6,6 +6,8 @@ import { CompanyComponent } from './company.component';
 import { UserComponent } from './user/user.component';
 import { HomeModule } from '../home/home.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     CompanyRoutingModule,
     HomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ]
 })
 export class CompanyModule { }

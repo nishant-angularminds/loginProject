@@ -69,14 +69,13 @@ export class ApiInfoService {
   getUserData() {
     var getTokenInfoUser = localStorage.getItem('tokenList');
 
-    return this.httpObject.get('https://shop-api.ngminds.com/users/?limit=30', {
+    return this.httpObject.get('https://shop-api.ngminds.com/users', {
       headers: { Authorization: `Bearer ${getTokenInfoUser}` },
     });
   }
 
   editUserName(editFormInfo: any) {
     var getTokeneditInfoUser = localStorage.getItem('tokenList');
-    console.log(editFormInfo);
 
     return this.httpObject.patch(
       `https://shop-api.ngminds.com/users/${this.userIdInformation}`,
@@ -85,5 +84,25 @@ export class ApiInfoService {
         headers: { Authorization: `Bearer ${getTokeneditInfoUser}` },
       }
     );
+  }
+
+  editRole(roleInfo:any,userId:any) {
+
+    var getTokeneditRoleInfoUser = localStorage.getItem('tokenList');
+
+    return this.httpObject.patch(`https://shop-api.ngminds.com/users/role/${userId}`,{'role' : roleInfo}, {
+      headers: { Authorization: `Bearer ${getTokeneditRoleInfoUser}` },
+    })
+
+  }
+
+  deleteUserApi(userDeleteToken:any) {
+
+    var getTokenInfoUser = localStorage.getItem('tokenList');
+
+    return this.httpObject.delete(`https://shop-api.ngminds.com/users/${userDeleteToken}`, {
+      headers: { Authorization: `Bearer ${getTokenInfoUser}` },
+    })
+
   }
 }
