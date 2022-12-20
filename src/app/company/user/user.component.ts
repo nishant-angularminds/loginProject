@@ -21,6 +21,8 @@ export class UserComponent implements OnInit{
   constructor(private apiService:ApiInfoService,private routerObject:Router) {
       
     this.userInfo();
+    console.log("hello");
+    
 
     }
 
@@ -44,8 +46,6 @@ userInfo() {
     this.userDataArray = data['results'];
     this.userInformationArray = data;
     console.log(this.userInformationArray);
-    
-       
     
   })
 }
@@ -72,7 +72,7 @@ userInfo() {
     this.apiService.editUserName(editUserFormInfo).subscribe((data)=>{
 
       console.log(data);
-      console.log("success");
+      this.userInfo();
 
       this.userDataArray = data;
       
@@ -88,9 +88,9 @@ userInfo() {
     
   }
 
-  sendRoleData(roleValue:any,indexInfo:any) {
+  sendRoleData(roleValue:any,userIdInfo:any) {
     
-    this.apiService.editRole(roleValue.target.value,this.userDataArray[indexInfo]['_id']).subscribe((data:any)=> {
+    this.apiService.editRole(roleValue.target.value,userIdInfo).subscribe((data:any)=> {
 
       this.userDataArray = data;
       
@@ -102,19 +102,19 @@ userInfo() {
 
   }
 
-  deleteUser(userIndex:number) {
+  deleteUser(userIdInfo1:number) {
 
-    console.log(this.userDataArray[userIndex]['_id']);
-    // this.apiService.deleteUserApi(this.userDataArray[userIndex]['_id']).subscribe((data)=> {
+    console.log(userIdInfo1);
+    this.apiService.deleteUserApi(userIdInfo1).subscribe((data)=> {
 
-    //   this.userDataArray = data;
-    //   this.userInfo();
+      this.userDataArray = data;
+      this.userInfo();
 
-    // },(err)=> {
+    },(err)=> {
 
-    //   console.log(err);
+      console.log(err);
       
-    // })
+    })
   }
 
 }

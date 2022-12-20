@@ -156,7 +156,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let userImpData of userDataArray | paginate:{itemsPerPage:1,currentPage:p}; index as i">
+      <tr *ngFor="let userImpData of userDataArray | paginate:{itemsPerPage:2,currentPage:p}; index as i">
         <td>
           <i
             class="fa-solid fa-pen-to-square ms-2 me-3"
@@ -169,7 +169,7 @@
         </td>
         <td>{{ userImpData["email"] }}</td>
         <td>
-          <select class="border no-border p-1 rounded" name="role" (change)="sendRoleData($event, i)">
+          <select class="border no-border p-1 rounded" name="role" (change)="sendRoleData($event, userImpData['_id'])">
             <option value="user" selected>{{ userImpData["role"] }}</option>
             <option value="admin" *ngIf="userImpData['role'] === 'user'">
               admin
@@ -178,7 +178,7 @@
               user
             </option>
           </select>
-          <i class="fa-solid fa-trash marginForDelete" (click)="deleteUser(i)"></i>
+          <i class="fa-solid fa-trash marginForDelete" (click)="deleteUser(userImpData['_id'])"></i>
         </td>
       </tr>
     </tbody>
