@@ -4,3 +4,19 @@
     left: 40%;
 
 }
+
+.widthStyle {
+
+    width: 200px;
+}
+
+@media screen and (max-width:768px) {
+ 
+    .marginForDelete {
+
+        left: 16%;
+    
+    }
+
+
+}

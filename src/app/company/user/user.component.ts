@@ -16,7 +16,10 @@ export class UserComponent implements OnInit{
   userDataArray:any;
   currentEditInfo:any;
   roleData:any;
-  p:any=1;
+  pageItem:any;
+  totalPages1:any;
+  pages:any[] = [];
+  demo:any = 0;
 
   constructor(private apiService:ApiInfoService,private routerObject:Router) {
       
@@ -46,6 +49,12 @@ userInfo() {
     this.userDataArray = data['results'];
     this.userInformationArray = data;
     console.log(this.userInformationArray);
+    // this.totalPages1 = this.userInformationArray['totalPages']
+    // console.log(this.totalPages1);
+    
+    this.pages.length = this.userInformationArray['totalPages'];
+    this.pages.fill(0); 
+    console.log(this.pages);
     
   })
 }
@@ -115,6 +124,53 @@ userInfo() {
       console.log(err);
       
     })
+  }
+
+  pageChange(event:any) {
+
+    this.apiService.limit = event.target.value;
+    this.apiService.getUserData().subscribe((data)=> {
+
+      // this.userDataArray = data;
+      // console.log(this.userDataArray);
+    
+      this.userInfo();
+
+    });
+    
+  }
+
+  pageClick(pageNoInfo:any) {
+
+    console.log(pageNoInfo);
+    this.apiService.page = pageNoInfo;
+    this.demo = pageNoInfo;
+    this.userInfo();
+ 
+  }
+
+  nextData() {
+
+    if(this.pages.length>this.demo) {
+
+    this.apiService.page++;
+    this.demo = this.apiService.getPage();
+    this.userInfo();
+
+    }
+
+  }
+
+  previousData() {
+
+    if(this.apiService.page!=1) {
+
+      this.apiService.page--;
+      this.demo = this.apiService.getPage();
+      this.userInfo();
+
+    }
+
   }
 
 }

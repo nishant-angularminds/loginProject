@@ -51,6 +51,11 @@
         </div>
         <br />
 
+        <div class="captcha-checkbox pb-4" style="font-size: 0.8rem">
+          <input type="checkbox" class="me-2" formControlName="captcha" (click)="onLoginCaptchaChecked($event)"><span class="fs-5">I am not a robot</span>
+          </div>
+          <div *ngIf="emailSubmitStatus1 && loginPage.controls['captcha'].invalid" class="text-danger">select who are you</div> 
+
         <input
           class="spaceForButton fadeIn fourth"
           type="submit"

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiInfoService } from 'src/app/services/api-info.service';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -11,7 +12,7 @@ export class RegisterComponent implements OnInit {
   registerPage: FormGroup;
   emailSubmitStatus: any;
 
-  constructor(private router1: Router,private serviceObject:ApiInfoService) {
+  constructor(private router1: Router,private serviceObject:ApiInfoService,private captchaObject:ReCaptchaV3Service) {
   }
 
   ngOnInit(): void {
@@ -35,6 +36,10 @@ export class RegisterComponent implements OnInit {
         Validators.maxLength(50),
         Validators.pattern('^[a-zA-Z ]*$'),
       ]),
+      
+      captcha:new FormControl('',Validators.required)
+      
+      ,
     });
   }
 
@@ -48,7 +53,9 @@ export class RegisterComponent implements OnInit {
       this.registerPage.controls['name'].valid &&
       this.registerPage.controls['email'].valid &&
       this.registerPage.controls['password'].valid &&
-      this.registerPage.controls['company'].valid
+      this.registerPage.controls['company'].valid &&
+      this.registerPage.controls['captcha'].valid
+
     ) {
 
        this.serviceObject.registerpostData(formData).subscribe((data)=> {
@@ -64,5 +71,22 @@ export class RegisterComponent implements OnInit {
 
     }
 
+  }
+
+  onCaptchaChecked(event:any) {
+    console.log(event);
+    console.log(this.registerPage);
+    
+    
+    if(event.target.checked==true) {
+
+    this.captchaObject.execute('importantAction').subscribe((token)=>{
+
+      this.registerPage.value.captcha = token;
+      console.log(token);
+      
+    })
+
+  }
   }
 }

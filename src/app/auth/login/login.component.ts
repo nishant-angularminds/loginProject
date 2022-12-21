@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiInfoService } from 'src/app/services/api-info.service';
 import { LocalstorageDataService } from 'src/app/services/localstorage-data.service';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   loginStatus: any = false;
   tempTokenArray: any;
 
-  constructor(private routerObject: Router, private service: ApiInfoService,private localstorageObject:LocalstorageDataService) {
+  constructor(private routerObject: Router, private service: ApiInfoService,private localstorageObject:LocalstorageDataService,private loginCaptcha:ReCaptchaV3Service) {
 
   }
 
@@ -32,14 +33,17 @@ export class LoginComponent implements OnInit {
         Validators.required,
         Validators.minLength(6),
       ]),
+      captcha:new FormControl('',Validators.required)
     });
   }
 
   submitLoginForm(loginData: any) {
+    
     this.emailSubmitStatus1 = true;
     if (
       this.loginPage.controls['email'].valid &&
-      this.loginPage.controls['password'].valid
+      this.loginPage.controls['password'].valid &&
+      this.loginPage.controls['captcha'].valid
     ) {
       this.service.loginpostData(loginData).subscribe(
         (data: any) => {
@@ -52,4 +56,18 @@ export class LoginComponent implements OnInit {
       );
     }
   }
+
+  onLoginCaptchaChecked(event:any) {
+
+    if(event.target.checked==true) {
+
+      this.loginCaptcha.execute('importantAction').subscribe((token)=>{
+  
+        this.loginPage.value.captcha = token;
+        
+      })
+    
+  }
+}
+
 }

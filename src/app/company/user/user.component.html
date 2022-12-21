@@ -156,7 +156,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let userImpData of userDataArray | paginate:{itemsPerPage:2,currentPage:p}; index as i">
+      <tr *ngFor="let userImpData of userDataArray">
         <td>
           <i
             class="fa-solid fa-pen-to-square ms-2 me-3"
@@ -169,7 +169,7 @@
         </td>
         <td>{{ userImpData["email"] }}</td>
         <td>
-          <select class="border no-border p-1 rounded" name="role" (change)="sendRoleData($event, userImpData['_id'])">
+          <select class="border no-border bg-success p-1 text-light rounded" name="role" (change)="sendRoleData($event, userImpData['_id'])">
             <option value="user" selected>{{ userImpData["role"] }}</option>
             <option value="admin" *ngIf="userImpData['role'] === 'user'">
               admin
@@ -183,6 +183,21 @@
       </tr>
     </tbody>
   </table>
+  <select class="form-select widthStyle" (change)="pageChange($event)" aria-label="Default select example">
+    <option selected>ItemsList</option>
+    <option value="4">4</option>
+    <option value="6">6</option>
+    <option value="8">8</option>
 
-  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </select>
+
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination" style="cursor:pointer">
+      <li class="page-item" (click)="previousData()" ><a class="page-link">Previous</a></li>
+      <div *ngFor="let data of pages; index as i"><li class="page-item" (click)="pageClick(i+1)"><a class="page-link">{{i+1}}</a></li></div>
+      <li class="page-item" (click)="nextData()"><a class="page-link">Next</a></li>
+    </ul>
+  </nav>
 </div>
+

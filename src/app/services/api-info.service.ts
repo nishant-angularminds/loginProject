@@ -10,6 +10,8 @@ export class ApiInfoService {
   registerData: any;
   registerSave: any = false;
   userIdInformation: any;
+  limit:any=3;
+  page:any=1;
 
   profileAvailable: any = false;
 
@@ -21,14 +23,14 @@ export class ApiInfoService {
 
   registerpostData(registerObject: any) {
     return this.httpObject.post(
-      'https://shop-api.ngminds.com/auth/register?captcha=false',
+      'https://shop-api.ngminds.com/auth/register',
       registerObject
     );
   }
 
   loginpostData(loginObject: any) {
     return this.httpObject.post(
-      'https://shop-api.ngminds.com/auth/login?captcha=false',
+      'https://shop-api.ngminds.com/auth/login',
       loginObject
     );
   }
@@ -39,6 +41,11 @@ export class ApiInfoService {
     return this.httpObject.get('https://shop-api.ngminds.com/auth/self', {
       headers: { Authorization: `Bearer ${tokenInfo}` },
     });
+  }
+
+  getPage() {
+
+    return this.page;
   }
 
   patchCompanyName(formInfo: any, editInfo: any) {
@@ -69,7 +76,9 @@ export class ApiInfoService {
   getUserData() {
     var getTokenInfoUser = localStorage.getItem('tokenList');
 
-    return this.httpObject.get('https://shop-api.ngminds.com/users', {
+    var query = `?limit=${this.limit}&page=${this.page}`;
+
+    return this.httpObject.get(`https://shop-api.ngminds.com/users${query}`, {
       headers: { Authorization: `Bearer ${getTokenInfoUser}` },
     });
   }
@@ -105,4 +114,16 @@ export class ApiInfoService {
     })
 
   }
-}
+
+  changePassword(passwordDataInfo:any) {
+
+    var getPasswordInfoUser = localStorage.getItem('tokenList');
+
+    return this.httpObject.post('https://shop-api.ngminds.com/auth/change-password',passwordDataInfo,{
+      headers: { Authorization: `Bearer ${getPasswordInfoUser}` },
+    })
+
+  }
+    
+  }
+

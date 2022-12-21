@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiInfoService } from 'src/app/services/api-info.service';
 import { LocalstorageDataService } from 'src/app/services/localstorage-data.service';
@@ -12,6 +13,7 @@ export class ProfileComponent implements OnInit {
   currentUserEmail: any;
   data1: any;
   editName:any = '';
+  changePassword:FormGroup;
 
   constructor(
     private routerforlogin: Router,
@@ -23,7 +25,15 @@ export class ProfileComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    this.changePassword = new FormGroup({
+
+      'old_password':new FormControl(),
+      'new_password':new FormControl()
+    })
+
+  }
 
   deleteLocal() {
     this.localstorageObject.removeToken();
@@ -54,6 +64,21 @@ export class ProfileComponent implements OnInit {
     });
 
     this.editName = '';
+
+  }
+
+  sendPasswordData(passwordData:any) {
+
+    // console.log(passwordData);
+    // this.apiObject.changePassword().subscribe((data)=> {
+
+    //   console.log(data);
+      
+    // },(err)=> {
+
+
+    // });
+    
 
   }
 }
