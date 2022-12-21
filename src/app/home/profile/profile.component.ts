@@ -12,8 +12,7 @@ import { LocalstorageDataService } from 'src/app/services/localstorage-data.serv
 export class ProfileComponent implements OnInit {
   currentUserEmail: any;
   data1: any;
-  editName:any = '';
-  changePassword:FormGroup;
+  companyForm:FormGroup;
 
   constructor(
     private routerforlogin: Router,
@@ -27,8 +26,10 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.changePassword = new FormGroup({
+    this.companyForm = new FormGroup({
 
+      'email':new FormControl(),
+      'name':new FormControl(),
       'old_password':new FormControl(),
       'new_password':new FormControl()
     })
@@ -41,7 +42,7 @@ export class ProfileComponent implements OnInit {
 
   getLoginInfo() {
 
-    this.apiObject.getLoginData().subscribe(
+    this.apiObject.get(`/auth/self`).subscribe(
       (data) => {
         this.data1 = data;
         console.log(this.data1);
@@ -51,9 +52,13 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  go(formData:any) {
+  editCompany(formData:any) {
     
-    this.apiObject.patchCompanyName(this.data1,formData['editName']).subscribe((data)=>{
+    delete this.companyForm.value.old_password;
+    delete this.companyForm.value.new_password;
+    console.log(formData);
+
+    this.apiObject.patch('/users/org',formData).subscribe((data)=>{
 
       this.getLoginInfo();
 
@@ -63,21 +68,24 @@ export class ProfileComponent implements OnInit {
       
     });
 
-    this.editName = '';
-
   }
 
   sendPasswordData(passwordData:any) {
 
-    // console.log(passwordData);
-    // this.apiObject.changePassword().subscribe((data)=> {
+    delete this.companyForm.value.email;
+    delete this.companyForm.value.name;
 
-    //   console.log(data);
+    console.log(passwordData);
+    this.apiObject.post(`/users/auth/change-password`,passwordData).subscribe((data)=> {
+
+      console.log(data);
       
-    // },(err)=> {
+    },(err)=> {
 
+      console.log(err);
+      
 
-    // });
+    });
     
 
   }

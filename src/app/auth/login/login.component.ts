@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   emailSubmitStatus1: any;
   loginStatus: any = false;
   tempTokenArray: any;
+  queryParamsLogin:any;
 
   constructor(private routerObject: Router, private service: ApiInfoService,private localstorageObject:LocalstorageDataService,private loginCaptcha:ReCaptchaV3Service) {
 
@@ -39,13 +40,18 @@ export class LoginComponent implements OnInit {
 
   submitLoginForm(loginData: any) {
     
+    console.log(loginData);
+    
+
     this.emailSubmitStatus1 = true;
     if (
       this.loginPage.controls['email'].valid &&
       this.loginPage.controls['password'].valid &&
       this.loginPage.controls['captcha'].valid
     ) {
-      this.service.loginpostData(loginData).subscribe(
+
+
+      this.service.post(`/auth/login`,loginData).subscribe(
         (data: any) => {
           this.localstorageObject.setTokenInLocalStorage(data);
           this.routerObject.navigate(['/my-profile']);
@@ -58,16 +64,20 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginCaptchaChecked(event:any) {
-
+    
     if(event.target.checked==true) {
 
       this.loginCaptcha.execute('importantAction').subscribe((token)=>{
   
+        console.log(token);
+        
         this.loginPage.value.captcha = token;
         
       })
     
   }
+
+  
 }
 
 }

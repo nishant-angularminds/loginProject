@@ -10,6 +10,7 @@ export class ApiInfoService {
   registerData: any;
   registerSave: any = false;
   userIdInformation: any;
+  baseUrl = 'https://shop-api.ngminds.com'
   limit:any=3;
   page:any=1;
 
@@ -21,109 +22,46 @@ export class ApiInfoService {
     private localObject: LocalstorageDataService
   ) {}
 
-  registerpostData(registerObject: any) {
-    return this.httpObject.post(
-      'https://shop-api.ngminds.com/auth/register',
-      registerObject
-    );
-  }
-
-  loginpostData(loginObject: any) {
-    return this.httpObject.post(
-      'https://shop-api.ngminds.com/auth/login',
-      loginObject
-    );
-  }
-
-  getLoginData() {
+  get(normalUrl:any) {
     var tokenInfo = localStorage.getItem('tokenList');
 
-    return this.httpObject.get('https://shop-api.ngminds.com/auth/self', {
+    return this.httpObject.get(`${this.baseUrl}${normalUrl}`, {
       headers: { Authorization: `Bearer ${tokenInfo}` },
     });
   }
 
-  getPage() {
-
-    return this.page;
-  }
-
-  patchCompanyName(formInfo: any, editInfo: any) {
-    var editObject = {
-      email: formInfo['email'],
-      name: editInfo,
-    };
+  patch(normalUrl:any,payload:object) {
 
     var tokenInfo1 = this.localObject.getTokenInLocalStorage();
 
     return this.httpObject.patch(
-      'https://shop-api.ngminds.com/users/org',
-      editObject,
+      `${this.baseUrl}${normalUrl}`,
+      payload,
       { headers: { Authorization: `Bearer ${tokenInfo1}` } }
     );
   }
 
-  sendUserData(userData: any) {
+  post(normalUrl:string,payload:object) {
+
     var tokenInfoUser = localStorage.getItem('tokenList');
 
     return this.httpObject.post(
-      'https://shop-api.ngminds.com/users',
-      userData,
+      `${this.baseUrl}${normalUrl}` ,
+      payload,
       { headers: { Authorization: `Bearer ${tokenInfoUser}` } }
     );
   }
 
-  getUserData() {
-    var getTokenInfoUser = localStorage.getItem('tokenList');
-
-    var query = `?limit=${this.limit}&page=${this.page}`;
-
-    return this.httpObject.get(`https://shop-api.ngminds.com/users${query}`, {
-      headers: { Authorization: `Bearer ${getTokenInfoUser}` },
-    });
-  }
-
-  editUserName(editFormInfo: any) {
-    var getTokeneditInfoUser = localStorage.getItem('tokenList');
-
-    return this.httpObject.patch(
-      `https://shop-api.ngminds.com/users/${this.userIdInformation}`,
-      editFormInfo,
-      {
-        headers: { Authorization: `Bearer ${getTokeneditInfoUser}` },
-      }
-    );
-  }
-
-  editRole(roleInfo:any,userId:any) {
-
-    var getTokeneditRoleInfoUser = localStorage.getItem('tokenList');
-
-    return this.httpObject.patch(`https://shop-api.ngminds.com/users/role/${userId}`,{'role' : roleInfo}, {
-      headers: { Authorization: `Bearer ${getTokeneditRoleInfoUser}` },
-    })
-
-  }
-
-  deleteUserApi(userDeleteToken:any) {
+  delete(normalUrl:any) {
 
     var getTokenInfoUser = localStorage.getItem('tokenList');
 
-    return this.httpObject.delete(`https://shop-api.ngminds.com/users/${userDeleteToken}`, {
+    return this.httpObject.delete(`${this.baseUrl}${normalUrl}`, {
       headers: { Authorization: `Bearer ${getTokenInfoUser}` },
     })
 
   }
 
-  changePassword(passwordDataInfo:any) {
-
-    var getPasswordInfoUser = localStorage.getItem('tokenList');
-
-    return this.httpObject.post('https://shop-api.ngminds.com/auth/change-password',passwordDataInfo,{
-      headers: { Authorization: `Bearer ${getPasswordInfoUser}` },
-    })
-
-  }
     
   }
 

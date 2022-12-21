@@ -20,9 +20,12 @@ export class UserComponent implements OnInit{
   totalPages1:any;
   pages:any[] = [];
   demo:any = 0;
+  userToken:any;
+  query:any;
 
   constructor(private apiService:ApiInfoService,private routerObject:Router) {
       
+    this.apiService.page = 1;
     this.userInfo();
     console.log("hello");
     
@@ -44,13 +47,13 @@ ngOnInit(): void {
 
 userInfo() {
 
-  this.apiService.getUserData().subscribe((data:any)=> {
+  this.query = `?limit=${this.apiService.limit}&page=${this.apiService.page}`;
+
+  this.apiService.get(`/users${this.query}`).subscribe((data:any)=> {
 
     this.userDataArray = data['results'];
     this.userInformationArray = data;
     console.log(this.userInformationArray);
-    // this.totalPages1 = this.userInformationArray['totalPages']
-    // console.log(this.totalPages1);
     
     this.pages.length = this.userInformationArray['totalPages'];
     this.pages.fill(0); 
@@ -61,7 +64,7 @@ userInfo() {
 
   submitUserForm(userFormData:any) {
 
-    this.apiService.sendUserData(userFormData.value).subscribe((data)=> {
+    this.apiService.post('/users',userFormData.value).subscribe((data)=> {
 
       this.userInfo();
 
@@ -78,7 +81,7 @@ userInfo() {
     delete this.userGroup.value.role;
 
     console.log(editUserFormInfo);
-    this.apiService.editUserName(editUserFormInfo).subscribe((data)=>{
+    this.apiService.patch(`/users/${this.userToken}`,editUserFormInfo).subscribe((data)=>{
 
       console.log(data);
       this.userInfo();
@@ -90,16 +93,15 @@ userInfo() {
   }
 
   userId(idInfo:any) {
-      console.log(idInfo)
 
-    this.userGroup.controls['email'].setValue(idInfo?.email)
-    this.apiService.userIdInformation = idInfo?._id;
-    
+    // this.userGroup.controls['email'].setValue(idInfo?.email)
+    // this.apiService.userIdInformation = idInfo?._id;
+    this.userToken =  idInfo['_id'];
   }
 
   sendRoleData(roleValue:any,userIdInfo:any) {
-    
-    this.apiService.editRole(roleValue.target.value,userIdInfo).subscribe((data:any)=> {
+
+    this.apiService.patch(`/users/role/${userIdInfo}`,{'role':roleValue.target.value}).subscribe((data:any)=> {
 
       this.userDataArray = data;
       
@@ -113,8 +115,7 @@ userInfo() {
 
   deleteUser(userIdInfo1:number) {
 
-    console.log(userIdInfo1);
-    this.apiService.deleteUserApi(userIdInfo1).subscribe((data)=> {
+    this.apiService.delete(`/users/${userIdInfo1}`).subscribe((data)=> {
 
       this.userDataArray = data;
       this.userInfo();
@@ -128,8 +129,15 @@ userInfo() {
 
   pageChange(event:any) {
 
+    if(event.target.value>this.apiService.limit) {
+
+      this.apiService.page = 1;
+      this.userInfo();
+
+    } 
+
     this.apiService.limit = event.target.value;
-    this.apiService.getUserData().subscribe((data)=> {
+    this.apiService.get(`/users${this.query}`).subscribe((data)=> {
 
       // this.userDataArray = data;
       // console.log(this.userDataArray);
@@ -151,14 +159,15 @@ userInfo() {
 
   nextData() {
 
-    if(this.pages.length>this.demo) {
+    console.log(this.pages.length);
+    
+    if(this.apiService.page<this.userInformationArray['totalPages']) {
 
     this.apiService.page++;
-    this.demo = this.apiService.getPage();
+    this.demo = this.apiService.page;
     this.userInfo();
 
     }
-
   }
 
   previousData() {
@@ -166,7 +175,7 @@ userInfo() {
     if(this.apiService.page!=1) {
 
       this.apiService.page--;
-      this.demo = this.apiService.getPage();
+      this.demo = this.apiService.page;
       this.userInfo();
 
     }

@@ -11,6 +11,7 @@ import { ReCaptchaV3Service } from 'ng-recaptcha';
 export class RegisterComponent implements OnInit {
   registerPage: FormGroup;
   emailSubmitStatus: any;
+  queryParams:any;
 
   constructor(private router1: Router,private serviceObject:ApiInfoService,private captchaObject:ReCaptchaV3Service) {
   }
@@ -58,7 +59,8 @@ export class RegisterComponent implements OnInit {
 
     ) {
 
-       this.serviceObject.registerpostData(formData).subscribe((data)=> {
+
+       this.serviceObject.post(`/auth/register`,formData).subscribe((data)=> {
 
         this.router1.navigateByUrl('/auth/login');
         
@@ -74,16 +76,12 @@ export class RegisterComponent implements OnInit {
   }
 
   onCaptchaChecked(event:any) {
-    console.log(event);
-    console.log(this.registerPage);
-    
-    
+
     if(event.target.checked==true) {
 
     this.captchaObject.execute('importantAction').subscribe((token)=>{
 
       this.registerPage.value.captcha = token;
-      console.log(token);
       
     })
 

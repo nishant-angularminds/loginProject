@@ -7,9 +7,14 @@
         <h1 class="modal-title fs-6" id="exampleModalLabel">Edit</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form #myForm="ngForm" (ngSubmit)="go(myForm.value)">
-      <div class="modal-dialog-centered border-0">
-      <input class="m-auto m-3 p-2 border no-border" [(ngModel)]="editName" name="editName" style="outline:none" placeholder="company name" type="text">
+      <form [formGroup]="companyForm" (ngSubmit)="editCompany(companyForm.value)">
+      
+        <div class="modal-dialog-centered border-0">
+          <input class="m-auto m-3 p-2 border no-border" formControlName="email" name="email" style="outline:none" placeholder="Email" type="text">
+          </div>
+
+        <div class="modal-dialog-centered border-0">
+      <input class="m-auto m-3 p-2 border no-border" formControlName="name" name="name" style="outline:none" placeholder="company name" type="text">
       </div>
       <div class="modal-footer border-0">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -27,7 +32,7 @@
         <h1 class="modal-title fs-6" id="exampleModalLabel">Edit</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form [formGroup]="changePassword" (ngSubmit)="sendPasswordData(changePassword)">
+      <form [formGroup]="companyForm" (ngSubmit)="sendPasswordData(companyForm.value)">
       <div class="modal-dialog-centered border-0">
       <input class="m-auto m-3 p-2 border no-border" formControlName="old_password" name="old_password" style="outline:none" placeholder="old password" type="text">
       </div>
