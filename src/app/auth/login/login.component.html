@@ -1,4 +1,30 @@
+<div class="modal fade" id="exampleModalForgot" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Forgot password</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="loginPage" (ngSubmit)="forgetPassword(loginPage.value)">
 
+      <div class="modal-body">
+          <input type="text" class="w-50 border p-2 text-start ms-5" formControlName="email" name="email" placeholder="Email">
+
+          <button type="button" class="btn btn-success ms-2">verify</button>
+
+          <input type="text" class="w-50 border p-2 text-start ms-5" formControlName="captcha" name="captcha" placeholder="Enter captcha">
+
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">send</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <div class="main" style="background-color: #56baed; height: 100vh">
   <div class="wrapper fadeInDown">
@@ -68,7 +94,7 @@
 
       <!-- Remind Passowrd -->
       <div id="formFooter">
-        <a class="underlineHover text-decoration-none" href="#">Forgot Password?</a>
+        <a class="underlineHover text-decoration-none" data-bs-toggle="modal" data-bs-target="#exampleModalForgot" >Forgot Password?</a>
       </div>
     </div>
   </div>

@@ -65,6 +65,8 @@ export class LoginComponent implements OnInit {
 
   onLoginCaptchaChecked(event:any) {
     
+    console.log(event.target.checked);    
+
     if(event.target.checked==true) {
 
       this.loginCaptcha.execute('importantAction').subscribe((token)=>{
@@ -72,12 +74,21 @@ export class LoginComponent implements OnInit {
         console.log(token);
         
         this.loginPage.value.captcha = token;
+        console.log(this.loginPage.value);
+
         
       })
     
   }
-
   
+}
+
+forgetPassword(forgetData:any) {
+
+  delete this.loginPage.value.password;
+
+  console.log(forgetData);
+
 }
 
 }
