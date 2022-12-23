@@ -9,12 +9,14 @@ import { RegisterComponent } from './register/register.component';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
 import { RecaptchaV3Module } from 'ng-recaptcha';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
     AuthComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,

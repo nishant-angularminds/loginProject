@@ -137,14 +137,35 @@
 </div>
 
 <app-header></app-header>
+
+<div class="d-flex ms-4 mt-5">
+  <div>
 <button
   type="button"
-  class="btn btn-success mt-4 ms-3"
+  class="btn btn-success"
   data-bs-toggle="modal"
   data-bs-target="#exampleModal"
 >
   Create user
 </button>
+</div>
+<div class="ms-5">
+<form
+class="d-flex"
+role="search"
+style="margin-right: 600px"
+>
+<input
+  class="form-control me-2"
+  type="search"
+  placeholder="Search customer"
+  name="search"
+  (keyup)="userSearch($event)"
+/>
+<button class="btn btn-dark" type="button">Search</button>
+</form> 
+</div>
+</div>
 
 <div class="container mt-4">
   <table class="table table-success table-striped">
@@ -169,7 +190,11 @@
         </td>
         <td>{{ userImpData["email"] }}</td>
         <td>
-          <select class="border no-border bg-success p-1 text-light rounded" name="role" (change)="sendRoleData($event, userImpData['_id'])">
+          <select
+            class="border no-border bg-success p-1 text-light rounded"
+            name="role"
+            (change)="sendRoleData($event, userImpData['_id'])"
+          >
             <option value="user" selected>{{ userImpData["role"] }}</option>
             <option value="admin" *ngIf="userImpData['role'] === 'user'">
               admin
@@ -178,26 +203,38 @@
               user
             </option>
           </select>
-          <i class="fa-solid fa-trash marginForDelete" (click)="deleteUser(userImpData['_id'])"></i>
+          <i
+            class="fa-solid fa-trash marginForDelete"
+            (click)="deleteUser(userImpData['_id'])"
+          ></i>
         </td>
       </tr>
     </tbody>
   </table>
-  <select class="form-select widthStyle" (change)="pageChange($event)" aria-label="Default select example">
+  <select
+    class="form-select widthStyle"
+    (change)="pageChange($event)"
+    aria-label="Default select example"
+  >
     <option selected>ItemsList</option>
     <option value="4">4</option>
     <option value="6">6</option>
     <option value="8">8</option>
-
   </select>
 
-
-  <nav aria-label="Page navigation example">
-    <ul class="pagination" style="cursor:pointer">
-      <li class="page-item" (click)="previousData()" ><a class="page-link">Previous</a></li>
-      <div *ngFor="let data of pages; index as i"><li class="page-item" (click)="pageClick(i+1)"><a class="page-link">{{i+1}}</a></li></div>
-      <li class="page-item" (click)="nextData()"><a class="page-link">Next</a></li>
+  <nav aria-label="Page navigation example" class="mt-4">
+    <ul class="pagination" style="cursor: pointer">
+      <li class="page-item" (click)="previousData()">
+        <a class="page-link">Previous</a>
+      </li>
+      <div *ngFor="let data of pages; index as i">
+        <li class="page-item" (click)="pageClick(i + 1)">
+          <a class="page-link">{{ i + 1 }}</a>
+        </li>
+      </div>
+      <li class="page-item" (click)="nextData()">
+        <a class="page-link">Next</a>
+      </li>
     </ul>
   </nav>
 </div>
-

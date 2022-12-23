@@ -11,10 +11,13 @@ import { ReCaptchaV3Service } from 'ng-recaptcha';
 export class RegisterComponent implements OnInit {
   registerPage: FormGroup;
   emailSubmitStatus: any;
-  queryParams:any;
+  queryParams: any;
 
-  constructor(private router1: Router,private serviceObject:ApiInfoService,private captchaObject:ReCaptchaV3Service) {
-  }
+  constructor(
+    private router1: Router,
+    private serviceObject: ApiInfoService,
+    private captchaObject: ReCaptchaV3Service
+  ) {}
 
   ngOnInit(): void {
     this.registerPage = new FormGroup({
@@ -37,18 +40,15 @@ export class RegisterComponent implements OnInit {
         Validators.maxLength(50),
         Validators.pattern('^[a-zA-Z ]*$'),
       ]),
-      
-      captcha:new FormControl('',Validators.required)
-      
-      ,
+
+      captcha: new FormControl('', Validators.required),
     });
   }
 
   submitForm(formData: any) {
     console.log(formData);
-    
-    this.emailSubmitStatus = true;
 
+    this.emailSubmitStatus = true;
 
     if (
       this.registerPage.controls['name'].valid &&
@@ -56,35 +56,24 @@ export class RegisterComponent implements OnInit {
       this.registerPage.controls['password'].valid &&
       this.registerPage.controls['company'].valid &&
       this.registerPage.controls['captcha'].valid
-
     ) {
-
-
-       this.serviceObject.post(`/auth/register`,formData).subscribe((data)=> {
-
-        this.router1.navigateByUrl('/auth/login');
-        
-       },(err)=>{
-
-        alert(err['error']['message']);        
-        this.router1.navigateByUrl('/auth/login');
-
-        });
-
+      this.serviceObject.post(`/auth/register`, formData).subscribe(
+        (data) => {
+          this.router1.navigateByUrl('/auth/login');
+        },
+        (err) => {
+          alert(err['error']['message']);
+          this.router1.navigateByUrl('/auth/login');
+        }
+      );
     }
-
   }
 
-  onCaptchaChecked(event:any) {
-
-    if(event.target.checked==true) {
-
-    this.captchaObject.execute('importantAction').subscribe((token)=>{
-
-      this.registerPage.value.captcha = token;
-      
-    })
-
-  }
+  onCaptchaChecked(event: any) {
+    if (event.target.checked == true) {
+      this.captchaObject.execute('importantAction').subscribe((token) => {
+        this.registerPage.value.captcha = token;
+      });
+    }
   }
 }

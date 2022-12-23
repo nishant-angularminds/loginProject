@@ -17,11 +17,14 @@ export class LoginComponent implements OnInit {
   emailSubmitStatus1: any;
   loginStatus: any = false;
   tempTokenArray: any;
-  queryParamsLogin:any;
+  queryParamsLogin: any;
 
-  constructor(private routerObject: Router, private service: ApiInfoService,private localstorageObject:LocalstorageDataService,private loginCaptcha:ReCaptchaV3Service) {
-
-  }
+  constructor(
+    private routerObject: Router,
+    private service: ApiInfoService,
+    private localstorageObject: LocalstorageDataService,
+    private loginCaptcha: ReCaptchaV3Service
+  ) {}
 
   ngOnInit(): void {
     this.loginPage = new FormGroup({
@@ -34,14 +37,12 @@ export class LoginComponent implements OnInit {
         Validators.required,
         Validators.minLength(6),
       ]),
-      captcha:new FormControl('',Validators.required)
+      captcha: new FormControl('', Validators.required),
     });
   }
 
   submitLoginForm(loginData: any) {
-    
     console.log(loginData);
-    
 
     this.emailSubmitStatus1 = true;
     if (
@@ -49,46 +50,44 @@ export class LoginComponent implements OnInit {
       this.loginPage.controls['password'].valid &&
       this.loginPage.controls['captcha'].valid
     ) {
-
-
-      this.service.post(`/auth/login`,loginData).subscribe(
+      this.service.post(`/auth/login`, loginData).subscribe(
         (data: any) => {
           this.localstorageObject.setTokenInLocalStorage(data);
-          this.routerObject.navigate(['/my-profile']);
+          this.routerObject.navigate(['/home']);
         },
-        (err) => {          
+        (err) => {
           alert(err['error']['message']);
         }
       );
     }
   }
 
-  onLoginCaptchaChecked(event:any) {
-    
-    console.log(event.target.checked);    
+  onLoginCaptchaChecked(event: any) {
+    console.log(event.target.checked);
 
-    if(event.target.checked==true) {
-
-      this.loginCaptcha.execute('importantAction').subscribe((token)=>{
-  
+    if (event.target.checked == true) {
+      this.loginCaptcha.execute('importantAction').subscribe((token) => {
         console.log(token);
-        
+
         this.loginPage.value.captcha = token;
         console.log(this.loginPage.value);
-
-        
-      })
-    
+      });
+    }
   }
-  
-}
 
-forgetPassword(forgetData:any) {
+  forgetPassword(forgetData: any) {
+    delete this.loginPage.value.password;
 
-  delete this.loginPage.value.password;
+    console.log(forgetData);
 
-  console.log(forgetData);
+    this.service.post(`/auth/forgot-password`, forgetData).subscribe(
+      (data) => {
 
-}
-
+        this.routerObject.navigateByUrl('/auth/reset-password');
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
 }

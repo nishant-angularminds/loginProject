@@ -12,28 +12,23 @@ import { LocalstorageDataService } from 'src/app/services/localstorage-data.serv
 export class ProfileComponent implements OnInit {
   currentUserEmail: any;
   data1: any;
-  companyForm:FormGroup;
+  companyForm: FormGroup;
 
   constructor(
     private routerforlogin: Router,
     private apiObject: ApiInfoService,
-    private localstorageObject:LocalstorageDataService
+    private localstorageObject: LocalstorageDataService
   ) {
-
     this.getLoginInfo();
-
   }
 
   ngOnInit(): void {
-
     this.companyForm = new FormGroup({
-
-      'email':new FormControl(),
-      'name':new FormControl(),
-      'old_password':new FormControl(),
-      'new_password':new FormControl()
-    })
-
+      email: new FormControl(),
+      name: new FormControl(),
+      old_password: new FormControl(),
+      new_password: new FormControl(),
+    });
   }
 
   deleteLocal() {
@@ -41,7 +36,6 @@ export class ProfileComponent implements OnInit {
   }
 
   getLoginInfo() {
-
     this.apiObject.get(`/auth/self`).subscribe(
       (data) => {
         this.data1 = data;
@@ -49,44 +43,37 @@ export class ProfileComponent implements OnInit {
       },
       (error) => {
         console.log(error['message']);
-      });
+      }
+    );
   }
 
-  editCompany(formData:any) {
-    
+  editCompany(formData: any) {
     delete this.companyForm.value.old_password;
     delete this.companyForm.value.new_password;
     console.log(formData);
 
-    this.apiObject.patch('/users/org',formData).subscribe((data)=>{
-
-      this.getLoginInfo();
-
-    },(err)=> {
-
-      console.log(err);
-      
-    });
-
+    this.apiObject.patch('/users/org', formData).subscribe(
+      (data) => {
+        this.getLoginInfo();
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
-  sendPasswordData(passwordData:any) {
-
+  sendPasswordData(passwordData: any) {
     delete this.companyForm.value.email;
     delete this.companyForm.value.name;
 
     console.log(passwordData);
-    this.apiObject.post(`/users/auth/change-password`,passwordData).subscribe((data)=> {
-
-      console.log(data);
-      
-    },(err)=> {
-
-      console.log(err);
-      
-
-    });
-    
-
+    this.apiObject.post(`/users/auth/change-password`, passwordData).subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }

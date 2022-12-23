@@ -1,18 +1,15 @@
 .loginFieldStyle {
-
-    margin: 10px;
-    padding: 5px;
+  margin: 10px;
+  padding: 5px;
 }
 
 .spaceForButton {
-
-    margin-right: 10px;
-    padding: 3px;
-    margin-left: 10px;
-    
+  margin-right: 10px;
+  padding: 3px;
+  margin-left: 10px;
 }
 
-@import url('https://fonts.googleapis.com/css?family=Poppins');
+@import url("https://fonts.googleapis.com/css?family=Poppins");
 
 body {
   font-family: "Poppins", sans-serif;
@@ -21,16 +18,16 @@ body {
 
 a {
   color: #92badd;
-  display:inline-block;
-  font-weight: 400; 
+  display: inline-block;
+  font-weight: 400;
 }
 
 h2 {
   font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;
-  display:inline-block;
-  margin: 40px 8px 10px 8px; 
+  display: inline-block;
+  margin: 40px 8px 10px 8px;
   color: #cccccc;
 }
 
@@ -43,8 +40,6 @@ h2 {
   border-radius: 0 0 10px 10px;
 }
 
-
-
 /* TABS */
 
 h2.inactive {
@@ -56,11 +51,11 @@ h2.active {
   border-bottom: 2px solid #5fbae9;
 }
 
-
-
 /* FORM TYPOGRAPHY*/
 
-input[type=button], input[type=submit], input[type=reset]  {
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
   background-color: #56baed;
   border: none;
   color: white;
@@ -70,23 +65,22 @@ input[type=button], input[type=submit], input[type=reset]  {
   display: inline-block;
   text-transform: uppercase;
   font-size: 13px;
-  -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
-  box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+  -webkit-box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+  box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
   margin: 5px 20px 40px 20px;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
 }
 
-input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover {
   background-color: #39ace7;
 }
 
-input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
+input[type="button"]:active,
+input[type="submit"]:active,
+input[type="reset"]:active {
   -moz-transform: scale(0.95);
   -webkit-transform: scale(0.95);
   -o-transform: scale(0.95);
@@ -94,7 +88,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
   transform: scale(0.95);
 }
 
-input[type=text] {
+input[type="text"] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -115,12 +109,12 @@ input[type=text] {
   border-radius: 5px 5px 5px 5px;
 }
 
-input[type=text]:focus {
+input[type="text"]:focus {
   background-color: #fff;
   border-bottom: 2px solid #5fbae9;
 }
 
-input[type=text]:placeholder {
+input[type="text"]:placeholder {
   color: #cccccc;
 }
 
@@ -140,30 +134,25 @@ input[type=text]:placeholder {
   color: #0d0d0d;
 }
 
-.underlineHover:hover:after{
+.underlineHover:hover:after {
   width: 100%;
 }
-
-
 
 /* OTHERS */
 
 *:focus {
-    outline: none;
-} 
-
-
+  outline: none;
+}
 
 * {
   box-sizing: border-box;
 }
 
 .emailValidation {
-
-    font-family: 'Arimo', sans-serif;
-font-family: 'Inter', sans-serif;
-font-family: 'Montserrat', sans-serif;
-color: red;
+  font-family: "Arimo", sans-serif;
+  font-family: "Inter", sans-serif;
+  font-family: "Montserrat", sans-serif;
+  color: red;
 }
 
 #formContent {
@@ -175,47 +164,36 @@ color: red;
   max-width: 450px;
   position: relative;
   padding: 0px;
-  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
-  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
   text-align: center;
 }
 
-
-@media screen and (max-width:720px) {
-  
+@media screen and (max-width: 720px) {
   #formContent {
-
     width: 60%;
-
   }
 
-  input[type=button], input[type=submit], input[type=reset]  {
-  
-  padding: 13px 50px;
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"] {
+    padding: 13px 50px;
   }
-
 }
 
-@media screen and (max-width:360px) {
-  
+@media screen and (max-width: 360px) {
   #formContent {
-
     width: 80%;
     /* padding: 20px; */
-
   }
 
-  input[type=button], input[type=submit], input[type=reset]  {
-
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"] {
     padding: 10px 30px;
-
-
   }
 
-  input[type=text] {
-
+  input[type="text"] {
     padding: 10px 22px;
-
   }
-
 }

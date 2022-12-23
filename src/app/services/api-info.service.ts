@@ -10,9 +10,10 @@ export class ApiInfoService {
   registerData: any;
   registerSave: any = false;
   userIdInformation: any;
-  baseUrl = 'https://shop-api.ngminds.com'
-  limit:any=3;
-  page:any=1;
+  baseUrl = 'https://shop-api.ngminds.com';
+  limit: any = 6;
+  page: any = 1;
+  name: any = '';
 
   profileAvailable: any = false;
 
@@ -22,7 +23,7 @@ export class ApiInfoService {
     private localObject: LocalstorageDataService
   ) {}
 
-  get(normalUrl:any) {
+  get(normalUrl: any) {
     var tokenInfo = localStorage.getItem('tokenList');
 
     return this.httpObject.get(`${this.baseUrl}${normalUrl}`, {
@@ -30,37 +31,27 @@ export class ApiInfoService {
     });
   }
 
-  patch(normalUrl:any,payload:object) {
-
+  patch(normalUrl: any, payload: object) {
     var tokenInfo1 = this.localObject.getTokenInLocalStorage();
 
-    return this.httpObject.patch(
-      `${this.baseUrl}${normalUrl}`,
-      payload,
-      { headers: { Authorization: `Bearer ${tokenInfo1}` } }
-    );
+    return this.httpObject.patch(`${this.baseUrl}${normalUrl}`, payload, {
+      headers: { Authorization: `Bearer ${tokenInfo1}` },
+    });
   }
 
-  post(normalUrl:string,payload:object) {
-
+  post(normalUrl: string, payload: object) {
     var tokenInfoUser = localStorage.getItem('tokenList');
 
-    return this.httpObject.post(
-      `${this.baseUrl}${normalUrl}` ,
-      payload,
-      { headers: { Authorization: `Bearer ${tokenInfoUser}` } }
-    );
+    return this.httpObject.post(`${this.baseUrl}${normalUrl}`, payload, {
+      headers: { Authorization: `Bearer ${tokenInfoUser}` },
+    });
   }
 
-  delete(normalUrl:any) {
-
+  delete(normalUrl: any) {
     var getTokenInfoUser = localStorage.getItem('tokenList');
 
     return this.httpObject.delete(`${this.baseUrl}${normalUrl}`, {
       headers: { Authorization: `Bearer ${getTokenInfoUser}` },
-    })
-
+    });
   }
-
-  }
-
+}

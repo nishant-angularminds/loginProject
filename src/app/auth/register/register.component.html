@@ -60,22 +60,29 @@
         /><br />
         <div
           class="emailValidation"
-          *ngIf="
-            emailSubmitStatus && registerPage.controls['company'].invalid
-          "
+          *ngIf="emailSubmitStatus && registerPage.controls['company'].invalid"
         >
           Invalid CompanyName
         </div>
         <br />
 
         <div class="captcha-checkbox pb-4" style="font-size: 0.8rem">
-        <input type="checkbox" class="me-2" formControlName="captcha" (click)="onCaptchaChecked($event)"><span class="fs-5">I am not a robot</span>
+          <input
+            type="checkbox"
+            class="me-2"
+            formControlName="captcha"
+            (click)="onCaptchaChecked($event)"
+          /><span class="fs-5">I am not a robot</span>
         </div>
-        <div *ngIf="emailSubmitStatus && registerPage.controls['captcha'].invalid" class="text-danger">select who are you</div>
+        <div
+          *ngIf="emailSubmitStatus && registerPage.controls['captcha'].invalid"
+          class="text-danger"
+        >
+          select who are you
+        </div>
 
         <input type="submit" class="fadeIn fisth" value="Sign Up" />
       </form>
     </div>
   </div>
-
 </div>

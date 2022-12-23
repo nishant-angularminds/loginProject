@@ -4,19 +4,26 @@ import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { RegisterAuthGuard } from '../login-auth.guard';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
-const routes: Routes = [{ path:'',redirectTo:'login', pathMatch:'full' },
+const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
 
-{
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
 
-  path:'login',
-  component:LoginComponent
-},
+  {
+    path: 'register',
+    component: RegisterComponent,
+  },
 
-{
-  path:'register',
-  component:RegisterComponent
-}
+  {
+
+    path:'reset-password',
+    component:ResetPasswordComponent
+  }
 ];
 
 @NgModule({

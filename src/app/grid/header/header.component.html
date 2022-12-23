@@ -1,83 +1,71 @@
+<nav class="navbar navbar-expand-lg customNavBar">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"></a>
 
-  
-  <nav class="navbar navbar-expand-lg customNavBar">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#"></a>
-  
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li
-            class="nav-item"
-            style="justify-content: space-between"
-            data-bs-toggle="offcanvas"
-            href="#offcanvasExample"
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li
+          class="nav-item"
+          style="justify-content: space-between"
+          data-bs-toggle="offcanvas"
+          href="#offcanvasExample"
+          role="button"
+          aria-controls="offcanvasExample"
+        >
+          <a
+            class="nav-link"
+            href="#"
             role="button"
-            aria-controls="offcanvasExample"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
           >
-            <a
-              class="nav-link"
-              href="#"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <img
-                src="assets/profile.png"
-                class="profileIcon"
-                alt=""
-                width="30px"
-              />
-            </a>
-          </li>
-        </ul>
-        <form class="d-flex serachData" role="search" style="margin-right: 600px">
-          <input
-            class="form-control me-2 searchElement searchTextData"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="sButton mobileSearchButton" type="submit">Search</button>
-        </form>
-  
-        <span class="companyName">NjCompany</span>
-      </div>
-    </div>
-  </nav>
-  
-
-  
-  <div
-    class="offcanvas offcanvas-start customSideNav"
-    tabindex="-1"
-    id="offcanvasExample"
-    aria-labelledby="offcanvasExampleLabel"
-  >
-    <div class="offcanvas-header p-3">
-      <h5 class="offcanvas-title" id="offcanvasExampleLabel"></h5>
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="offcanvas"
-        aria-label="Close"
-      ></button>
-    </div>
-  
-    <div class="image">
-      <img src="assets/steve.jpeg" class="imgData" alt="" />
-    </div>
-  
-    <div class="menus">
-      <div>
-        <div class="menuLinks" routerLink="/my-profile">Home</div>
-        <div class="menuLinks" routerLink="/company">Company</div>
-        <div class="menuLinks" data-bs-dismiss="offcanvas"
-        aria-label="Close">chenged password</div>
-        <div class="menuLinks">About</div>
-      </div>
-    </div>
-  
-    <div class="logOut" class="logImg" (click)="logoutData()">
-      <i class="fa-solid fa-right-from-bracket"></i>
+            <img
+              src="assets/profile.png"
+              class="profileIcon"
+              alt=""
+              width="30px"
+            />
+          </a>
+        </li>
+      </ul>
+      
+      <span class="companyName">NjCompany</span>
     </div>
   </div>
+</nav>
+
+<div
+  class="offcanvas offcanvas-start customSideNav"
+  tabindex="-1"
+  id="offcanvasExample"
+  aria-labelledby="offcanvasExampleLabel"
+>
+  <div class="offcanvas-header p-3">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel"></h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+
+  <div class="image">
+    <img src="assets/steve.jpeg" class="imgData" alt="" />
+  </div>
+
+  <div class="menus">
+    <div>
+      <div class="menuLinks" routerLink="/my-profile">Home</div>
+      <div class="menuLinks" routerLink="/company">Company</div>
+      <div class="menuLinks" data-bs-dismiss="offcanvas" aria-label="Close">
+        chenged password
+      </div>
+      <div class="menuLinks">About</div>
+    </div>
+  </div>
+
+  <div class="logOut" class="logImg" (click)="logoutData()">
+    <i class="fa-solid fa-right-from-bracket"></i>
+  </div>
+</div>
