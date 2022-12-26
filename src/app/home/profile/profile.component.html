@@ -162,6 +162,14 @@
               >
                 Edit
               </button>
+
+               <span *ngIf="data1['isEmailVerified']==false">
+              <button type="button" class="btn btn-light ms-3" (click)="verifyEmail()">Verify</button>
+              </span>
+              <span *ngIf="data1['isEmailVerified']==true">
+              <button type="button" class="btn btn-light ms-3">Verified</button>
+              </span>
+
             </div>
           </div>
         </div>

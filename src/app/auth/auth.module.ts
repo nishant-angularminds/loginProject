@@ -10,32 +10,47 @@ import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
 import { RecaptchaV3Module } from 'ng-recaptcha';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
+
+// Google Api Login Imports
+
+// const google_clientid =
+//   '893913805202-rg7o6somctq21ike6dk1u0d696t64e0q.apps.googleusercontent.com';
 
 @NgModule({
   declarations: [
     AuthComponent,
     LoginComponent,
     RegisterComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    VerifyEmailComponent,
   ],
   imports: [
     CommonModule,
     AuthRoutingModule,
     ReactiveFormsModule,
-    RecaptchaV3Module
+    RecaptchaV3Module,
   ],
-  exports:[
+  exports: [RegisterComponent, LoginComponent],
+  providers: [
+    ReCaptchaV3Service,
+    {
+      provide: RECAPTCHA_V3_SITE_KEY,
+      useValue: '6LevmbQZAAAAAMSCjcpJmuCr4eIgmjxEI7bvbmRI',
+    },
 
-    RegisterComponent,
-    LoginComponent
+    // {
+    //   provide: "SocialAuthServiceConfig",
+    //   useValue: {
+    //      authLogin: false,
+    //      providers: [{
+    //       id: GoogleLoginProvider.PROVIDER_ID,
+    //       provider: new GoogleLoginProvider(
+    //         google_clientid
+    //       )
+    //      }]
+    //   }as SocialAuthServiceConfig
+    // }
   ],
-  providers:[
-
-    ReCaptchaV3Service,{
-
-      provide:RECAPTCHA_V3_SITE_KEY,
-      useValue:"6LevmbQZAAAAAMSCjcpJmuCr4eIgmjxEI7bvbmRI",
-    }
-  ]
 })
-export class AuthModule { }
+export class AuthModule {}

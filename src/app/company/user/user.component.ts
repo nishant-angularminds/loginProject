@@ -26,12 +26,10 @@ export class UserComponent implements OnInit {
     private apiService: ApiInfoService,
     private routerObject: Router
   ) {
-
     this.apiService.page = 1;
     this.userInfo();
     // console.log('hello');
-    console.log("i am user");
-    
+    console.log('i am user');
   }
 
   ngOnInit(): void {
@@ -43,26 +41,18 @@ export class UserComponent implements OnInit {
     });
   }
 
-  userSearch(event:any) {
-
-    this.apiService.name =  event.target.value;
+  userSearch(event: any) {
+    this.apiService.name = event.target.value;
     this.userInfo();
   }
 
   userInfo() {
-
     this.query = `?limit=${this.apiService.limit}&page=${this.apiService.page}`;
 
-    if(this.apiService.name=='') {
-
+    if (this.apiService.name == '') {
       this.query = `?limit=${this.apiService.limit}&page=${this.apiService.page}`;
-
-    }
-
-    else {
-
-      this.query = `${this.query}&name=${this.apiService.name}`
-
+    } else {
+      this.query = `${this.query}&name=${this.apiService.name}`;
     }
 
     this.apiService.get(`/users${this.query}`).subscribe((data: any) => {
@@ -73,7 +63,6 @@ export class UserComponent implements OnInit {
       this.pages.length = this.userInformationArray['totalPages'];
       this.pages.fill(0);
       console.log(this.pages);
-      
     });
   }
 
@@ -132,20 +121,12 @@ export class UserComponent implements OnInit {
   }
 
   pageChange(event: any) {
-
-    if(this.apiService.page==this.pages.length) {
-
-      if(event.target.value > this.apiService.limit) {
-
-              this.apiService.page--;
-              this.userInfo();
-
-
+    if (this.apiService.page == this.pages.length) {
+      if (event.target.value > this.apiService.limit) {
+        this.apiService.page--;
+        this.userInfo();
       }
-
-    }
-
-    else  {
+    } else {
       // this.apiService.page--;
 
       this.userInfo();

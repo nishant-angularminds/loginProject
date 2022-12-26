@@ -11,14 +11,17 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
-    canActivate: [RegisterAuthGuard],
   },
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
     canActivate: [LoginAuthGuard],
   },
-  { path: 'company', loadChildren: () => import('./company/company.module').then(m => m.CompanyModule) },
+  {
+    path: 'company',
+    loadChildren: () =>
+      import('./company/company.module').then((m) => m.CompanyModule),
+  },
 
   { path: '**', component: PageNotFoundComponent },
 ];

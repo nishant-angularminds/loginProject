@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
   loginStatus: any = false;
   tempTokenArray: any;
   queryParamsLogin: any;
+  httpService: any;
+  authService: any;
 
   constructor(
     private routerObject: Router,
@@ -82,7 +84,6 @@ export class LoginComponent implements OnInit {
 
     this.service.post(`/auth/forgot-password`, forgetData).subscribe(
       (data) => {
-
         this.routerObject.navigateByUrl('/auth/reset-password');
       },
       (err) => {

@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiInfoService } from 'src/app/services/api-info.service';
 import { LocalstorageDataService } from 'src/app/services/localstorage-data.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -13,13 +14,23 @@ export class ProfileComponent implements OnInit {
   currentUserEmail: any;
   data1: any;
   companyForm: FormGroup;
+  verifyToken:any;
 
   constructor(
     private routerforlogin: Router,
     private apiObject: ApiInfoService,
-    private localstorageObject: LocalstorageDataService
+    private localstorageObject: LocalstorageDataService,
+    private activeObject:ActivatedRoute
   ) {
+    activeObject.queryParams.subscribe((data)=>{
+
+      this.verifyToken = data;
+    })
+
+    console.log("hello nishant");
+    
     this.getLoginInfo();
+    
   }
 
   ngOnInit(): void {
@@ -29,6 +40,8 @@ export class ProfileComponent implements OnInit {
       old_password: new FormControl(),
       new_password: new FormControl(),
     });
+    console.log(this.verifyToken);
+    
   }
 
   deleteLocal() {
@@ -76,4 +89,21 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
+
+
+  verifyEmail() {
+
+    this.apiObject.post(`/auth/send-verification-email`,{}).subscribe((data)=> {
+
+      console.log("success");
+
+      this.routerforlogin.navigateByUrl('/auth/verify-email')
+
+    },(err)=>{
+
+      console.log(err);
+      
+    })
+  }
+  
 }

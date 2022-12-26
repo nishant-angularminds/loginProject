@@ -8,7 +8,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './home/page-not-found/page-not-found.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent],
   imports: [
@@ -16,8 +15,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    ReactiveFormsModule
-    ],
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

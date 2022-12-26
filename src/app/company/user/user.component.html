@@ -140,31 +140,27 @@
 
 <div class="d-flex ms-4 mt-5">
   <div>
-<button
-  type="button"
-  class="btn btn-success"
-  data-bs-toggle="modal"
-  data-bs-target="#exampleModal"
->
-  Create user
-</button>
-</div>
-<div class="ms-5">
-<form
-class="d-flex"
-role="search"
-style="margin-right: 600px"
->
-<input
-  class="form-control me-2"
-  type="search"
-  placeholder="Search customer"
-  name="search"
-  (keyup)="userSearch($event)"
-/>
-<button class="btn btn-dark" type="button">Search</button>
-</form> 
-</div>
+    <button
+      type="button"
+      class="btn btn-success"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+    >
+      Create user
+    </button>
+  </div>
+  <div class="ms-5">
+    <form class="d-flex" role="search" style="margin-right: 600px">
+      <input
+        class="form-control me-2"
+        type="search"
+        placeholder="Search customer"
+        name="search"
+        (keyup)="userSearch($event)"
+      />
+      <button class="btn btn-dark" type="button">Search</button>
+    </form>
+  </div>
 </div>
 
 <div class="container mt-4">
