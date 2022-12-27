@@ -14,23 +14,22 @@ export class ProfileComponent implements OnInit {
   currentUserEmail: any;
   data1: any;
   companyForm: FormGroup;
-  verifyToken:any;
+  verifyToken: any;
+  verify: any;
 
   constructor(
     private routerforlogin: Router,
     private apiObject: ApiInfoService,
     private localstorageObject: LocalstorageDataService,
-    private activeObject:ActivatedRoute
+    private activeObject: ActivatedRoute
   ) {
-    activeObject.queryParams.subscribe((data)=>{
-
+    activeObject.queryParams.subscribe((data) => {
       this.verifyToken = data;
-    })
+    });
 
-    console.log("hello nishant");
-    
+    console.log('hello nishant');
+
     this.getLoginInfo();
-    
   }
 
   ngOnInit(): void {
@@ -41,7 +40,6 @@ export class ProfileComponent implements OnInit {
       new_password: new FormControl(),
     });
     console.log(this.verifyToken);
-    
   }
 
   deleteLocal() {
@@ -49,20 +47,26 @@ export class ProfileComponent implements OnInit {
   }
 
   getLoginInfo() {
-    this.apiObject.get(`/auth/self`).subscribe(
-      (data) => {
+    this.apiObject.get(`/auth/self`).subscribe({
+     next:(data) => {
         this.data1 = data;
         console.log(this.data1);
+        this.verify = this.data1['isEmailVerified'];
       },
-      (error) => {
-        console.log(error['message']);
+      error:(error) => {
+        console.log(error);
       }
-    );
+  });
+  }
+
+  fillEmail() {
+    this.companyForm.controls['email'].setValue(this.data1['email']);
   }
 
   editCompany(formData: any) {
     delete this.companyForm.value.old_password;
     delete this.companyForm.value.new_password;
+
     console.log(formData);
 
     this.apiObject.patch('/users/org', formData).subscribe(
@@ -90,20 +94,16 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-
   verifyEmail() {
+    this.apiObject.post(`/auth/send-verification-email`, {}).subscribe(
+      (data) => {
+        console.log('success');
 
-    this.apiObject.post(`/auth/send-verification-email`,{}).subscribe((data)=> {
-
-      console.log("success");
-
-      this.routerforlogin.navigateByUrl('/auth/verify-email')
-
-    },(err)=>{
-
-      console.log(err);
-      
-    })
+        this.routerforlogin.navigateByUrl('/auth/verify-email');
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
-  
 }

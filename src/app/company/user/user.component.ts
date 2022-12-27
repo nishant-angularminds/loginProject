@@ -127,15 +127,12 @@ export class UserComponent implements OnInit {
         this.userInfo();
       }
     } else {
-      // this.apiService.page--;
 
       this.userInfo();
     }
 
     this.apiService.limit = event.target.value;
     this.apiService.get(`/users${this.query}`).subscribe((data) => {
-      // this.userDataArray = data;
-      // console.log(this.userDataArray);
 
       this.userInfo();
     });

@@ -12,12 +12,21 @@ export class RegisterComponent implements OnInit {
   registerPage: FormGroup;
   emailSubmitStatus: any;
   queryParams: any;
+  captchaToken: any;
 
   constructor(
     private router1: Router,
     private serviceObject: ApiInfoService,
     private captchaObject: ReCaptchaV3Service
-  ) {}
+  ) {
+
+    this.captchaObject.execute('importantAction').subscribe((token: any) => {
+      // console.log(token);
+
+      this.captchaToken = token;
+    });
+    
+  }
 
   ngOnInit(): void {
     this.registerPage = new FormGroup({
@@ -46,7 +55,8 @@ export class RegisterComponent implements OnInit {
   }
 
   submitForm(formData: any) {
-    console.log(formData);
+
+    this.registerPage.value.captcha = this.captchaToken;
 
     this.emailSubmitStatus = true;
 
@@ -54,9 +64,7 @@ export class RegisterComponent implements OnInit {
       this.registerPage.controls['name'].valid &&
       this.registerPage.controls['email'].valid &&
       this.registerPage.controls['password'].valid &&
-      this.registerPage.controls['company'].valid &&
-      this.registerPage.controls['captcha'].valid
-    ) {
+      this.registerPage.controls['company'].valid     ) {
       this.serviceObject.post(`/auth/register`, formData).subscribe(
         (data) => {
           this.router1.navigateByUrl('/auth/login');

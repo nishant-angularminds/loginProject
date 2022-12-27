@@ -27,26 +27,36 @@ export class ResetPasswordComponent implements OnInit {
     this.resetForm = new FormGroup({
       password: new FormControl(),
       token: new FormControl(),
-      captcha: new FormControl(),
+      Confirmpassword: new FormControl(),
     });
   }
 
   resetPassword(resetData: any) {
     delete this.resetForm.value.token;
-    delete this.resetForm.value.captcha;
-    console.log(this.resetToken);
+    // console.log(resetData);
 
-    this.serviceObject
-      .post(`/auth/reset-password?token=${this.resetToken.token}`, resetData)
-      .subscribe(
-        (data) => {
+    if(resetData.password==resetData.Confirmpassword) {
+      // console.log("success password");
+      delete this.resetForm.value.Confirmpassword;
 
-          this.routeObject.navigateByUrl('/auth/login');
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+      this.serviceObject
+    .post(`/auth/reset-password?token=${this.resetToken.token}`, resetData)
+    .subscribe(
+      (data) => {
+
+        this.routeObject.navigateByUrl('/auth/login');
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+
+    }
+
+    else {
+
+      alert("password wrong")
+    }
 
   }
 }

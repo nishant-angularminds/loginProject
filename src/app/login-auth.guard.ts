@@ -30,7 +30,9 @@ export class LoginAuthGuard implements CanActivate {
       this.router1.navigateByUrl('/auth/login');
 
       return false;
-    } else {
+    }
+  
+    else {
       return true;
     }
   }

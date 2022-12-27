@@ -24,34 +24,18 @@ export class ApiInfoService {
   ) {}
 
   get(normalUrl: any) {
-    var tokenInfo = localStorage.getItem('tokenList');
-
-    return this.httpObject.get(`${this.baseUrl}${normalUrl}`, {
-      headers: { Authorization: `Bearer ${tokenInfo}` },
-    });
+    return this.httpObject.get(`${this.baseUrl}${normalUrl}`);
   }
 
   patch(normalUrl: any, payload: object) {
-    var tokenInfo1 = this.localObject.getTokenInLocalStorage();
-
-    return this.httpObject.patch(`${this.baseUrl}${normalUrl}`, payload, {
-      headers: { Authorization: `Bearer ${tokenInfo1}` },
-    });
+    return this.httpObject.patch(`${this.baseUrl}${normalUrl}`, payload);
   }
 
   post(normalUrl: string, payload: object) {
-    var tokenInfoUser = localStorage.getItem('tokenList');
-
-    return this.httpObject.post(`${this.baseUrl}${normalUrl}`, payload, {
-      headers: { Authorization: `Bearer ${tokenInfoUser}` },
-    });
+    return this.httpObject.post(`${this.baseUrl}${normalUrl}`, payload);
   }
 
   delete(normalUrl: any) {
-    var getTokenInfoUser = localStorage.getItem('tokenList');
-
-    return this.httpObject.delete(`${this.baseUrl}${normalUrl}`, {
-      headers: { Authorization: `Bearer ${getTokenInfoUser}` },
-    });
+    return this.httpObject.delete(`${this.baseUrl}${normalUrl}`);
   }
 }

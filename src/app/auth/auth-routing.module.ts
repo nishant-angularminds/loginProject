@@ -26,12 +26,15 @@ const routes: Routes = [
   {
 
     path:'reset-password',
-    component:ResetPasswordComponent
+    component:ResetPasswordComponent,
+    canActivate: [RegisterAuthGuard]
+
   },
 
   {
     path:'verify-email',
-    component:VerifyEmailComponent
+    component:VerifyEmailComponent,
+    canActivate: [RegisterAuthGuard]
   }
 ];
 

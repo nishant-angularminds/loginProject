@@ -159,14 +159,15 @@
                 class="btn btn-light px-4 ms-3"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
+                (click)="fillEmail()"
               >
                 Edit
               </button>
 
-               <span *ngIf="data1['isEmailVerified']==false">
+               <span *ngIf="verify==false">
               <button type="button" class="btn btn-light ms-3" (click)="verifyEmail()">Verify</button>
               </span>
-              <span *ngIf="data1['isEmailVerified']==true">
+              <span *ngIf="verify==true">
               <button type="button" class="btn btn-light ms-3">Verified</button>
               </span>
 
