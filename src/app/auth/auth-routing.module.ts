@@ -33,8 +33,8 @@ const routes: Routes = [
 
   {
     path:'verify-email',
-    component:VerifyEmailComponent,
-    canActivate: [RegisterAuthGuard]
+    component:VerifyEmailComponent
+  
   }
 ];
 

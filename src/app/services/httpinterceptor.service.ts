@@ -23,11 +23,7 @@ export class HttpinterceptorService implements HttpInterceptor {
 
   private handleError(error: HttpErrorResponse) {
     if (error['error']['code'] == 401) {
-      console.log(error['error']['code']);
-
       this.local1.removeToken();
-      // localStorage.clear();
-      // this.router.navigateByUrl('/auth/login');
     }
 
     // Return an observable with a user-facing error message.
