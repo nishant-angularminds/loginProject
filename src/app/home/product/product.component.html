@@ -1,0 +1,130 @@
+<div
+  class="modal fade"
+  id="exampleModalProduct"
+  data-bs-backdrop="static"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">User detail</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form
+        [formGroup]="productGroup"
+        (ngSubmit)="submitProductForm(productGroup.value); productGroup.reset()"
+      >
+        <div class="modal-body text-center">
+          <input
+            class="mb-5 p-1"
+            type="text"
+            formControlName="name"
+            placeholder="Name"
+          />
+          <input
+            class="mb-5 p-1"
+            type="text"
+            formControlName="description"
+            placeholder="description"
+          />
+          <input
+            class="mb-5 p-1"
+            type="file"
+            name="images"
+            id="files"
+            formControlName="images"
+            multiple
+            (change)="changeImage($event)"
+          /><br />
+
+          <div class="d-flex justify-content-center">
+            <div class="me-2">Select price:</div>
+
+            <div>
+              <input
+                type="number"
+                value="number"
+                formControlName="price"
+              /><br />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+            Save user
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<button
+  type="button"
+  class="btn btn-primary ms-4 mt-4"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModalProduct"
+>
+  Create product
+</button>
+
+<!-- <div class="container border border-danger mt-5 d-flex overflow-y scroll">
+
+    <div class="me-5 row" *ngFor="let data of watchProduct"><div class="col card" style="width: 18rem;">
+        <img src="{{data['images'][0]['url']}}" class="card-img-top" height="250px" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">&#8377;{{data['price']}}</h5>
+          <p class="card-text"> laboriosam ex tempore pariatur voluptas eius voluptatum. Error, voluptate aut?</p>
+          <a class="btn btn-primary">Buy</a>
+        </div>
+      </div></div>
+
+</div> -->
+
+<div class="container mt-4">
+  <div
+    class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-1 g-4"
+  >
+    <div class="" *ngFor="let data of watchProduct">
+      <div class="col card ps-3 pe-3 shadow p-3 mb-3 bg-body rounded">
+        <img
+          src="{{ data['images'][0]['url'] }}"
+          class="card-img-top"
+          height="240px"
+          alt="..."
+        /><i class="fa-solid fa-camera ms-auto fs-5"></i>
+        <div class="card-body">
+          <h5 class="card-title">&#8377;{{ data["price"] }}</h5>
+          <p class="card-text" *ngIf="data['description'].length<40;else smallDes">
+            {{data['description']}}
+          </p>
+
+          <ng-template #smallDes>
+
+            <p class="card-text">
+                i am nishant
+              </p>
+
+          </ng-template>
+          
+          <a class="btn btn-primary">Edit</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

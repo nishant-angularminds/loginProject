@@ -28,8 +28,7 @@ export class UserComponent implements OnInit {
   ) {
     this.apiService.page = 1;
     this.userInfo();
-    // console.log('hello');
-    console.log('i am user');
+
   }
 
   ngOnInit(): void {
