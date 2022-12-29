@@ -1,0 +1,21 @@
+
+<div class="container mt-5">
+  <div class="row">
+    <div
+      class="col imagePart bg-info d-flex justify-content-center align-items-center"
+    >
+      <img src="{{ currentData['images'][0]['url'] }}" width="400px" alt="" />
+    </div>
+    <div
+      class="col textPart bg-warning d-flex justify-content-center align-items-center"
+    >
+      <div class="container">
+        <div class="display-4 mt-5 text-light">{{ currentData.name }}</div>
+
+        <div class="fs-4 mt-5">{{ currentData.description }}</div>
+
+        <div class="display-3 mt-5">Price: {{ currentData.price }} &#8377;</div>
+      </div>
+    </div>
+  </div>
+</div>

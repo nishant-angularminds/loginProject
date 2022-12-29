@@ -11,7 +11,7 @@ export class ApiInfoService {
   registerSave: any = false;
   userIdInformation: any;
   baseUrl = 'https://shop-api.ngminds.com';
-  limit: any = 6;
+  limit: any = 8;
   page: any = 1;
   name: any = '';
 

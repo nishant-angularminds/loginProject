@@ -1,0 +1,24 @@
+.imagePart,
+.textPart {
+  height: 700px;
+}
+
+@media screen and (max-width: 992px) {
+  .imagePart,
+  .textPart {
+    height: 800px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .imagePart,
+  .textPart {
+    height: 450px;
+  }
+}
+
+@media screen and (max-width: 368px) {
+  .textPart {
+    height: 500px;
+  }
+}

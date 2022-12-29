@@ -18,7 +18,7 @@ export class UserComponent implements OnInit {
   totalPages1: any;
   userDataArray: any;
   pages: any[] = [];
-  demo: any = 0;
+  // demo: any = 0;
   userToken: any;
   query: any;
 
@@ -28,7 +28,6 @@ export class UserComponent implements OnInit {
   ) {
     this.apiService.page = 1;
     this.userInfo();
-
   }
 
   ngOnInit(): void {
@@ -123,24 +122,15 @@ export class UserComponent implements OnInit {
     if (this.apiService.page == this.pages.length) {
       if (event.target.value > this.apiService.limit) {
         this.apiService.page--;
-        this.userInfo();
       }
-    } else {
-
-      this.userInfo();
     }
-
     this.apiService.limit = event.target.value;
-    this.apiService.get(`/users${this.query}`).subscribe((data) => {
-
-      this.userInfo();
-    });
+    this.userInfo();
   }
 
   pageClick(pageNoInfo: any) {
     console.log(pageNoInfo);
     this.apiService.page = pageNoInfo;
-    this.demo = pageNoInfo;
     this.userInfo();
   }
 
@@ -149,7 +139,6 @@ export class UserComponent implements OnInit {
 
     if (this.apiService.page < this.userInformationArray['totalPages']) {
       this.apiService.page++;
-      this.demo = this.apiService.page;
       this.userInfo();
     }
   }
@@ -157,7 +146,6 @@ export class UserComponent implements OnInit {
   previousData() {
     if (this.apiService.page != 1) {
       this.apiService.page--;
-      this.demo = this.apiService.page;
       this.userInfo();
     }
   }

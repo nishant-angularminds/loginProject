@@ -7,9 +7,10 @@ import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from '../grid/header/header.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from './product/product.component';
+import { ProductdataComponent } from './productdata/productdata.component';
 
 @NgModule({
-  declarations: [HomeComponent, ProfileComponent,HeaderComponent, ProductComponent],
+  declarations: [HomeComponent, ProfileComponent,HeaderComponent, ProductComponent, ProductdataComponent],
   imports: [CommonModule, HomeRoutingModule,FormsModule,ReactiveFormsModule],
   exports:[HeaderComponent]
 })

@@ -1,4 +1,8 @@
 .outContainer {
+  background-color: skyblue;
+}
 
-    background-color: skyblue;
+.styleText {
+ 
+font-size: 30px;
 }

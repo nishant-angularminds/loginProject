@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ApiInfoService } from 'src/app/services/api-info.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -10,14 +11,17 @@ import { ApiInfoService } from 'src/app/services/api-info.service';
 export class ProductComponent implements OnInit {
   productGroup: FormGroup;
   imageInfo: any;
-  arr: any = [];
   imgData: any;
-  watchProduct:any;
+  watchProduct: any;
+  pages: any = [];
+  apiResponse: any;
+  productEditId: any;
+  productimageid: any;
 
-  constructor(private apiObject: ApiInfoService) {
+  constructor(private apiObject: ApiInfoService, private routerObject: Router) {
+    // this.apiObject.page = 1;
 
     this.getProduct();
-
   }
 
   ngOnInit(): void {
@@ -26,7 +30,32 @@ export class ProductComponent implements OnInit {
       description: new FormControl(),
       images: new FormControl(),
       price: new FormControl(),
+      new_images: new FormControl(),
     });
+  }
+
+  getEditProductId(productId: any) {
+    this.productEditId = productId;
+    console.log(this.productEditId);
+  }
+
+  getimgProductId(productId: any, productimgId: any) {
+    this.productEditId = productId;
+    this.productimageid = productimgId;
+  }
+
+  readData(getPid: any) {
+    this.getEditProductId(getPid);
+
+    this.apiObject.get(`/products/${this.productEditId}`).subscribe(
+      (data) => {
+        localStorage.setItem('currentProduct', JSON.stringify(data));
+        this.routerObject.navigateByUrl('/home/productdata');
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   changeImage(event: any) {
@@ -43,9 +72,6 @@ export class ProductComponent implements OnInit {
     formObject.append('name', productData.name);
     formObject.append('description', productData.description);
     formObject.append('price', productData.price);
-    this.arr = [];
-
-    console.log(this.arr);
 
     this.apiObject.post(`/products`, formObject).subscribe(
       (data) => {
@@ -58,17 +84,115 @@ export class ProductComponent implements OnInit {
     );
   }
 
+  submitEditImage(imageData: any) {
+    delete this.productGroup.value.name;
+    delete this.productGroup.value.description;
+    delete this.productGroup.value.price;
+    delete this.productGroup.value.images;
+
+    var formInfo = new FormData();
+
+    for (var j = 0; j < this.imgData.length; j++) {
+      formInfo.append('new_images', this.imgData[j]);
+    }
+
+    formInfo.append('delete', this.productimageid);
+
+    console.log(imageData);
+
+    this.apiObject
+      .patch(`/products/images/${this.productEditId}`, formInfo)
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.getProduct();
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+  }
+
   getProduct() {
+    this.apiObject
+      .get(
+        `/products?limit=${this.apiObject.limit}&page=${this.apiObject.page}`
+      )
+      .subscribe(
+        (data: any) => {
+          this.apiResponse = data;
+          this.watchProduct = data['results'];
 
-    this.apiObject.get(`/products`).subscribe((data:any)=>{
+          console.log(this.watchProduct);
+          console.log(this.apiResponse);
 
-      console.log(data);
-      this.watchProduct = data['results'];
-      
-    },(err)=> {
+          this.pages.length = this.apiResponse['totalPages'];
+          this.pages.fill(0);
+          console.log(this.pages);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+  }
 
-      console.log(err);
-      
-    })
+  deleteProduct(productId: any) {
+    console.log(productId);
+
+    // this.apiObject.delete(`/products/${productId}`).subscribe(
+    //   (data) => {
+    //     console.log(data);
+    //     this.getProduct();
+    //   },
+    //   (err) => {
+    //     console.log(err);
+    //   }
+    // );
+  }
+
+  updateProductForm(productUpdateData: any) {
+    delete this.productGroup.value.images;
+
+    this.apiObject
+      .patch(`/products/${this.productEditId}`, productUpdateData)
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.getProduct();
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+  }
+
+  previousData() {
+    if (this.apiObject.page != 1) {
+      this.apiObject.page--;
+      this.getProduct();
+    }
+  }
+
+  pageChange(event: any) {
+    if (this.apiObject.page == this.pages.length) {
+      if (event.target.value > this.apiObject.limit) {
+        this.apiObject.page--;
+      }
+    }
+    this.apiObject.limit = event.target.value;
+    this.getProduct();
+  }
+
+  pageClick(pageNoInfo: any) {
+    console.log(pageNoInfo);
+    this.apiObject.page = pageNoInfo;
+    this.getProduct();
+  }
+
+  nextData() {
+    if (this.apiObject.page < this.apiResponse['totalPages']) {
+      this.apiObject.page++;
+      this.getProduct();
+    }
   }
 }

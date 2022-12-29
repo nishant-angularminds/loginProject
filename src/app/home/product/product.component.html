@@ -1,5 +1,65 @@
 <div
   class="modal fade"
+  id="exampleModalProduct1"
+  data-bs-backdrop="static"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit product</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form
+        [formGroup]="productGroup"
+        (ngSubmit)="updateProductForm(productGroup.value); productGroup.reset()"
+      >
+        <div class="modal-body text-center">
+          <input
+            class="mb-5 p-1"
+            type="text"
+            formControlName="name"
+            placeholder="Enter product"
+          />
+          <input
+            class="mb-5 p-1"
+            type="text"
+            formControlName="description"
+            placeholder="description"
+          />
+          <input
+            class="mb-5 p-1"
+            type="number"
+            formControlName="price"
+            placeholder="price"
+          /><br />
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+            Save user
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
   id="exampleModalProduct"
   data-bs-backdrop="static"
   tabindex="-1"
@@ -73,6 +133,59 @@
   </div>
 </div>
 
+<div
+  class="modal fade"
+  id="exampleCamera"
+  data-bs-backdrop="static"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Change image</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form
+          [formGroup]="productGroup"
+          (ngSubmit)="submitEditImage(productGroup.value)"
+        >
+          <input
+            type="file"
+            name="new_images"
+            formControlName="new_images"
+            (change)="changeImage($event)"
+          />
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              Save changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 <button
   type="button"
   class="btn btn-primary ms-4 mt-4"
@@ -82,23 +195,8 @@
   Create product
 </button>
 
-<!-- <div class="container border border-danger mt-5 d-flex overflow-y scroll">
-
-    <div class="me-5 row" *ngFor="let data of watchProduct"><div class="col card" style="width: 18rem;">
-        <img src="{{data['images'][0]['url']}}" class="card-img-top" height="250px" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">&#8377;{{data['price']}}</h5>
-          <p class="card-text"> laboriosam ex tempore pariatur voluptas eius voluptatum. Error, voluptate aut?</p>
-          <a class="btn btn-primary">Buy</a>
-        </div>
-      </div></div>
-
-</div> -->
-
 <div class="container mt-4">
-  <div
-    class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-1 g-4"
-  >
+  <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-1 g-4">
     <div class="" *ngFor="let data of watchProduct">
       <div class="col card ps-3 pe-3 shadow p-3 mb-3 bg-body rounded">
         <img
@@ -106,25 +204,83 @@
           class="card-img-top"
           height="240px"
           alt="..."
-        /><i class="fa-solid fa-camera ms-auto fs-5"></i>
+        />
+
+        <i
+          class="fa-solid fa-camera ms-auto fs-5 mt-3"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleCamera"
+          (click)="getimgProductId(data['_id'], data['images'][0]['public_id'])"
+        ></i>
+
         <div class="card-body">
-          <h5 class="card-title">&#8377;{{ data["price"] }}</h5>
-          <p class="card-text" *ngIf="data['description'].length<40;else smallDes">
-            {{data['description']}}
+          <h5 class="card-title text-danger">&#8377;{{ data["price"] }}</h5>
+          <p
+            class="card-text styleText"
+            *ngIf="data['name'].length < 40; else smallDes"
+          >
+            {{ data["name"] }}
           </p>
 
           <ng-template #smallDes>
-
-            <p class="card-text">
-                i am nishant
-              </p>
-
+            <p class="card-text">i am nishant</p>
           </ng-template>
-          
-          <a class="btn btn-primary">Edit</a>
+          <div class="row">
+            <a
+              class="btn btn-primary col me-1"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModalProduct1"
+              (click)="getEditProductId(data['_id'])"
+              >Edit</a
+            >
+
+            <a
+              class="btn btn-danger col me-1"
+              (click)="deleteProduct(data['_id'])"
+              >Delete</a
+            >
+
+            <a
+              class="btn btn-success col me-1 mt-sm-1 mt-lg-1 mt-xl-0"
+              (click)="readData(data['_id'])"
+              >Read</a
+            >
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
+  <div class="row">
+    <div class="col-sm-3 col-md-5 col-lg-7">
+      <select
+        class="form-select responsiveLimit mt-4"
+        (change)="pageChange($event)"
+        aria-label="Default select example"
+      >
+        <option selected>Items</option>
+        <option value="4">4</option>
+        <option value="6">6</option>
+        <option value="8">8</option>
+      </select>
+    </div>
+
+    <div class="col">
+      <nav aria-label="Page navigation example" class="mt-4">
+        <ul class="pagination" style="cursor: pointer">
+          <li class="page-item" (click)="previousData()">
+            <a class="page-link">Previous</a>
+          </li>
+          <div *ngFor="let data of pages; index as i">
+            <li class="page-item" id="nj" (click)="pageClick(i + 1)">
+              <a class="page-link">{{ i + 1 }}</a>
+            </li>
+          </div>
+          <li class="page-item" (click)="nextData()">
+            <a class="page-link">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
