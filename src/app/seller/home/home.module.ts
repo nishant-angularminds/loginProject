@@ -4,7 +4,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FormsModule } from '@angular/forms';
-import { HeaderComponent } from '../grid/header/header.component';
+import { HeaderComponent } from 'src/app/seller/grid/header/header.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from './product/product.component';
 import { ProductdataComponent } from './productdata/productdata.component';

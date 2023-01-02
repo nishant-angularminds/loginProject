@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
       this.service.post(`/auth/login`, loginData).subscribe({
         next: (data: any) => {
           this.localstorageObject.setTokenInLocalStorage(data);
-          this.routerObject.navigate(['/home']);
+          this.routerObject.navigate(['/seller/home']);
         },
         error: (err) => {
           console.log('i am login');

@@ -17,11 +17,9 @@ export class LocalstorageDataService {
   }
 
   removeToken() {
-    console.log("i am mad");
-    
     localStorage.removeItem('tokenList');
     localStorage.removeItem('loggedUser');
 
-    this.routerObject.navigateByUrl('/auth/login');
+    this.routerObject.navigateByUrl('seller/auth');
   }
 }

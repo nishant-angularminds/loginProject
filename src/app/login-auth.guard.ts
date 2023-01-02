@@ -57,7 +57,7 @@ export class RegisterAuthGuard implements CanActivate {
     if (tokenDemo == null) {
       return true;
     } else {
-      this.router2.navigateByUrl('/home');
+      this.router2.navigateByUrl('/seller/home');
       return false;
     }
   }

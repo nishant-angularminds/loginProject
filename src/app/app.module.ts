@@ -8,7 +8,7 @@ import {
   HttpInterceptor,
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
-import { PageNotFoundComponent } from './home/page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './seller/home/page-not-found/page-not-found.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpinterceptorService } from './services/httpinterceptor.service';
 
