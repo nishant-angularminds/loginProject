@@ -10,8 +10,14 @@ import { ProductComponent } from './product/product.component';
 import { ProductdataComponent } from './productdata/productdata.component';
 
 @NgModule({
-  declarations: [HomeComponent, ProfileComponent,HeaderComponent, ProductComponent, ProductdataComponent],
-  imports: [CommonModule, HomeRoutingModule,FormsModule,ReactiveFormsModule],
-  exports:[HeaderComponent]
+  declarations: [
+    HomeComponent,
+    ProfileComponent,
+    HeaderComponent,
+    ProductComponent,
+    ProductdataComponent,
+  ],
+  imports: [CommonModule, HomeRoutingModule, FormsModule, ReactiveFormsModule],
+  exports: [HeaderComponent],
 })
 export class HomeModule {}

@@ -17,10 +17,12 @@ export class ProductComponent implements OnInit {
   apiResponse: any;
   productEditId: any;
   productimageid: any;
+  productName: any;
+  queryLine: any;
 
   constructor(private apiObject: ApiInfoService, private routerObject: Router) {
     // this.apiObject.page = 1;
-
+    this.productName = '';
     this.getProduct();
   }
 
@@ -31,6 +33,7 @@ export class ProductComponent implements OnInit {
       images: new FormControl(),
       price: new FormControl(),
       new_images: new FormControl(),
+      searchProductName: new FormControl(),
     });
   }
 
@@ -89,6 +92,7 @@ export class ProductComponent implements OnInit {
     delete this.productGroup.value.description;
     delete this.productGroup.value.price;
     delete this.productGroup.value.images;
+    delete this.productGroup.value.searchProductName;
 
     var formInfo = new FormData();
 
@@ -114,45 +118,61 @@ export class ProductComponent implements OnInit {
   }
 
   getProduct() {
-    this.apiObject
-      .get(
-        `/products?limit=${this.apiObject.limit}&page=${this.apiObject.page}`
-      )
-      .subscribe(
-        (data: any) => {
-          this.apiResponse = data;
-          this.watchProduct = data['results'];
+    if (this.productName == '') {
+      this.queryLine = `?limit=${this.apiObject.limit}&page=${this.apiObject.page}`;
+    } else {
+      this.queryLine = `?limit=${this.apiObject.limit}&page=${this.apiObject.page}&name=${this.productName}`;
+    }
 
-          console.log(this.watchProduct);
-          console.log(this.apiResponse);
+    this.apiObject.get(`/products${this.queryLine}`).subscribe(
+      (data: any) => {
+        this.apiResponse = data;
+        this.watchProduct = data['results'];
 
-          this.pages.length = this.apiResponse['totalPages'];
-          this.pages.fill(0);
-          console.log(this.pages);
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+        console.log(this.watchProduct);
+        console.log(this.apiResponse);
+
+        this.pages.length = this.apiResponse['totalPages'];
+        this.pages.fill(0);
+        console.log(this.pages);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  searchProduct(serchObject: any) {
+    delete this.productGroup.value.name;
+    delete this.productGroup.value.description;
+    delete this.productGroup.value.price;
+    delete this.productGroup.value.images;
+    delete this.productGroup.value.new_images;
+    this.productName = serchObject.searchProductName;
+    this.getProduct();
   }
 
   deleteProduct(productId: any) {
     console.log(productId);
 
-    // this.apiObject.delete(`/products/${productId}`).subscribe(
-    //   (data) => {
-    //     console.log(data);
-    //     this.getProduct();
-    //   },
-    //   (err) => {
-    //     console.log(err);
-    //   }
-    // );
+    this.apiObject.delete(`/products/${productId}`).subscribe(
+      (data) => {
+        console.log(data);
+        this.getProduct();
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   updateProductForm(productUpdateData: any) {
     delete this.productGroup.value.images;
+    delete this.productGroup.value.searchProductName;
+    delete this.productGroup.value.new_images;
 
+    console.log(productUpdateData);
+    
     this.apiObject
       .patch(`/products/${this.productEditId}`, productUpdateData)
       .subscribe(

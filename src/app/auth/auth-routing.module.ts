@@ -13,29 +13,25 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    canActivate: [RegisterAuthGuard]
+    canActivate: [RegisterAuthGuard],
   },
 
   {
     path: 'register',
     component: RegisterComponent,
-    canActivate: [RegisterAuthGuard]
-    
+    canActivate: [RegisterAuthGuard],
   },
 
   {
-
-    path:'reset-password',
-    component:ResetPasswordComponent,
-    canActivate: [RegisterAuthGuard]
-
+    path: 'reset-password',
+    component: ResetPasswordComponent,
+    canActivate: [RegisterAuthGuard],
   },
 
   {
-    path:'verify-email',
-    component:VerifyEmailComponent
-  
-  }
+    path: 'verify-email',
+    component: VerifyEmailComponent,
+  },
 ];
 
 @NgModule({

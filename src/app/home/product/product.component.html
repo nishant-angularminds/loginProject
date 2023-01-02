@@ -69,7 +69,7 @@
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">User detail</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Products detail</h1>
         <button
           type="button"
           class="btn-close"
@@ -186,14 +186,44 @@
   </div>
 </div>
 
-<button
-  type="button"
-  class="btn btn-primary ms-4 mt-4"
-  data-bs-toggle="modal"
-  data-bs-target="#exampleModalProduct"
->
-  Create product
-</button>
+<div class="maindiv d-sm-flex">
+  <div>
+    <button
+      type="button"
+      class="btn btn-primary ms-4 mt-4"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModalProduct"
+    >
+      Create product
+    </button>
+  </div>
+
+  <div class="main-search-input-wrap mt-4 ms-4">
+    <div class="main-search-input fl-wrap">
+      <form
+        [formGroup]="productGroup"
+        (ngSubmit)="searchProduct(productGroup.value)"
+      >
+        <div class="main-search-input-item">
+          <input
+            type="text"
+            formControlName="searchProductName"
+            name="searchProductName"
+            value=""
+            class="sEdit p-1 me-3"
+            placeholder="Search Products..."
+          />
+          <button
+            class="main-search-button border no-border bg-warning p-1"
+            type="submit"
+          >
+            Search
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <div class="container mt-4">
   <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-1 g-4">
