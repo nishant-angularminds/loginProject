@@ -11,6 +11,7 @@ import {
 import { PageNotFoundComponent } from './seller/home/page-not-found/page-not-found.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpinterceptorService } from './services/httpinterceptor.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent],
@@ -19,6 +20,7 @@ import { HttpinterceptorService } from './services/httpinterceptor.service';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    NgxPaginationModule,
     ReactiveFormsModule,
   ],
   providers: [

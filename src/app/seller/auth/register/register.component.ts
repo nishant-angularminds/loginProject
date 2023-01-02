@@ -67,11 +67,11 @@ export class RegisterComponent implements OnInit {
       this.registerPage.controls['company'].valid     ) {
       this.serviceObject.post(`/auth/register`, formData).subscribe(
         (data) => {
-          this.router1.navigateByUrl('/auth/login');
+          this.router1.navigateByUrl('/seller/auth/login');
         },
         (err) => {
           alert(err['error']['message']);
-          this.router1.navigateByUrl('/auth/login');
+          this.router1.navigateByUrl('/seller/auth/login');
         }
       );
     }

@@ -44,7 +44,7 @@ export class ResetPasswordComponent implements OnInit {
     .subscribe(
       (data) => {
 
-        this.routeObject.navigateByUrl('/auth/login');
+        this.routeObject.navigateByUrl('/seller/auth/login');
       },
       (err) => {
         console.log(err);

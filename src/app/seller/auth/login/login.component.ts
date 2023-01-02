@@ -56,25 +56,27 @@ export class LoginComponent implements OnInit {
   submitLoginForm(loginData: any) {
     this.loginPage.value.captcha = this.captchaToken;
 
+    console.log(loginData);
+
     this.emailSubmitStatus1 = true;
     if (
       this.loginPage.controls['email'].valid &&
       this.loginPage.controls['password'].valid
     ) {
-      this.service.post(`/auth/login`, loginData).subscribe({
-        next: (data: any) => {
+      this.service.post(`/auth/login`, loginData).subscribe(
+        (data: any) => {
           this.localstorageObject.setTokenInLocalStorage(data);
           this.routerObject.navigate(['/seller/home']);
         },
-        error: (err) => {
+        (err) => {
           console.log('i am login');
 
           console.log(err);
 
-          alert(err['error']['message']);
-          this.setCaptchaToken();
-        },
-      });
+          // alert(err['error']['message']);
+          // this.setCaptchaToken();
+        }
+      );
     }
   }
 
@@ -85,7 +87,7 @@ export class LoginComponent implements OnInit {
 
     this.service.post(`/auth/forgot-password`, forgetData).subscribe(
       (data) => {
-        this.routerObject.navigateByUrl('/auth/reset-password');
+        this.routerObject.navigateByUrl('/seller/auth/reset-password');
       },
       (err) => {
         console.log(err);
