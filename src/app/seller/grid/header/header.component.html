@@ -1,70 +1,20 @@
-<nav class="navbar navbar-expand-lg customNavBar">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#"></a>
 
+<nav class="navbar navbar-expand-lg" style="background-color: skyblue;">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li
-          class="nav-item"
-          style="justify-content: space-between"
-          data-bs-toggle="offcanvas"
-          href="#offcanvasExample"
-          role="button"
-          aria-controls="offcanvasExample"
-        >
-          <a
-            class="nav-link"
-            href="#"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <img
-              src="assets/profile.png"
-              class="profileIcon"
-              alt=""
-              width="30px"
-            />
-          </a>
+        <li class="nav-item">
+          <a class="nav-link active fs-5" aria-current="page" routerLink="/seller/company">Company</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link active ms-3 fs-5" routerLink="/seller/home/product">Product</a>
+        </li>
+       
       </ul>
-      
-      <span class="companyName">NjCompany</span>
+     <div class="text-light fs-3">NjCompany</div>
     </div>
   </div>
 </nav>
-
-<div
-  class="offcanvas offcanvas-start customSideNav"
-  tabindex="-1"
-  id="offcanvasExample"
-  aria-labelledby="offcanvasExampleLabel"
->
-  <div class="offcanvas-header p-3">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel"></h5>
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="offcanvas"
-      aria-label="Close"
-    ></button>
-  </div>
-
-  <div class="image">
-    <img src="assets/steve.jpeg" class="imgData" alt="" />
-  </div>
-
-  <div class="menus">
-    <div>
-      <div class="menuLinks" routerLink="/my-profile">Home</div>
-      <div class="menuLinks" routerLink="/seller/company">Company</div>
-      <div class="menuLinks" data-bs-dismiss="offcanvas" aria-label="Close" routerLink="/seller/home/product">
-product      </div>
-      <div class="menuLinks">About</div>
-    </div>
-  </div>
-
-  <div class="logOut" class="logImg" (click)="logoutData()">
-    <i class="fa-solid fa-right-from-bracket"></i>
-  </div>
-</div>

@@ -172,7 +172,7 @@ export class ProductComponent implements OnInit {
     delete this.productGroup.value.new_images;
 
     console.log(productUpdateData);
-    
+
     this.apiObject
       .patch(`/products/${this.productEditId}`, productUpdateData)
       .subscribe(
