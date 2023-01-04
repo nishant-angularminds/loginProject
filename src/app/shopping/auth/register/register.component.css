@@ -1,0 +1,33 @@
+.spacing {
+    margin: 10px;
+    padding: 6px;
+  }
+  
+  .loginFieldStyle {
+    margin: 10px;
+    padding: 5px;
+  }
+  
+  .spaceForButton {
+    margin-right: 10px;
+    padding: 3px;
+    margin-left: 10px;
+  }
+  
+  @import url("https://fonts.googleapis.com/css?family=Poppins");
+  
+  /* BASIC */
+  
+
+  /* @media (min-width: 1025px) {
+    .h-custom {
+    height: 100vh !important;
+    }
+    }
+ */
+
+ .demo {
+
+    margin-top: 90px;
+    background-color:rgb(150, 116, 241) ;
+ }

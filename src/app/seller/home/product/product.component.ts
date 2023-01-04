@@ -53,7 +53,7 @@ export class ProductComponent implements OnInit {
     this.apiObject.get(`/products/${this.productEditId}`).subscribe(
       (data) => {
         localStorage.setItem('currentProduct', JSON.stringify(data));
-        this.routerObject.navigateByUrl('/home/productdata');
+        this.routerObject.navigateByUrl('/seller/home/productdata');
       },
       (err) => {
         console.log(err);

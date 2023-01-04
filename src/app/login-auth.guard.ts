@@ -27,12 +27,10 @@ export class LoginAuthGuard implements CanActivate {
     var statusLocal = localStorage.getItem('tokenList');
 
     if (statusLocal == null) {
-      this.router1.navigateByUrl('/auth/login');
+      this.router1.navigateByUrl('/seller/auth/login');
 
       return false;
-    }
-  
-    else {
+    } else {
       return true;
     }
   }

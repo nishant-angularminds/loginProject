@@ -5,12 +5,15 @@ import { ShoppingRoutingModule } from './shopping-routing.module';
 import { ShoppingComponent } from './shopping.component';
 import { HomeComponent } from './home/home.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+HeaderpartComponent
+import { HeaderpartComponent } from './grid/headerpart/headerpart.component';
 
 
 @NgModule({
   declarations: [
     ShoppingComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderpartComponent
   ],
   imports: [
     CommonModule,
