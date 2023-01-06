@@ -22,14 +22,14 @@ export class HttpinterceptorService implements HttpInterceptor {
   ) {}
 
   private handleError(error: HttpErrorResponse) {
-    if (error['error']['code'] == 401) {
-      this.local1.removeToken();
-    }
+    // if (error['error']['code'] == 401) {
+    //   this.local1.removeToken();
+    // }
 
-    // Return an observable with a user-facing error message.
-    return throwError(
-      () => new Error('Something bad happened; please try again later.')
-    );
+    // // Return an observable with a user-facing error message.
+    // return throwError(
+    //   () => new Error('Something bad happened; please try again later.')
+    // );
   }
 
   intercept(
@@ -39,9 +39,9 @@ export class HttpinterceptorService implements HttpInterceptor {
     this.token = localStorage.getItem('tokenList');
     this.header = { Authorization: `Bearer ${this.token}` };
     return next.handle(req.clone({ setHeaders: this.header })).pipe(
-      catchError((err) => {
-        return this.handleError(err);
-      })
+      // catchError((err) => {
+      //   return this.handleError(err);
+      // })
     );
   }
 }

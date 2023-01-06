@@ -12,6 +12,25 @@ export class HomeComponent implements OnInit {
   p:number=1;
 
   constructor(private apiObject: ApiInfoService) {
+
+   var check =  localStorage.getItem('custToken');
+   console.log(check);
+   
+
+   if(check==null) {
+
+    this.apiObject.status = false;
+
+   }
+
+   else {
+
+    this.apiObject.status = true;
+
+   }
+
+   console.log(this.apiObject.status);
+   
     this.getProductData();
   }
 

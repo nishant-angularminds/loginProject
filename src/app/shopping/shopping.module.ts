@@ -7,13 +7,15 @@ import { HomeComponent } from './home/home.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { HeaderDemoComponent } from './heading/header-demo/header-demo.component';
+import { CustomerprofileComponent } from './customerprofile/customerprofile.component';
 
 
 @NgModule({
   declarations: [
     ShoppingComponent,
     HomeComponent,
-    HeaderDemoComponent
+    HeaderDemoComponent,
+    CustomerprofileComponent
   ],
   imports: [
     CommonModule,

@@ -14,6 +14,8 @@ export class ApiInfoService {
   limit: any = 8;
   page: any = 1;
   name: any = '';
+  status:any = false;
+  dem:any;
 
   profileAvailable: any = false;
 

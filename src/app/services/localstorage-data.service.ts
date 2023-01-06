@@ -22,4 +22,10 @@ export class LocalstorageDataService {
 
     this.routerObject.navigateByUrl('seller/auth');
   }
+
+  removeCustToken() {
+    localStorage.removeItem('custToken');
+
+    this.routerObject.navigateByUrl('shopping');
+  }
 }

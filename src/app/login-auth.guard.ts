@@ -60,3 +60,55 @@ export class RegisterAuthGuard implements CanActivate {
     }
   }
 }
+
+@Injectable({
+  providedIn: 'root',
+})
+export class CustAuth implements CanActivate {
+  constructor(private p1: ApiInfoService, private router2: Router) {}
+
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
+    var tokenDemo = localStorage.getItem('custToken');
+
+    if (tokenDemo == null) {
+      return true;
+    } else {
+      this.router2.navigateByUrl('/shopping');
+      return false;
+    }
+  }
+}
+
+@Injectable({
+  providedIn: 'root',
+})
+export class CustProfileAuth implements CanActivate {
+  constructor(private p1: ApiInfoService, private router2: Router) {}
+
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
+    var tokenDemo = localStorage.getItem('custToken');
+
+    if (tokenDemo == null) {
+      this.router2.navigateByUrl('/shopping');
+
+      return false;
+
+    } else {
+      return true;
+    }
+  }
+}

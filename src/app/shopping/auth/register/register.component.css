@@ -28,6 +28,7 @@
 
  .demo {
 
-    margin-top: 90px;
-    background-color:rgb(150, 116, 241) ;
+    margin-top: 70px;
+    background-color:rgb(168, 158, 158) ;
+    border-radius: 10px;
  }
