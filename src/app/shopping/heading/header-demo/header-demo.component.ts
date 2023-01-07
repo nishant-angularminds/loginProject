@@ -12,7 +12,7 @@ export class HeaderDemoComponent {
   mj:any;
 
   constructor(private apiObject: ApiInfoService) {
-    var check1 = localStorage.getItem('custToken');
+    var check1 = localStorage.getItem('tokenList');
 
     if (check1 == null) {
       this.statusUser = true;

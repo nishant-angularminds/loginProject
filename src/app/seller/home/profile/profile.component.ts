@@ -44,6 +44,7 @@ export class ProfileComponent implements OnInit {
 
   deleteLocal() {
     this.localstorageObject.removeToken();
+    this.routerforlogin.navigateByUrl('/seller/auth');
   }
 
   getLoginInfo() {

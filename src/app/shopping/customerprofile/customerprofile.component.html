@@ -1,25 +1,83 @@
 <app-header-demo></app-header-demo>
-<div style="width: 100vw; height:100vh;background-color: rgb(203, 227, 255);">
-<div class="container pt-5 mb-5 d-flex justify-content-center">
+<div style="width: 100vw; height: 100vh; background-color: rgb(203, 227, 255)">
+  <div class="container pt-5 mb-5 d-flex justify-content-center">
     <div class="card rounded">
-        <div class="d-block justify-content-center">
-            <div class="area1 p-3 py-5"> </div>
-            <div class="area2 p- text-center px-3">
-                <div class="image mr-3"> <img src="https://i.imgur.com/ZSkeqnd.jpg" class="rounded-circle" width="100" />
-                    <h4 class=" name mt-3 ">{{userData['customer']['name']}}</h4>
-                    <h6>{{userData['customer']['email']}}</h6>
-                    <p class="information mt-3 text-justify">I'm doing this as a way to practice my design skills,explore different styles and have fun.I'm fully aware this challenge doesn't pose my real problem to solve,That's why i'm looking for criticism and feedback ,not just likes </p>
-                    
-                    <div class="d-flex justify-content-between">
-                    <button class="btn btn-warning">Edit</button>
-                    <button class="btn btn-danger" (click)="deleteUser()">Logout</button>
-                </div>
-                </div>
+      <div class="d-block justify-content-center">
+        <div class="area1 p-3 py-5"></div>
+        <div class="area2 p- text-center px-3">
+          <div class="image mr-3">
+            <img
+              src="https://i.imgur.com/ZSkeqnd.jpg"
+              class="rounded-circle"
+              width="100"
+            />
+            <h4 class="name mt-3">{{ userData["customer"]["name"] }}</h4>
+            <h6>{{ userData["customer"]["email"] }}</h6>
+            <p class="information mt-3 text-justify">
+              I'm doing this as a way to practice my design skills,explore
+              different styles and have fun.I'm fully aware this challenge
+              doesn't pose my real problem to solve,That's why i'm looking for
+              criticism and feedback ,not just likes
+            </p>
 
-              
-                <!-- <div> </div> -->
+            <div class="d-flex justify-content-between">
+              <button
+                class="btn btn-warning"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                Edit
+              </button>
+              <button class="btn btn-danger" (click)="deleteUser()">
+                Logout
+              </button>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  data-bs-backdrop="static"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <form [formGroup]="edituser" (ngSubmit)="sendEditData(edituser.value)">
+        <div class="modal-body">
+          <input type="text" formControlName="email" name="email" />
+          <input type="text" formControlName="name" name="name" />
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+            Save changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

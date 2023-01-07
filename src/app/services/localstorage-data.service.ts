@@ -19,13 +19,7 @@ export class LocalstorageDataService {
   removeToken() {
     localStorage.removeItem('tokenList');
     localStorage.removeItem('loggedUser');
-
-    this.routerObject.navigateByUrl('seller/auth');
   }
 
-  removeCustToken() {
-    localStorage.removeItem('custToken');
 
-    this.routerObject.navigateByUrl('shopping');
-  }
 }

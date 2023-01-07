@@ -75,7 +75,7 @@ export class CustAuth implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    var tokenDemo = localStorage.getItem('custToken');
+    var tokenDemo = localStorage.getItem('tokenList');
 
     if (tokenDemo == null) {
       return true;
@@ -100,7 +100,7 @@ export class CustProfileAuth implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    var tokenDemo = localStorage.getItem('custToken');
+    var tokenDemo = localStorage.getItem('tokenList');
 
     if (tokenDemo == null) {
       this.router2.navigateByUrl('/shopping');

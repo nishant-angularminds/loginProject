@@ -21,16 +21,16 @@ export class HttpinterceptorService implements HttpInterceptor {
     private router: Router
   ) {}
 
-  private handleError(error: HttpErrorResponse) {
-    // if (error['error']['code'] == 401) {
-    //   this.local1.removeToken();
-    // }
+  // private handleError(error: HttpErrorResponse) {
+  //   // if (error['error']['code'] == 401) {
+  //   //   this.local1.removeToken();
+  //   // }
 
-    // // Return an observable with a user-facing error message.
-    // return throwError(
-    //   () => new Error('Something bad happened; please try again later.')
-    // );
-  }
+  //   // Return an observable with a user-facing error message.
+  //   return throwError(
+  //     () => new Error('Something bad happened; please try again later.')
+  //   );
+  // }
 
   intercept(
     req: HttpRequest<any>,

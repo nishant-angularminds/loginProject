@@ -8,23 +8,16 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 import { HeaderDemoComponent } from './heading/header-demo/header-demo.component';
 import { CustomerprofileComponent } from './customerprofile/customerprofile.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     ShoppingComponent,
     HomeComponent,
     HeaderDemoComponent,
-    CustomerprofileComponent
+    CustomerprofileComponent,
   ],
-  imports: [
-    CommonModule,
-    ShoppingRoutingModule,
-    NgxPaginationModule
-  ],
-  exports:[
-
-    HeaderDemoComponent
-  ]
+  imports: [CommonModule, ShoppingRoutingModule, NgxPaginationModule,ReactiveFormsModule],
+  exports: [HeaderDemoComponent],
 })
-export class ShoppingModule { }
+export class ShoppingModule {}

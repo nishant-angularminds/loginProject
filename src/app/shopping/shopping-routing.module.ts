@@ -18,7 +18,7 @@ const routes: Routes = [
     path: 'customerprofile',
     component: CustomerprofileComponent,
     canActivate: [CustProfileAuth],
-  },
+  }
 ];
 
 @NgModule({
