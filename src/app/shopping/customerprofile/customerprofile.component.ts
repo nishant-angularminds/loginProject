@@ -13,33 +13,50 @@ import { Router } from '@angular/router';
 export class CustomerprofileComponent implements OnInit {
   userData: any;
   edituser: FormGroup;
+  imgData: any;
+  imageData: any;
+  addressInfo: any;
 
   constructor(
     private apiobject: ApiInfoService,
     private localObject: LocalstorageDataService,
     private routerObj: Router
   ) {
-    this.apiobject.get(`/customers/address`).subscribe(
-      (data) => {
-        console.log(data);
-        // console.log("run");
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-    this.userData = JSON.parse(localStorage.getItem('currentUser')!);
+    this.getAddress();
+    this.getUser();
+    console.log(this.userData);
   }
 
   ngOnInit(): void {
     this.edituser = new FormGroup({
       email: new FormControl(),
       name: new FormControl(),
+      picture: new FormControl(),
     });
 
     this.edituser['controls']['email'].setValue(
       this.userData['customer']['email']
     );
+  }
+
+  getAddress() {
+    this.apiobject.get(`/customers/address`).subscribe(
+      (data) => {
+        console.log(data);
+        this.addressInfo = data;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  getUser() {
+    this.userData = JSON.parse(localStorage.getItem('currentUser')!);
+  }
+
+  fileChoose(event: any) {
+    this.imageData = event.target.files;
   }
 
   deleteUser() {
@@ -48,6 +65,8 @@ export class CustomerprofileComponent implements OnInit {
   }
 
   sendEditData(data1: any) {
+    delete this.edituser.value.picture;
+
     this.apiobject.patch(`/customers/update-profile`, data1).subscribe(
       (data: any) => {
         this.userData['customer']['name'] = data['name'];
@@ -58,5 +77,44 @@ export class CustomerprofileComponent implements OnInit {
       }
     );
     console.log(data1);
+  }
+
+  sendImgData(imgData: any) {
+    delete this.edituser.value.name;
+    delete this.edituser.value.email;
+
+    var formData = new FormData();
+
+    formData.append('picture', this.imageData[0]);
+
+    this.apiobject.post(`/customers/profile-picture`, formData).subscribe(
+      (data: any) => {
+        this.userData['customer']['picture'] = data['picture'];
+
+        localStorage.setItem('currentUser', JSON.stringify(this.userData));
+        this.getUser();
+        console.log(data);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  removePic() {
+    this.apiobject.delete(`/customers/profile-picture`).subscribe(
+      (data) => {
+        this.userData['customer']['picture'] = data;
+
+        localStorage.setItem('currentUser', JSON.stringify(this.userData));
+
+        this.getUser();
+
+        this.edituser['controls']['picture'].setValue(null);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }

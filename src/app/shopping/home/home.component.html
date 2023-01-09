@@ -1,4 +1,30 @@
 <app-header-demo></app-header-demo>
+
+<div class="main-search-input-wrap mt-4 ms-4">
+  <div class="main-search-input fl-wrap">
+    <form
+     
+    >
+      <div class="main-search-input-item">
+        <input
+          type="text"
+          formControlName="searchProductName"
+          name="searchProductName"
+          value=""
+          class="sEdit p-1 me-3"
+          placeholder="Search Products..."
+        />
+        <button
+          class="main-search-button border no-border bg-warning p-1"
+          type="submit"
+        >
+          Search
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <div class="container mt-4">
   <div class="row row-cols-1 row-cols-md-3 row-cols-sm-2 row-cols-lg-4 g-4">
     <div
@@ -16,7 +42,7 @@
         />
         <div class="card-body">
           <h5 class="card-title">{{ data["name"] }}</h5>
-          <p class="card-text text-danger">{{ data["price"] }}&#8377;</p>
+          <p class="card-text text-danger fs-5">{{ data["price"] }}&#8377;</p>
         </div>
       </div>
     </div>

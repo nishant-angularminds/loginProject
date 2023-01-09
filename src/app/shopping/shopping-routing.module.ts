@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CustAuth, CustProfileAuth } from '../login-auth.guard';
+import { AddresslistComponent } from './addresslist/addresslist.component';
 import { CustomerprofileComponent } from './customerprofile/customerprofile.component';
 import { HomeComponent } from './home/home.component';
 import { ShoppingComponent } from './shopping.component';
@@ -18,6 +19,12 @@ const routes: Routes = [
     path: 'customerprofile',
     component: CustomerprofileComponent,
     canActivate: [CustProfileAuth],
+  },
+
+  {
+
+    path:'addresslist',
+    component:AddresslistComponent
   }
 ];
 

@@ -1,0 +1,12 @@
+.mainStyle:hover {
+
+    background-color: lightgreen;
+    width: 130px;
+    padding: 4px;
+
+}
+
+.brStyle {
+
+    border-radius: 3px;
+}

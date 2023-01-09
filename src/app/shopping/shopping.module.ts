@@ -9,6 +9,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { HeaderDemoComponent } from './heading/header-demo/header-demo.component';
 import { CustomerprofileComponent } from './customerprofile/customerprofile.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddresslistComponent } from './addresslist/addresslist.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     HeaderDemoComponent,
     CustomerprofileComponent,
+    AddresslistComponent,
   ],
   imports: [CommonModule, ShoppingRoutingModule, NgxPaginationModule,ReactiveFormsModule],
   exports: [HeaderDemoComponent],
