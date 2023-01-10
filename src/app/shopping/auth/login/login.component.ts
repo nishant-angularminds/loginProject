@@ -11,7 +11,10 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   custLogin: FormGroup;
 
-  constructor(private apiObject: ApiInfoService,private routerObject:Router) {}
+  constructor(
+    private apiObject: ApiInfoService,
+    private routerObject: Router
+  ) {}
 
   ngOnInit(): void {
     this.custLogin = new FormGroup({
@@ -26,15 +29,15 @@ export class LoginComponent implements OnInit {
     this.apiObject.post(`/shop/auth/login`, custLoginData).subscribe(
       (data: any) => {
         // console.log(data);
-        localStorage.setItem('currentUser',JSON.stringify(data));
+        localStorage.setItem('currentUser', JSON.stringify(data));
         localStorage.setItem('tokenList', data['token']);
-        this.routerObject.navigateByUrl('/shopping');
-
+        this.routerObject.navigateByUrl('');
       },
       (err) => {
         console.log(err);
-        this.routerObject.navigateByUrl('/shopping');
+        alert(err['error']['message']);
 
+        this.routerObject.navigateByUrl('');
       }
     );
   }

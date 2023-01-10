@@ -40,6 +40,12 @@ export class AddresslistComponent implements OnInit {
     );
   }
 
+  resetData() {
+
+    this.addressUser.reset();
+
+  }
+
   getAddress() {
     this.apiobject.get(`/customers/address`).subscribe(
       (data) => {
@@ -67,9 +73,17 @@ export class AddresslistComponent implements OnInit {
     );
   }
 
-  editAddressData(idAddress: any) {
+  editAddressData(idAddress: any, iData: any) {
     this.editAddressId = idAddress;
     console.log(idAddress);
+    console.log(this.addressInfo[iData]);
+    this.addressUser.setValue(this.addressInfo[iData]);
+  }
+
+  clearAddress() {
+
+    this.addressUser.reset();
+
   }
 
   sendUpdateAddressData(editInfo: any) {

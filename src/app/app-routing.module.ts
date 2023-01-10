@@ -5,7 +5,7 @@ import { RegisterComponent } from './seller/auth/register/register.component';
 import { LoginAuthGuard, RegisterAuthGuard } from './login-auth.guard';
 import { PageNotFoundComponent } from './seller/home/page-not-found/page-not-found.component';
 const routes: Routes = [
-  { path: '', redirectTo: 'shopping', pathMatch: 'full' },
+  // { path: '', redirectTo: 'shopping', pathMatch: 'full' },
 
   {
     path: 'seller',
@@ -13,7 +13,7 @@ const routes: Routes = [
       import('./seller/seller.module').then((m) => m.SellerModule),
   },
   {
-    path: 'shopping',
+    path: '',
     loadChildren: () =>
       import('./shopping/shopping.module').then((m) => m.ShoppingModule),
   },

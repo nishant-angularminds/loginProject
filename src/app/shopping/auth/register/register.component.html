@@ -1,7 +1,7 @@
 <!-- <app-headerpart></app-headerpart> -->
 <!-- <app-header-demo></app-header-demo> -->
 
-<div class="container p-5 demo">
+<div class="container mainReg p-5 demo">
 
  <h1>Register</h1>
   <form
@@ -9,7 +9,7 @@
     [formGroup]="customerRegisterForm"
     (ngSubmit)="submitCustData(customerRegisterForm.value)"
   >
-    <div class="col-md-6">
+    <div class="col-12">
       <label for="inputEmail4" class="form-label">Email</label>
       <input
         type="email"
@@ -19,7 +19,7 @@
         id="inputEmail4"
       />
     </div>
-    <div class="col-md-6">
+    <div class="col-12">
       <label for="inputPassword4" class="form-label">Password</label>
       <input
         type="password"
@@ -51,8 +51,8 @@
           name="addressLine2"
         />
       </div>
-      <div class="row row-cols-3 mt-4">
-        <div class="col">
+      <div class="row row-cols-1 mt-4">
+        <div class="col col-sm-4">
           <label for="inputCity" class="form-label">City</label>
           <input
             type="text"
@@ -63,7 +63,7 @@
           />
         </div>
 
-        <div class="col">
+        <div class="col col-sm-4">
           <label for="inputStreet" class="form-label">Street</label>
           <input
             type="text"
@@ -74,7 +74,7 @@
           />
         </div>
 
-        <div class="col">
+        <div class="col col-sm-4">
           <label for="inputState" class="form-label">State</label>
           <select
             id="inputState"

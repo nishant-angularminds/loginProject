@@ -80,7 +80,7 @@ export class CustAuth implements CanActivate {
     if (tokenDemo == null) {
       return true;
     } else {
-      this.router2.navigateByUrl('/shopping');
+      this.router2.navigateByUrl('');
       return false;
     }
   }
@@ -103,7 +103,7 @@ export class CustProfileAuth implements CanActivate {
     var tokenDemo = localStorage.getItem('tokenList');
 
     if (tokenDemo == null) {
-      this.router2.navigateByUrl('/shopping');
+      this.router2.navigateByUrl('');
 
       return false;
 

@@ -2,9 +2,7 @@
 
 <div class="main-search-input-wrap mt-4 ms-4">
   <div class="main-search-input fl-wrap">
-    <form
-     
-    >
+    <form>
       <div class="main-search-input-item">
         <input
           type="text"
@@ -27,12 +25,7 @@
 
 <div class="container mt-4">
   <div class="row row-cols-1 row-cols-md-3 row-cols-sm-2 row-cols-lg-4 g-4">
-    <div
-      class="col"
-      *ngFor="
-        let data of productData | paginate : { itemsPerPage: 6, currentPage: p }
-      "
-    >
+    <div class="col" *ngFor="let data of productData">
       <div class="card h-100">
         <img
           src="{{ data['images'][0]['url'] }}"
@@ -49,6 +42,37 @@
   </div>
 </div>
 
-<div class="d-flex justify-content-center mt-5">
-  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3 col-md-5 col-lg-7">
+      <select
+        class="form-select responsiveLimit mt-4"
+        (change)="pageChange($event)"
+        aria-label="Default select example"
+      >
+        <option selected>Items</option>
+        <option value="4">4</option>
+        <option value="6">6</option>
+        <option value="8">8</option>
+      </select>
+    </div>
+
+    <div class="col">
+      <nav aria-label="Page navigation example" class="mt-4">
+        <ul class="pagination" style="cursor: pointer">
+          <li class="page-item" (click)="previousData()">
+            <a class="page-link">Previous</a>
+          </li>
+          <div *ngFor="let data of pages; index as i">
+            <li class="page-item" id="nj" (click)="pageClick(i + 1)">
+              <a class="page-link" *ngIf="i < 3">{{ i + 1 }}</a>
+            </li>
+          </div>
+          <li class="page-item" (click)="nextData()">
+            <a class="page-link">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
 </div>

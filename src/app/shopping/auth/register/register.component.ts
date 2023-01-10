@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
     this.apiobject.post(`/shop/auth/register`, custData).subscribe(
       (data) => {
         console.log(data);
-        this.routerObject.navigateByUrl('/shopping');
+        this.routerObject.navigateByUrl('');
 
       },
       (err) => {

@@ -41,10 +41,9 @@ export class ApiInfoService {
     return this.httpObject.delete(`${this.baseUrl}${normalUrl}`);
   }
 
-  put(normalUrl: string, payload: object) {
+  put(normalUrl: any, payload: object) {
 
     return this.httpObject.put(`${this.baseUrl}${normalUrl}`, payload);
-
 
   }
 }

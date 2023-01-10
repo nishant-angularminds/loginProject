@@ -18,7 +18,8 @@ export class LocalstorageDataService {
 
   removeToken() {
     localStorage.removeItem('tokenList');
-    localStorage.removeItem('loggedUser');
+    localStorage.removeItem('currentUser');
+
   }
 
 

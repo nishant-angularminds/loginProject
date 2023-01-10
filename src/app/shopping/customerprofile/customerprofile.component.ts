@@ -15,14 +15,12 @@ export class CustomerprofileComponent implements OnInit {
   edituser: FormGroup;
   imgData: any;
   imageData: any;
-  addressInfo: any;
 
   constructor(
     private apiobject: ApiInfoService,
     private localObject: LocalstorageDataService,
     private routerObj: Router
   ) {
-    this.getAddress();
     this.getUser();
     console.log(this.userData);
   }
@@ -32,23 +30,20 @@ export class CustomerprofileComponent implements OnInit {
       email: new FormControl(),
       name: new FormControl(),
       picture: new FormControl(),
+      old_password: new FormControl(),
+      new_password: new FormControl(),
     });
 
+    console.log(this.edituser.value);
+  }
+
+  go2() {
     this.edituser['controls']['email'].setValue(
       this.userData['customer']['email']
     );
-  }
 
-  getAddress() {
-    this.apiobject.get(`/customers/address`).subscribe(
-      (data) => {
-        console.log(data);
-        this.addressInfo = data;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    console.log(this.userData['customer']['email']);
+    console.log(this.edituser.value);
   }
 
   getUser() {
@@ -61,11 +56,14 @@ export class CustomerprofileComponent implements OnInit {
 
   deleteUser() {
     this.localObject.removeToken();
-    this.routerObj.navigateByUrl('shopping');
+    this.routerObj.navigateByUrl('');
   }
 
   sendEditData(data1: any) {
     delete this.edituser.value.picture;
+    delete this.edituser.value.old_password;
+    delete this.edituser.value.new_password;
+
 
     this.apiobject.patch(`/customers/update-profile`, data1).subscribe(
       (data: any) => {
@@ -111,6 +109,39 @@ export class CustomerprofileComponent implements OnInit {
         this.getUser();
 
         this.edituser['controls']['picture'].setValue(null);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  changedData(changedPassword: any) {
+    delete this.edituser.value.picture;
+    delete this.edituser.value.name;
+    delete this.edituser.value.email;
+
+    console.log(changedPassword);
+
+    this.apiobject
+      .post(`/customers/auth/change-password`, changedPassword)
+      .subscribe(
+        (data) => {
+          console.log(data);
+          console.log('changed password by nishu');
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+  }
+
+  deleteAccount() {
+    this.apiobject.delete(`/customers/account`).subscribe(
+      (data) => {
+        console.log(data);
+        console.log('deleted successfully');
+        this.deleteUser();
       },
       (err) => {
         console.log(err);

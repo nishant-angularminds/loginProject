@@ -5,6 +5,7 @@
   data-bs-toggle="modal"
   data-bs-target="#exampleModal2"
   style="width: 12%; cursor: pointer"
+  (click)="clearAddress()"
 >
   <i class="fa-solid fa-plus" style="color: blue"></i> Add Address
 </p>
@@ -31,7 +32,7 @@
           style="cursor: pointer"
           data-bs-toggle="modal"
           data-bs-target="#exampleModal3"
-          (click)="editAddressData(addressData['_id'])"
+          (click)="editAddressData(addressData['_id'], i)"
         ></i>
 
         <i
@@ -54,7 +55,7 @@
 >
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="background-color:lightgreen;">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Add Address</h1>
         <button
           type="button"
@@ -66,7 +67,7 @@
 
       <form
         [formGroup]="addressUser"
-        (ngSubmit)="sendAddressData(addressUser.value)"
+        (ngSubmit)="sendAddressData(addressUser.value); addressUser.reset()"
       >
         <div class="modal-body">
           <textarea
@@ -137,7 +138,7 @@
 >
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="background-color: lightgreen;">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Address</h1>
         <button
           type="button"
