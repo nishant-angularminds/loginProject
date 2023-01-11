@@ -16,14 +16,14 @@ const routes: Routes = [
   },
 
   {
-    path: 'customerprofile',
+    path: 'customer-profile',
     component: CustomerprofileComponent,
     canActivate: [CustProfileAuth],
   },
 
   {
 
-    path:'addresslist',
+    path:'address-list',
     component:AddresslistComponent
   }
 ];
