@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CustAuth, CustProfileAuth } from '../login-auth.guard';
+import { CustAuthGuard, CustProfileAuth } from './services/cust-auth.guard';
 import { AddresslistComponent } from './addresslist/addresslist.component';
 import { CustomerprofileComponent } from './customerprofile/customerprofile.component';
 import { HomeComponent } from './home/home.component';
@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
-    canActivate: [CustAuth],
+    canActivate: [CustAuthGuard],
   },
 
   {

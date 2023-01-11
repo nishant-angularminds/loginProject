@@ -10,8 +10,10 @@ import {
 } from '@angular/common/http';
 import { PageNotFoundComponent } from './seller/home/page-not-found/page-not-found.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpinterceptorService } from './services/httpinterceptor.service';
+
 import { NgxPaginationModule } from 'ngx-pagination';
+import { SellershoppingInterceptor } from './sellershopping.interceptor';
+import { CustomerInterceptor } from './customer.interceptor';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent],
@@ -26,9 +28,16 @@ import { NgxPaginationModule } from 'ngx-pagination';
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: HttpinterceptorService,
+      useClass: SellershoppingInterceptor,
       multi: true,
     },
+    {
+
+      provide: HTTP_INTERCEPTORS,
+      useClass: CustomerInterceptor,
+      multi: true,
+
+    }
   ],
   bootstrap: [AppComponent],
 })

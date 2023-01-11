@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ApiInfoService } from 'src/app/services/api-info.service';
+import { SellerapiService } from '../../services/sellerapi.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,7 +15,7 @@ export class ResetPasswordComponent implements OnInit {
 
   constructor(
     private activateObject: ActivatedRoute,
-    private serviceObject: ApiInfoService,
+    private serviceObject: SellerapiService,
     private routeObject:Router
   ) {
     activateObject.queryParams.subscribe((data) => {

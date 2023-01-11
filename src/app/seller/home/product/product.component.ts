@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ApiInfoService } from 'src/app/services/api-info.service';
+import { SellerapiService } from '../../services/sellerapi.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -20,7 +20,7 @@ export class ProductComponent implements OnInit {
   productName: any;
   queryLine: any;
 
-  constructor(private apiObject: ApiInfoService, private routerObject: Router) {
+  constructor(private apiObject: SellerapiService, private routerObject: Router) {
     // this.apiObject.page = 1;
     this.productName = '';
     this.getProduct();

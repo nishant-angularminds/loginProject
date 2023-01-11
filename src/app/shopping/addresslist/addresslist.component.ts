@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ApiInfoService } from 'src/app/services/api-info.service';
-
+import { ShoppingapiService } from '../services/shoppingapi.service';
 @Component({
   selector: 'app-addresslist',
   templateUrl: './addresslist.component.html',
@@ -12,7 +11,7 @@ export class AddresslistComponent implements OnInit {
   addressInfo: any;
   editAddressId: any;
 
-  constructor(private apiobject: ApiInfoService) {
+  constructor(private apiobject: ShoppingapiService) {
     this.getAddress();
   }
 
@@ -41,9 +40,7 @@ export class AddresslistComponent implements OnInit {
   }
 
   resetData() {
-
     this.addressUser.reset();
-
   }
 
   getAddress() {
@@ -81,9 +78,7 @@ export class AddresslistComponent implements OnInit {
   }
 
   clearAddress() {
-
     this.addressUser.reset();
-
   }
 
   sendUpdateAddressData(editInfo: any) {

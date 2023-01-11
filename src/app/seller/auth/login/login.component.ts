@@ -3,8 +3,8 @@ import { Token } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApiInfoService } from 'src/app/services/api-info.service';
-import { LocalstorageDataService } from 'src/app/services/localstorage-data.service';
+import { SellerapiService } from '../../services/sellerapi.service';
+import { SellerlocalstorageapiService } from '../../services/sellerlocalstorageapi.service';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 
@@ -25,8 +25,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private routerObject: Router,
-    private service: ApiInfoService,
-    private localstorageObject: LocalstorageDataService,
+    private service: SellerapiService,
+    private localstorageObject: SellerlocalstorageapiService,
     private loginCaptcha: ReCaptchaV3Service,
     private authservice: SocialAuthService
   ) {

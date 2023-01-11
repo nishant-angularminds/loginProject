@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ApiInfoService } from 'src/app/services/api-info.service';
+import { ShoppingapiService } from '../../services/shoppingapi.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
   customerRegisterForm: FormGroup;
 
-  constructor(private apiobject: ApiInfoService,private routerObject:Router) {}
+  constructor(private apiobject: ShoppingapiService,private routerObject:Router) {}
 
   ngOnInit(): void {
     this.customerRegisterForm = new FormGroup({

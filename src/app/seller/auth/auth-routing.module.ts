@@ -3,9 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { RegisterAuthGuard } from 'src/app/login-auth.guard';
+import { SellerAuthGuard } from '../services/seller-auth.guard';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
+import { SellerRAuthGuard } from '../services/seller-auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -13,19 +14,19 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    canActivate: [RegisterAuthGuard],
+    canActivate: [SellerRAuthGuard],
   },
 
   {
     path: 'register',
     component: RegisterComponent,
-    canActivate: [RegisterAuthGuard],
+    canActivate: [SellerRAuthGuard],
   },
 
   {
     path: 'reset-password',
     component: ResetPasswordComponent,
-    canActivate: [RegisterAuthGuard],
+    canActivate: [SellerRAuthGuard],
   },
 
   {

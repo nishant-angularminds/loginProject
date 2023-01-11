@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApiInfoService } from 'src/app/services/api-info.service';
-import { LocalstorageDataService } from 'src/app/services/localstorage-data.service';
+import { SellerapiService } from '../../services/sellerapi.service';
+import { SellerlocalstorageapiService } from '../../services/sellerlocalstorageapi.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -19,8 +19,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private routerforlogin: Router,
-    private apiObject: ApiInfoService,
-    private localstorageObject: LocalstorageDataService,
+    private apiObject: SellerapiService,
+    private localstorageObject: SellerlocalstorageapiService,
     private activeObject: ActivatedRoute
   ) {
     activeObject.queryParams.subscribe((data) => {

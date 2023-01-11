@@ -1,8 +1,8 @@
 import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ApiInfoService } from 'src/app/services/api-info.service';
-import { LocalstorageDataService } from 'src/app/services/localstorage-data.service';
+import { ShoppingapiService } from '../services/shoppingapi.service';
+import { ShoppinglocalstorageService } from '../services/shoppinglocalstorage.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,12 +17,11 @@ export class CustomerprofileComponent implements OnInit {
   imageData: any;
 
   constructor(
-    private apiobject: ApiInfoService,
-    private localObject: LocalstorageDataService,
+    private apiobject: ShoppingapiService,
+    private localObject: ShoppinglocalstorageService,
     private routerObj: Router
   ) {
     this.getUser();
-    console.log(this.userData);
   }
 
   ngOnInit(): void {
@@ -33,21 +32,24 @@ export class CustomerprofileComponent implements OnInit {
       old_password: new FormControl(),
       new_password: new FormControl(),
     });
-
-    console.log(this.edituser.value);
   }
 
   go2() {
-    this.edituser['controls']['email'].setValue(
-      this.userData['customer']['email']
-    );
+    this.edituser['controls']['email'].setValue(this.userData['email']);
 
-    console.log(this.userData['customer']['email']);
     console.log(this.edituser.value);
   }
 
   getUser() {
-    this.userData = JSON.parse(localStorage.getItem('currentUser')!);
+    this.apiobject.get(`/shop/auth/self`).subscribe(
+      (data) => {
+        console.log(data);
+        this.userData = data;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   fileChoose(event: any) {
@@ -64,11 +66,12 @@ export class CustomerprofileComponent implements OnInit {
     delete this.edituser.value.old_password;
     delete this.edituser.value.new_password;
 
+    console.log(data1);
 
     this.apiobject.patch(`/customers/update-profile`, data1).subscribe(
       (data: any) => {
-        this.userData['customer']['name'] = data['name'];
-        localStorage.setItem('currentUser', JSON.stringify(this.userData));
+        this.userData['name'] = data['name'];
+        this.getUser();
       },
       (err) => {
         console.log(err);
@@ -87,9 +90,8 @@ export class CustomerprofileComponent implements OnInit {
 
     this.apiobject.post(`/customers/profile-picture`, formData).subscribe(
       (data: any) => {
-        this.userData['customer']['picture'] = data['picture'];
+        this.userData['picture'] = data['picture'];
 
-        localStorage.setItem('currentUser', JSON.stringify(this.userData));
         this.getUser();
         console.log(data);
       },
@@ -102,9 +104,7 @@ export class CustomerprofileComponent implements OnInit {
   removePic() {
     this.apiobject.delete(`/customers/profile-picture`).subscribe(
       (data) => {
-        this.userData['customer']['picture'] = data;
-
-        localStorage.setItem('currentUser', JSON.stringify(this.userData));
+        this.userData['picture'] = data;
 
         this.getUser();
 

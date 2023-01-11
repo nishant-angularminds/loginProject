@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginAuthGuard } from 'src/app/login-auth.guard';
+import { SellerAuthGuard } from '../services/seller-auth.guard';
 import { HomeComponent } from './home.component';
 import { ProductComponent } from './product/product.component';
 import { ProductdataComponent } from './productdata/productdata.component';
@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path: '',
     component: ProfileComponent,
-    canActivate: [LoginAuthGuard],
+    canActivate: [SellerAuthGuard],
   },
 
   {

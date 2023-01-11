@@ -1,12 +1,10 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { LocalstorageDataService } from './localstorage-data.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ApiInfoService {
+export class ShoppingapiService {
   registerData: any;
   registerSave: any = false;
   userIdInformation: any;
@@ -14,16 +12,11 @@ export class ApiInfoService {
   limit: any = 8;
   page: any = 1;
   name: any = '';
-  status:any = false;
-  dem:any;
+  status: any = false;
 
   profileAvailable: any = false;
 
-  constructor(
-    private httpObject: HttpClient,
-    private serviceRouter: Router,
-    private localObject: LocalstorageDataService
-  ) {}
+  constructor(private httpObject: HttpClient) {}
 
   get(normalUrl: any) {
     return this.httpObject.get(`${this.baseUrl}${normalUrl}`);
@@ -42,8 +35,6 @@ export class ApiInfoService {
   }
 
   put(normalUrl: any, payload: object) {
-
     return this.httpObject.put(`${this.baseUrl}${normalUrl}`, payload);
-
   }
 }

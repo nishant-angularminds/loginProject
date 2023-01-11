@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApiInfoService } from 'src/app/services/api-info.service';
+import { SellerapiService } from '../../services/sellerapi.service';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 @Component({
   selector: 'app-register',
@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private router1: Router,
-    private serviceObject: ApiInfoService,
+    private serviceObject: SellerapiService,
     private captchaObject: ReCaptchaV3Service
   ) {
 

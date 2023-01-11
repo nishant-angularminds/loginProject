@@ -10,6 +10,8 @@ import { HeaderDemoComponent } from './heading/header-demo/header-demo.component
 import { CustomerprofileComponent } from './customerprofile/customerprofile.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddresslistComponent } from './addresslist/addresslist.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AppComponent } from '../app.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,13 @@ import { AddresslistComponent } from './addresslist/addresslist.component';
     CustomerprofileComponent,
     AddresslistComponent,
   ],
-  imports: [CommonModule, ShoppingRoutingModule, NgxPaginationModule,ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ShoppingRoutingModule,
+    NgxPaginationModule,
+    ReactiveFormsModule,
+  ],
   exports: [HeaderDemoComponent],
+
 })
 export class ShoppingModule {}

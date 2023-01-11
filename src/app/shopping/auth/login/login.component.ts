@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ApiInfoService } from 'src/app/services/api-info.service';
+import { ShoppingapiService } from '../../services/shoppingapi.service';
+import { ShoppinglocalstorageService } from '../../services/shoppinglocalstorage.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,8 +13,9 @@ export class LoginComponent implements OnInit {
   custLogin: FormGroup;
 
   constructor(
-    private apiObject: ApiInfoService,
-    private routerObject: Router
+    private apiObject: ShoppingapiService,
+    private routerObject: Router,
+    private local:ShoppinglocalstorageService
   ) {}
 
   ngOnInit(): void {
@@ -29,8 +31,11 @@ export class LoginComponent implements OnInit {
     this.apiObject.post(`/shop/auth/login`, custLoginData).subscribe(
       (data: any) => {
         // console.log(data);
-        localStorage.setItem('currentUser', JSON.stringify(data));
-        localStorage.setItem('tokenList', data['token']);
+
+        this.local.setUser(data);
+
+        this.local.setTokenInLocalStorage(data['token']);
+
         this.routerObject.navigateByUrl('');
       },
       (err) => {

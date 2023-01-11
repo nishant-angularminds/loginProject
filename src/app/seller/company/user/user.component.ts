@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ApiInfoService } from 'src/app/services/api-info.service';
+import { SellerapiService } from '../../services/sellerapi.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 
@@ -23,7 +23,7 @@ export class UserComponent implements OnInit {
   query: any;
 
   constructor(
-    private apiService: ApiInfoService,
+    private apiService: SellerapiService,
     private routerObject: Router
   ) {
     this.apiService.page = 1;

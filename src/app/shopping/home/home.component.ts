@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiInfoService } from 'src/app/services/api-info.service';
-
+import { ShoppingapiService } from '../services/shoppingapi.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -12,18 +11,7 @@ export class HomeComponent implements OnInit {
   pages: any = [];
   queryLine: any;
 
-  constructor(private apiObject: ApiInfoService) {
-    var check = localStorage.getItem('custToken');
-    console.log(check);
-
-    if (check == null) {
-      this.apiObject.status = false;
-    } else {
-      this.apiObject.status = true;
-    }
-
-    console.log(this.apiObject.status);
-
+  constructor(private apiObject: ShoppingapiService) {
     this.getProductData();
   }
 
@@ -65,7 +53,6 @@ export class HomeComponent implements OnInit {
   }
 
   pageClick(pageNoInfo: any) {
-    console.log(pageNoInfo);
     this.apiObject.page = pageNoInfo;
     this.getProductData();
   }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ApiInfoService } from 'src/app/services/api-info.service';
+import { SellerapiService } from '../../services/sellerapi.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 
@@ -12,7 +12,7 @@ export class VerifyEmailComponent {
 
   verifyToken:any;
 
-  constructor(private apiObject:ApiInfoService,private routerObject:Router,private activeObject:ActivatedRoute) {
+  constructor(private apiObject:SellerapiService,private routerObject:Router,private activeObject:ActivatedRoute) {
 
     activeObject.queryParams.subscribe((data)=> {
 
