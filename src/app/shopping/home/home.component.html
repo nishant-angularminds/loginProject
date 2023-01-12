@@ -1,6 +1,7 @@
 <app-header-demo></app-header-demo>
 
-<div class="main-search-input-wrap mt-4 ms-4">
+<div class="container">
+<div class="main-search-input-wrap mt-4 d-flex justify-content-between">
   <div class="main-search-input fl-wrap">
     <form>
       <div class="main-search-input-item">
@@ -21,6 +22,17 @@
       </div>
     </form>
   </div>
+
+  <div>
+
+    <select class="p-1 border no-border" (change)="sortByMethod($event)">
+
+      <option>sortBy</option>
+      <option value="price">price</option>
+      <option value="name">name</option>
+    </select>
+  </div>
+</div>
 </div>
 
 <div class="container mt-4">

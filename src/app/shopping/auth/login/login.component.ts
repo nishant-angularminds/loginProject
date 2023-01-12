@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private apiObject: ShoppingapiService,
     private routerObject: Router,
-    private local:ShoppinglocalstorageService
+    private local: ShoppinglocalstorageService
   ) {}
 
   ngOnInit(): void {
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
       (data: any) => {
         // console.log(data);
 
-        this.local.setUser(data);
+        // this.local.setUser(data);
 
         this.local.setTokenInLocalStorage(data['token']);
 

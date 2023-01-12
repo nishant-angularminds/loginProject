@@ -10,6 +10,7 @@ export class HomeComponent implements OnInit {
   apiResponse: any;
   pages: any = [];
   queryLine: any;
+  sortByVariable: any = '';
 
   constructor(private apiObject: ShoppingapiService) {
     this.getProductData();
@@ -18,7 +19,11 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {}
 
   getProductData() {
-    this.queryLine = `?limit=${this.apiObject.limit}&page=${this.apiObject.page}`;
+    if (this.sortByVariable != '') {
+      this.queryLine = `?limit=${this.apiObject.limit}&page=${this.apiObject.page}&sortBy=${this.sortByVariable}`;
+    } else {
+      this.queryLine = `?limit=${this.apiObject.limit}&page=${this.apiObject.page}`;
+    }
 
     this.apiObject.get(`/shop/products${this.queryLine}`).subscribe(
       (data: any) => {
@@ -62,5 +67,17 @@ export class HomeComponent implements OnInit {
       this.apiObject.page++;
       this.getProductData();
     }
+  }
+
+  sortByMethod(eventData: any) {
+    console.log(eventData.target.value);
+
+    if (eventData.target.value == 'price') {
+      this.sortByVariable = 'price';
+    } else if (eventData.target.value == 'name') {
+      this.sortByVariable = 'name';
+    }
+
+    this.getProductData();
   }
 }
