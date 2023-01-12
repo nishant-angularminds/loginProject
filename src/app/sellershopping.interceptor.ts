@@ -38,6 +38,7 @@ export class SellershoppingInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     this.token = localStorage.getItem('tokenList');
     this.header = { Authorization: `Bearer ${this.token}` };
+
     return next.handle(req.clone({ setHeaders: this.header })).pipe(
       catchError((err) => {
         return this.handleError(err);
