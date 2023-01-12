@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AddresslistComponent } from './addresslist/addresslist.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from '../app.component';
+import { ProductdetailsComponent } from './home/productdetails/productdetails.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AppComponent } from '../app.component';
     HeaderDemoComponent,
     CustomerprofileComponent,
     AddresslistComponent,
+    ProductdetailsComponent,
   ],
   imports: [
     CommonModule,

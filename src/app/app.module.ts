@@ -30,13 +30,6 @@ import { CustomerInterceptor } from './customer.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: SellershoppingInterceptor,
       multi: true,
-    },
-    {
-
-      provide: HTTP_INTERCEPTORS,
-      useClass: CustomerInterceptor,
-      multi: true,
-
     }
   ],
   bootstrap: [AppComponent],

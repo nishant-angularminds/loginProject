@@ -19,9 +19,13 @@ export class ProductComponent implements OnInit {
   productimageid: any;
   productName: any;
   queryLine: any;
+  sortByVariable: string = '';
+  sortStatus: any = false;
 
-  constructor(private apiObject: SellerapiService, private routerObject: Router) {
-    // this.apiObject.page = 1;
+  constructor(
+    private apiObject: SellerapiService,
+    private routerObject: Router
+  ) {
     this.productName = '';
     this.getProduct();
   }
@@ -118,10 +122,19 @@ export class ProductComponent implements OnInit {
   }
 
   getProduct() {
-    if (this.productName == '') {
-      this.queryLine = `?limit=${this.apiObject.limit}&page=${this.apiObject.page}`;
+    if (this.sortStatus == false) {
+      if (this.productName == '') {
+        this.queryLine = `?limit=${this.apiObject.limit}&page=${this.apiObject.page}`;
+      } else {
+        this.queryLine = `?limit=${this.apiObject.limit}&page=${this.apiObject.page}&name=${this.productName}`;
+      }
     } else {
-      this.queryLine = `?limit=${this.apiObject.limit}&page=${this.apiObject.page}&name=${this.productName}`;
+      if (this.sortByVariable != '') {
+        this.queryLine = `?limit=${this.apiObject.limit}&page=${this.apiObject.page}&sortBy=${this.sortByVariable}`;
+      } else {
+        this.queryLine = `?limit=${this.apiObject.limit}&page=${this.apiObject.page}`;
+      }
+      this.sortStatus = false;
     }
 
     this.apiObject.get(`/products${this.queryLine}`).subscribe(
@@ -214,5 +227,18 @@ export class ProductComponent implements OnInit {
       this.apiObject.page++;
       this.getProduct();
     }
+  }
+
+  sortByMethod(eventData: any) {
+    console.log(eventData.target.value);
+
+    this.sortStatus = true;
+    if (eventData.target.value == 'price') {
+      this.sortByVariable = 'price';
+    } else if (eventData.target.value == 'name') {
+      this.sortByVariable = 'name';
+    }
+
+    this.getProduct();
   }
 }

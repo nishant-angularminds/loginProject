@@ -8,7 +8,7 @@
 >
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="background-color: rgb(206, 143, 206)">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Edit product</h1>
         <button
           type="button"
@@ -68,7 +68,7 @@
 >
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="background-color: rgb(206, 143, 206)">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Products detail</h1>
         <button
           type="button"
@@ -143,7 +143,7 @@
 >
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="background-color: rgb(206, 143, 206)">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Change image</h1>
         <button
           type="button"
@@ -186,6 +186,8 @@
   </div>
 </div>
 
+<div class="container">
+<div class="d-flex justify-content-between">
 <div class="maindiv d-sm-flex">
   <div>
     <button
@@ -223,6 +225,16 @@
       </form>
     </div>
   </div>
+</div>
+
+<div class="mt-4">
+  <select class="p-1 border no-border" (change)="sortByMethod($event)">
+    <option>sortBy</option>
+    <option value="price">price</option>
+    <option value="name">name</option>
+  </select>
+</div>
+</div>
 </div>
 
 <div class="container mt-4">

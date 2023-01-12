@@ -1,38 +1,38 @@
 <app-header-demo></app-header-demo>
 
 <div class="container">
-<div class="main-search-input-wrap mt-4 d-flex justify-content-between">
-  <div class="main-search-input fl-wrap">
-    <form>
-      <div class="main-search-input-item">
-        <input
-          type="text"
-          formControlName="searchProductName"
-          name="searchProductName"
-          value=""
-          class="sEdit p-1 me-3"
-          placeholder="Search Products..."
-        />
-        <button
-          class="main-search-button border no-border bg-warning p-1"
-          type="submit"
-        >
-          Search
-        </button>
-      </div>
-    </form>
+  <div class="main-search-input-wrap mt-4 d-flex justify-content-between">
+    <div class="main-search-input fl-wrap">
+      <form>
+        <div class="main-search-input-item">
+          <form [formGroup]="searchGroup" (ngSubmit)="searchProduct(searchGroup.value)">
+            <input
+              type="text"
+              formControlName="searchProductName"
+              name="searchProductName"
+              value=""
+              class="sEdit p-1 me-3"
+              placeholder="Search Products..."
+            />
+            <button
+              class="main-search-button border no-border bg-warning p-1"
+              type="submit"
+            >
+              Search
+            </button>
+          </form>
+        </div>
+      </form>
+    </div>
+
+    <div>
+      <select class="p-1 border no-border" (change)="sortByMethod($event)">
+        <option>sortBy</option>
+        <option value="price">price</option>
+        <option value="name">name</option>
+      </select>
+    </div>
   </div>
-
-  <div>
-
-    <select class="p-1 border no-border" (change)="sortByMethod($event)">
-
-      <option>sortBy</option>
-      <option value="price">price</option>
-      <option value="name">name</option>
-    </select>
-  </div>
-</div>
 </div>
 
 <div class="container mt-4">
@@ -47,7 +47,20 @@
         />
         <div class="card-body">
           <h5 class="card-title">{{ data["name"] }}</h5>
-          <p class="card-text text-danger fs-5">{{ data["price"] }}&#8377;</p>
+          <p class="card-text text-danger fs-5">
+            Price: {{ data["price"] }}&#8377;
+          </p>
+
+          <div class="d-flex justify-content-between">
+            <button
+              class="btn btn-danger"
+              routerLink="/product-details"
+              (click)="checkId(data['_id'])"
+            >
+              Read
+            </button>
+            <button class="btn btn-success">Buy</button>
+          </div>
         </div>
       </div>
     </div>

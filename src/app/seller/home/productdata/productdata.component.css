@@ -15,10 +15,24 @@
   .textPart {
     height: 450px;
   }
+
+
+
 }
 
 @media screen and (max-width: 368px) {
   .textPart {
     height: 500px;
   }
+
+  .bolo {
+
+    height: 600px;
+  }
+
+  .changedDes {
+
+    font-size: 16px;
+  }
+
 }

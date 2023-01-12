@@ -5,6 +5,7 @@ import { AddresslistComponent } from './addresslist/addresslist.component';
 import { CustomerprofileComponent } from './customerprofile/customerprofile.component';
 import { HomeComponent } from './home/home.component';
 import { ShoppingComponent } from './shopping.component';
+import { ProductdetailsComponent } from './home/productdetails/productdetails.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -25,6 +26,10 @@ const routes: Routes = [
 
     path:'address-list',
     component:AddresslistComponent
+  },{
+
+    path:'product-details',
+    component:ProductdetailsComponent
   }
 ];
 
