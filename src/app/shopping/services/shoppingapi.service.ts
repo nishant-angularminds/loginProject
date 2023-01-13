@@ -5,16 +5,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ShoppingapiService {
-  registerData: any;
-  registerSave: any = false;
-  userIdInformation: any;
-  baseUrl = 'https://shop-api.ngminds.com';
-  limit: any = 8;
-  page: any = 1;
-  name: any = '';
-  status: any = false;
 
-  profileAvailable: any = false;
+  baseUrl = 'https://shop-api.ngminds.com';
+  // name: any = '';
+  // status: any = false;
 
   constructor(private httpObject: HttpClient) {}
 

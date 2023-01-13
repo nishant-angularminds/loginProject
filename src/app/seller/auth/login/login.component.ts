@@ -7,6 +7,7 @@ import { SellerapiService } from '../../services/sellerapi.service';
 import { SellerlocalstorageapiService } from '../../services/sellerlocalstorageapi.service';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,8 @@ export class LoginComponent implements OnInit {
     private service: SellerapiService,
     private localstorageObject: SellerlocalstorageapiService,
     private loginCaptcha: ReCaptchaV3Service,
-    private authservice: SocialAuthService
+    private authservice: SocialAuthService,
+    private toast:HotToastService
   ) {
     this.setCaptchaToken();
   }
@@ -67,14 +69,13 @@ export class LoginComponent implements OnInit {
         (data: any) => {
           this.localstorageObject.setTokenInLocalStorage(data);
           this.routerObject.navigate(['/seller/home']);
+          this.toast.success('login successfully');
+
         },
         (err) => {
-          console.log('i am login');
 
           console.log(err);
 
-          // alert(err['error']['message']);
-          // this.setCaptchaToken();
         }
       );
     }

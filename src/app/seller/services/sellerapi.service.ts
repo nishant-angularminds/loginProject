@@ -1,24 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export class SellerapiService {
-  registerData: any;
-  registerSave: any = false;
-  userIdInformation: any;
   baseUrl = 'https://shop-api.ngminds.com';
-  limit: any = 8;
-  page: any = 1;
-  name: any = '';
 
-  profileAvailable: any = false;
-
-  constructor(
-    private httpObject: HttpClient
-  ) {}
+  constructor(private httpObject: HttpClient) {}
 
   get(normalUrl: any) {
     return this.httpObject.get(`${this.baseUrl}${normalUrl}`);
@@ -35,8 +24,4 @@ export class SellerapiService {
   delete(normalUrl: any) {
     return this.httpObject.delete(`${this.baseUrl}${normalUrl}`);
   }
-
-  // put(normalUrl: any, payload: object) {
-  //   return this.httpObject.put(`${this.baseUrl}${normalUrl}`, payload);
-  // }
 }

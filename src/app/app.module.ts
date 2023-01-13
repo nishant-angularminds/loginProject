@@ -14,6 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SellershoppingInterceptor } from './sellershopping.interceptor';
 import { CustomerInterceptor } from './customer.interceptor';
+import { StoreModule } from '@ngrx/store';
+import { HotToastModule } from '@ngneat/hot-toast';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent],
@@ -24,6 +26,8 @@ import { CustomerInterceptor } from './customer.interceptor';
     HttpClientModule,
     NgxPaginationModule,
     ReactiveFormsModule,
+    StoreModule.forRoot({}, {}),
+    HotToastModule.forRoot(),
   ],
   providers: [
     {

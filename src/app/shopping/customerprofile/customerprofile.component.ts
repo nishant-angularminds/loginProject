@@ -22,6 +22,7 @@ export class CustomerprofileComponent implements OnInit {
     private routerObj: Router
   ) {
     this.getUser();
+
   }
 
   ngOnInit(): void {
@@ -71,7 +72,7 @@ export class CustomerprofileComponent implements OnInit {
     this.apiobject.patch(`/customers/update-profile`, data1).subscribe(
       (data: any) => {
         this.userData['name'] = data['name'];
-        this.getUser();
+        this.getUser(); 
       },
       (err) => {
         console.log(err);
@@ -137,6 +138,7 @@ export class CustomerprofileComponent implements OnInit {
   }
 
   deleteAccount() {
+
     this.apiobject.delete(`/customers/account`).subscribe(
       (data) => {
         console.log(data);

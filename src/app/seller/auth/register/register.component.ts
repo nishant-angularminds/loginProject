@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SellerapiService } from '../../services/sellerapi.service';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
+import { HotToastService } from '@ngneat/hot-toast';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -17,7 +18,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private router1: Router,
     private serviceObject: SellerapiService,
-    private captchaObject: ReCaptchaV3Service
+    private captchaObject: ReCaptchaV3Service,
+    private toast:HotToastService
   ) {
 
     this.captchaObject.execute('importantAction').subscribe((token: any) => {
@@ -67,7 +69,9 @@ export class RegisterComponent implements OnInit {
       this.registerPage.controls['company'].valid     ) {
       this.serviceObject.post(`/auth/register`, formData).subscribe(
         (data) => {
+
           this.router1.navigateByUrl('/seller/auth/login');
+          this.toast.success('Register successfully')
         },
         (err) => {
           alert(err['error']['message']);

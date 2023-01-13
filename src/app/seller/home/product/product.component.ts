@@ -21,6 +21,8 @@ export class ProductComponent implements OnInit {
   queryLine: any;
   sortByVariable: string = '';
   sortStatus: any = false;
+  page:any = 1;
+  limit:any=10;
 
   constructor(
     private apiObject: SellerapiService,
@@ -124,15 +126,15 @@ export class ProductComponent implements OnInit {
   getProduct() {
     if (this.sortStatus == false) {
       if (this.productName == '') {
-        this.queryLine = `?limit=${this.apiObject.limit}&page=${this.apiObject.page}`;
+        this.queryLine = `?limit=${this.limit}&page=${this.page}`;
       } else {
-        this.queryLine = `?limit=${this.apiObject.limit}&page=${this.apiObject.page}&name=${this.productName}`;
+        this.queryLine = `?limit=${this.limit}&page=${this.page}&name=${this.productName}`;
       }
     } else {
       if (this.sortByVariable != '') {
-        this.queryLine = `?limit=${this.apiObject.limit}&page=${this.apiObject.page}&sortBy=${this.sortByVariable}`;
+        this.queryLine = `?limit=${this.limit}&page=${this.page}&sortBy=${this.sortByVariable}`;
       } else {
-        this.queryLine = `?limit=${this.apiObject.limit}&page=${this.apiObject.page}`;
+        this.queryLine = `?limit=${this.limit}&page=${this.page}`;
       }
       this.sortStatus = false;
     }
@@ -200,31 +202,31 @@ export class ProductComponent implements OnInit {
   }
 
   previousData() {
-    if (this.apiObject.page != 1) {
-      this.apiObject.page--;
+    if (this.page != 1) {
+      this.page--;
       this.getProduct();
     }
   }
 
   pageChange(event: any) {
-    if (this.apiObject.page == this.pages.length) {
-      if (event.target.value > this.apiObject.limit) {
-        this.apiObject.page--;
+    if (this.page == this.pages.length) {
+      if (event.target.value > this.limit) {
+        this.page--;
       }
     }
-    this.apiObject.limit = event.target.value;
+    this.limit = event.target.value;
     this.getProduct();
   }
 
   pageClick(pageNoInfo: any) {
     console.log(pageNoInfo);
-    this.apiObject.page = pageNoInfo;
+    this.page = pageNoInfo;
     this.getProduct();
   }
 
   nextData() {
-    if (this.apiObject.page < this.apiResponse['totalPages']) {
-      this.apiObject.page++;
+    if (this.page < this.apiResponse['totalPages']) {
+      this.page++;
       this.getProduct();
     }
   }

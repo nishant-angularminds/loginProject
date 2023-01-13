@@ -21,12 +21,15 @@ export class UserComponent implements OnInit {
   // demo: any = 0;
   userToken: any;
   query: any;
+  page:any = 1;
+  limit:any = 10;
+  name:any = "";
 
   constructor(
     private apiService: SellerapiService,
     private routerObject: Router
   ) {
-    this.apiService.page = 1;
+    this.page = 1;
     this.userInfo();
   }
 
@@ -40,17 +43,17 @@ export class UserComponent implements OnInit {
   }
 
   userSearch(event: any) {
-    this.apiService.name = event.target.value;
+    this.name = event.target.value;
     this.userInfo();
   }
 
   userInfo() {
-    this.query = `?limit=${this.apiService.limit}&page=${this.apiService.page}`;
+    this.query = `?limit=${this.limit}&page=${this.page}`;
 
-    if (this.apiService.name == '') {
-      this.query = `?limit=${this.apiService.limit}&page=${this.apiService.page}`;
+    if (this.name == '') {
+      this.query = `?limit=${this.limit}&page=${this.page}`;
     } else {
-      this.query = `${this.query}&name=${this.apiService.name}`;
+      this.query = `${this.query}&name=${this.name}`;
     }
 
     this.apiService.get(`/users${this.query}`).subscribe((data: any) => {
@@ -119,33 +122,33 @@ export class UserComponent implements OnInit {
   }
 
   pageChange(event: any) {
-    if (this.apiService.page == this.pages.length) {
-      if (event.target.value > this.apiService.limit) {
-        this.apiService.page--;
+    if (this.page == this.pages.length) {
+      if (event.target.value > this.limit) {
+        this.page--;
       }
     }
-    this.apiService.limit = event.target.value;
+    this.limit = event.target.value;
     this.userInfo();
   }
 
   pageClick(pageNoInfo: any) {
     console.log(pageNoInfo);
-    this.apiService.page = pageNoInfo;
+    this.page = pageNoInfo;
     this.userInfo();
   }
 
   nextData() {
     console.log(this.pages.length);
 
-    if (this.apiService.page < this.userInformationArray['totalPages']) {
-      this.apiService.page++;
+    if (this.page < this.userInformationArray['totalPages']) {
+      this.page++;
       this.userInfo();
     }
   }
 
   previousData() {
-    if (this.apiService.page != 1) {
-      this.apiService.page--;
+    if (this.page != 1) {
+      this.page--;
       this.userInfo();
     }
   }
