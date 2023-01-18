@@ -7,8 +7,7 @@ import { Injectable } from '@angular/core';
 export class ShoppingapiService {
 
   baseUrl = 'https://shop-api.ngminds.com';
-  // name: any = '';
-  // status: any = false;
+  cartCount:any = 0;
 
   constructor(private httpObject: HttpClient) {}
 

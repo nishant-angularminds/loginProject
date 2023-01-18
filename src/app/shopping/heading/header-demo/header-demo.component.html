@@ -79,7 +79,19 @@
         
         </ng-template>
       </ul>
+  
+      <div>
 
+        <div class="position-relative me-5" style="cursor: pointer;">
+          <!-- Profile -->
+          <i class="fa-solid fa-cart-shopping" style="font-size: 30px;" routerLink="/cartlist"></i>
+          <span class="position-absolute top-0 start-100 translate-middle bg-light border border-light rounded-circle">
+           {{(state)?.length}}+
+          </span>
+        </div>
+      </div>
+
+     
       <div class="text-light fs-3">NjComapny</div>
     </div>
   </div>

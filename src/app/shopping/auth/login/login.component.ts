@@ -4,6 +4,9 @@ import { ShoppingapiService } from '../../services/shoppingapi.service';
 import { ShoppinglocalstorageService } from '../../services/shoppinglocalstorage.service';
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { InitialState } from '@ngrx/store/src/models';
 
 @Component({
   selector: 'app-login',
@@ -17,15 +20,19 @@ export class LoginComponent implements OnInit {
     private apiObject: ShoppingapiService,
     private routerObject: Router,
     private local: ShoppinglocalstorageService,
-    private toast:HotToastService
-  ) {}
+    private toast: HotToastService
+  ) {
+  }
 
   ngOnInit(): void {
     this.custLogin = new FormGroup({
       email: new FormControl(),
       password: new FormControl(),
     });
+
   }
+
+  changeData() {}
 
   submitCustLogin(custLoginData: any) {
     console.log(custLoginData);
@@ -38,7 +45,7 @@ export class LoginComponent implements OnInit {
 
         this.local.setTokenInLocalStorage(data['token']);
 
-        this.toast.success("login successfully")
+        this.toast.success('login successfully');
 
         this.routerObject.navigateByUrl('');
       },

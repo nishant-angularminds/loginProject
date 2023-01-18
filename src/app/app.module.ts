@@ -16,6 +16,8 @@ import { SellershoppingInterceptor } from './sellershopping.interceptor';
 import { CustomerInterceptor } from './customer.interceptor';
 import { StoreModule } from '@ngrx/store';
 import { HotToastModule } from '@ngneat/hot-toast';
+import { cartReducer } from './shopping/states/cart.reducer';
+
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent],
@@ -28,6 +30,7 @@ import { HotToastModule } from '@ngneat/hot-toast';
     ReactiveFormsModule,
     StoreModule.forRoot({}, {}),
     HotToastModule.forRoot(),
+    StoreModule.forRoot({state:cartReducer}),
   ],
   providers: [
     {

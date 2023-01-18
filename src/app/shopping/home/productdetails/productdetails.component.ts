@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { ShoppingapiService } from '../../services/shoppingapi.service';
+import { addCart } from '../../states/cart.action';
 
 @Component({
   selector: 'app-productdetails',
@@ -9,8 +12,13 @@ import { ShoppingapiService } from '../../services/shoppingapi.service';
 export class ProductdetailsComponent {
   idInfo: any;
   currentProductInfo: any;
-  constructor(private apiObject: ShoppingapiService) {
+
+  constructor(
+    private apiObject: ShoppingapiService,
+    private store: Store<{ state: any }>
+  ) {
     this.idInfo = localStorage.getItem('productId');
+
     this.getCurrentProduct();
   }
 
@@ -24,5 +32,14 @@ export class ProductdetailsComponent {
         console.log(err);
       },
     });
+  }
+
+  addCart(productData: any) {
+    productData['qty'] = 1;
+    productData['totalPrice'] = productData['price'];
+
+    console.log(productData);
+
+    this.store.dispatch(addCart({ productData: productData }));
   }
 }

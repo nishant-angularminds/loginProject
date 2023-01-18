@@ -6,9 +6,11 @@ import { CustomerprofileComponent } from './customerprofile/customerprofile.comp
 import { HomeComponent } from './home/home.component';
 import { ShoppingComponent } from './shopping.component';
 import { ProductdetailsComponent } from './home/productdetails/productdetails.component';
+import { CartlistComponent } from './home/cartlist/cartlist.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'cartlist', component: CartlistComponent },
 
   {
     path: 'auth',
@@ -23,14 +25,13 @@ const routes: Routes = [
   },
 
   {
-
-    path:'address-list',
-    component:AddresslistComponent
-  },{
-
-    path:'product-details',
-    component:ProductdetailsComponent
-  }
+    path: 'address-list',
+    component: AddresslistComponent,
+  },
+  {
+    path: 'product-details',
+    component: ProductdetailsComponent,
+  },
 ];
 
 @NgModule({

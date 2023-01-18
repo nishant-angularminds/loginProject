@@ -13,6 +13,7 @@ import { AddresslistComponent } from './addresslist/addresslist.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from '../app.component';
 import { ProductdetailsComponent } from './home/productdetails/productdetails.component';
+import { CartlistComponent } from './home/cartlist/cartlist.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ProductdetailsComponent } from './home/productdetails/productdetails.co
     CustomerprofileComponent,
     AddresslistComponent,
     ProductdetailsComponent,
+    CartlistComponent,
   ],
   imports: [
     CommonModule,

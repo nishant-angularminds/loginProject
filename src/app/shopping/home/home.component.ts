@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { ShoppingapiService } from '../services/shoppingapi.service';
+import { addCart } from '../states/cart.action';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -15,10 +18,14 @@ export class HomeComponent implements OnInit {
   sortByVariable: any = '';
   productSort: any = false;
   productName1: any = '';
-  p: any=1;
-  limit:any = 10;
+  p: any = 1;
+  limit: any = 10;
+  counter: Observable<any>;
 
-  constructor(private apiObject: ShoppingapiService) {
+  constructor(
+    private apiObject: ShoppingapiService,
+    private store: Store<{ state: any }>
+  ) {
     localStorage.removeItem('productId');
 
     this.getProductData();
@@ -66,7 +73,6 @@ export class HomeComponent implements OnInit {
         console.log(err);
       }
     );
-
   }
 
   checkId(idData: any) {
