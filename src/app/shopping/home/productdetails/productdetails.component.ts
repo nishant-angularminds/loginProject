@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ShoppingapiService } from '../../services/shoppingapi.service';
-import { addCart } from '../../states/cart.action';
+import { addCart, addTotal } from '../../states/cart.action';
 
 @Component({
   selector: 'app-productdetails',
@@ -36,10 +36,10 @@ export class ProductdetailsComponent {
 
   addCart(productData: any) {
     productData['qty'] = 1;
-    productData['totalPrice'] = productData['price'];
-
-    console.log(productData);
+    productData['subTotal'] = productData['price'];
+    productData['productId'] = productData['_id'];
 
     this.store.dispatch(addCart({ productData: productData }));
+    this.store.dispatch(addTotal());
   }
 }

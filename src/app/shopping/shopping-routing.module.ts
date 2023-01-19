@@ -7,10 +7,22 @@ import { HomeComponent } from './home/home.component';
 import { ShoppingComponent } from './shopping.component';
 import { ProductdetailsComponent } from './home/productdetails/productdetails.component';
 import { CartlistComponent } from './home/cartlist/cartlist.component';
+import { PaymentComponent } from './home/payment/payment.component';
+import { OrderComponent } from './home/order/order.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'cartlist', component: CartlistComponent },
+
+  {
+    path: 'payment',
+    component: PaymentComponent,
+  },
+
+  {
+    path: 'order',
+    component: OrderComponent,
+  },
 
   {
     path: 'auth',

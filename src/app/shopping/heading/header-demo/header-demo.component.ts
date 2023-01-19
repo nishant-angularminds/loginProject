@@ -17,7 +17,7 @@ export class HeaderDemoComponent {
 
     this.store.select('state').subscribe((data)=> {
 
-      this.state = data.productCartList;
+      this.state = data.items;
     })
 
     if (check1 == null) {

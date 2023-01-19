@@ -1,5 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
-import { addCart, decrementQuantity, incrementQuantity } from './cart.action';
+import { count } from 'rxjs';
+import {
+  addCart,
+  addTotal,
+  decrementQuantity,
+  incrementQuantity,
+  subTotal,
+  totalPrice,
+} from './cart.action';
 
 export interface ProdutInfo {
   _id: string;
@@ -10,31 +18,31 @@ export interface ProdutInfo {
   subTotal: number;
   qty: number;
   images: { public_id: string; url: string }[];
-  totalPrice: number;
 }
 
 export interface cart {
-  productCartList: ProdutInfo[];
-  totalAmount: number;
-  buyNow: ProdutInfo[];
+  items: ProdutInfo[];
+  total: number;
+  deliveryFee:number;
 }
 
 export const initialState: cart = {
-  productCartList: [],
-  totalAmount: 0,
-  buyNow: [],
+  items: [],
+  total: 0,
+  deliveryFee:50
+
 };
 
 export const cartReducer = createReducer(
   initialState,
   on(addCart, (state, { productData }) => {
-    console.log(state.productCartList);
+    console.log(state.items);
 
-    let index = state.productCartList.find(
+    let index = state.items.find(
       (data) => data['_id'] == productData['_id']
     );
 
-    let temp = structuredClone(state.productCartList);
+    let temp = structuredClone(state.items);
 
     console.log(index);
 
@@ -44,38 +52,75 @@ export const cartReducer = createReducer(
 
     return {
       ...state,
-      productCartList: temp,
+      items: temp,
     };
   }),
 
   on(incrementQuantity, (state, { dataInfo }) => {
-    let temp = structuredClone(state.productCartList);
+    let temp = structuredClone(state.items);
     // var totalPriceValue = temp[dataInfo]['totalPrice'];
 
+    console.log(state);
+
     temp[dataInfo]['qty'] += 1;
-    temp[dataInfo]['totalPrice'] =
+    temp[dataInfo]['subTotal'] =
       temp[dataInfo]['qty'] * temp[dataInfo]['price'];
 
     return {
       ...state,
-      productCartList: temp,
+      items: temp,
     };
   }),
 
   on(decrementQuantity, (state, { dataInfo1 }) => {
-    let temp = structuredClone(state.productCartList);
+    let temp = structuredClone(state.items);
 
     if (temp[dataInfo1]['qty'] > 1) {
       temp[dataInfo1]['qty'] -= 1;
-      temp[dataInfo1]['totalPrice'] =
+      temp[dataInfo1]['subTotal'] =
         temp[dataInfo1]['qty'] * temp[dataInfo1]['price'];
     } else {
       temp[dataInfo1]['qty'] = 1;
+
+      temp.splice(dataInfo1, 1);
     }
-    //nishu
     return {
       ...state,
-      productCartList: temp,
+      items: temp,
+    };
+  }),
+
+  on(addTotal, (state) => {
+    let temp = structuredClone(state.items);
+    var cartTotal = structuredClone(state.total);
+    var count = 0;
+
+    temp.map((data) => {
+      count = count + data['subTotal'];
+    });
+
+    console.log(cartTotal);
+
+    return {
+      ...state,
+      total: count,
+    };
+  }),
+
+  on(subTotal, (state) => {
+    let temp = structuredClone(state.items);
+    var cartTotal = structuredClone(state.total);
+    var count = 0;
+
+    temp.map((data) => {
+      count = count - data['subTotal'];
+    });
+
+    count = Math.abs(count);
+
+    return {
+      ...state,
+      total: count,
     };
   })
 );

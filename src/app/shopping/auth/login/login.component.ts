@@ -47,7 +47,18 @@ export class LoginComponent implements OnInit {
 
         this.toast.success('login successfully');
 
+        if(this.apiObject.loginCart) {
+
+          this.apiObject.loginCart = false;
+          this.routerObject.navigateByUrl('/cartlist');
+
+        }
+
+        else {
+
         this.routerObject.navigateByUrl('');
+
+        }
       },
       (err) => {
         console.log(err);

@@ -160,8 +160,8 @@
                           />
                         </div>
                         <div class="col-md-3 col-lg-3 col-xl-3">
-                          <h6 class="text-muted">Shirt</h6>
-                          <h6 class="text-black mb-0">Cotton T-shirt</h6>
+                          <!-- <h6 class="text-muted">Shirt</h6> -->
+                          <h6 class="text-black mb-0">{{data['name']}}</h6>
                         </div>
                         <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
                           <button class="btn btn-link px-2" (click)="decrementCount(i)">
@@ -175,7 +175,7 @@
                           </button>
                         </div>
                         <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                          <h6 class="mb-0">{{ data["totalPrice"] }} &#8377;</h6>
+                          <h6 class="mb-0">{{ data["subTotal"] }} &#8377;</h6>
                         </div>
                         <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                           <a href="#!" class="text-muted"
@@ -188,7 +188,7 @@
 
                       <div class="pt-5">
                         <h6 class="mb-0">
-                          <a href="#!" class="text-body"
+                          <a class="text-body" routerLink=""
                             ><i class="fas fa-long-arrow-alt-left me-2"></i>Back
                             to shop</a
                           >
@@ -198,15 +198,15 @@
                   </div>
                   <div class="col-lg-4 bg-grey">
                     <div class="p-5">
-                      <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
+                      <h3 class="fw-bold mb-5 mt-2 pt-1">Details</h3>
                       <hr class="my-4" />
 
                       <div class="d-flex justify-content-between mb-4">
-                        <h5 class="text-uppercase">items 3</h5>
-                        <h5>€ 132.00</h5>
+                        <h5 class="text-uppercase">items {{state.length}}</h5>
+                        <h5>{{totalState}}</h5>
                       </div>
 
-                      <h5 class="text-uppercase mb-3">Shipping</h5>
+                      <!-- <h5 class="text-uppercase mb-3">Shipping</h5>
 
                       <div class="mb-4 pb-2">
                         <select class="select">
@@ -217,9 +217,9 @@
                         </select>
                       </div>
 
-                      <h5 class="text-uppercase mb-3">Give code</h5>
+                      <h5 class="text-uppercase mb-3">Give code</h5> -->
 
-                      <div class="mb-5">
+                      <!-- <div class="mb-5">
                         <div class="form-outline">
                           <input
                             type="text"
@@ -230,21 +230,22 @@
                             >Enter your code</label
                           >
                         </div>
-                      </div>
+                      </div> -->
 
                       <hr class="my-4" />
 
                       <div class="d-flex justify-content-between mb-5">
                         <h5 class="text-uppercase">Total price</h5>
-                        <h5>€ 137.00</h5>
+                        <h5>{{totalState}}</h5>
                       </div>
 
                       <button
                         type="button"
                         class="btn btn-dark btn-block btn-lg"
                         data-mdb-ripple-color="dark"
+                        (click)="placeTheOrder()"
                       >
-                        Register
+                        Place order
                       </button>
                     </div>
                   </div>

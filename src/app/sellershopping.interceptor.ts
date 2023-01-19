@@ -41,6 +41,15 @@ export class SellershoppingInterceptor implements HttpInterceptor {
         this.local2.removeToken();
         this.router.navigateByUrl('');
       }
+
+     else if (error['error']['code'] == 400) {
+
+        console.log(error);
+        
+        alert(error['message']);
+        
+      }
+      
       console.log(this.typeData);
     }
 

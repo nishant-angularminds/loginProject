@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ShoppingapiService } from '../services/shoppingapi.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-addresslist',
   templateUrl: './addresslist.component.html',
@@ -11,7 +12,10 @@ export class AddresslistComponent implements OnInit {
   addressInfo: any;
   editAddressId: any;
 
-  constructor(private apiobject: ShoppingapiService) {
+  constructor(
+    private apiobject: ShoppingapiService,
+    private routeObject: Router
+  ) {
     this.getAddress();
   }
 
@@ -32,6 +36,15 @@ export class AddresslistComponent implements OnInit {
       (data) => {
         console.log(data);
         this.getAddress();
+
+        var add = [];
+        add.push(data);
+
+        localStorage.setItem('address',JSON.stringify(add));
+        if (this.apiobject.addressCart) {
+          this.apiobject.addressCart = false;
+          this.routeObject.navigateByUrl('/cartlist');
+        }
       },
       (err) => {
         console.log(err);
@@ -45,8 +58,10 @@ export class AddresslistComponent implements OnInit {
 
   getAddress() {
     this.apiobject.get(`/customers/address`).subscribe(
-      (data) => {
-        console.log(data);
+      (data: any) => {
+
+          localStorage.setItem('address',JSON.stringify(data));
+      
         this.addressInfo = data;
         // console.log("run");
       },

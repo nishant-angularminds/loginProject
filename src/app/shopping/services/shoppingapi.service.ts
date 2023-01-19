@@ -8,6 +8,9 @@ export class ShoppingapiService {
 
   baseUrl = 'https://shop-api.ngminds.com';
   cartCount:any = 0;
+  loginCart:any = false;
+  addressCart:any = false;
+  orderId:any;
 
   constructor(private httpObject: HttpClient) {}
 

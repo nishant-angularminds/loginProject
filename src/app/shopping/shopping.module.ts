@@ -14,6 +14,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from '../app.component';
 import { ProductdetailsComponent } from './home/productdetails/productdetails.component';
 import { CartlistComponent } from './home/cartlist/cartlist.component';
+import { PaymentComponent } from './home/payment/payment.component';
+import { OrderComponent } from './home/order/order.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { CartlistComponent } from './home/cartlist/cartlist.component';
     AddresslistComponent,
     ProductdetailsComponent,
     CartlistComponent,
+    PaymentComponent,
+    OrderComponent,
   ],
   imports: [
     CommonModule,
