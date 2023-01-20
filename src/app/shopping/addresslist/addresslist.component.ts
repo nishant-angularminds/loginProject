@@ -36,15 +36,6 @@ export class AddresslistComponent implements OnInit {
       (data) => {
         console.log(data);
         this.getAddress();
-
-        var add = [];
-        add.push(data);
-
-        localStorage.setItem('address',JSON.stringify(add));
-        if (this.apiobject.addressCart) {
-          this.apiobject.addressCart = false;
-          this.routeObject.navigateByUrl('/cartlist');
-        }
       },
       (err) => {
         console.log(err);

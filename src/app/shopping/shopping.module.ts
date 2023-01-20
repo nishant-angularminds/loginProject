@@ -16,6 +16,7 @@ import { ProductdetailsComponent } from './home/productdetails/productdetails.co
 import { CartlistComponent } from './home/cartlist/cartlist.component';
 import { PaymentComponent } from './home/payment/payment.component';
 import { OrderComponent } from './home/order/order.component';
+import { OrderHistoryComponent } from './home/order-history/order-history.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { OrderComponent } from './home/order/order.component';
     CartlistComponent,
     PaymentComponent,
     OrderComponent,
+    OrderHistoryComponent,
   ],
   imports: [
     CommonModule,

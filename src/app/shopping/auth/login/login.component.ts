@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
         if(this.apiObject.loginCart) {
 
           this.apiObject.loginCart = false;
-          this.routerObject.navigateByUrl('/cartlist');
+          this.routerObject.navigateByUrl('/order');
 
         }
 

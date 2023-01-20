@@ -1,0 +1,242 @@
+<div class="container mt-5">
+  <h1>ORDER HISTORY</h1>
+  <table class="table align-middle mb-0 bg-white">
+    <thead class="bg-light">
+      <tr>
+        <th>Transation_ID</th>
+        <th>Price</th>
+        <th>Order</th>
+        <th>Payment</th>
+        <th>Actions</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let data of orderInfo |paginate
+        : {
+            itemsPerPage: 6,
+            currentPage: page,
+            totalItems: 27
+          };index as i"
+        class="designTable"
+        data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop"
+        (click)="getOrder(data['_id'])"
+      >
+        <td class="text-center">
+          <div class="d-flex align-items-center">
+            <div
+              class="ms-3"
+              *ngIf="
+                data.hasOwnProperty('transactionNo');
+                else blankTransaction
+              "
+            >
+              <p class="fw-bold mb-1">{{ data["transactionNo"] }}</p>
+            </div>
+
+            <ng-template
+              class="d-flex justify-content-center"
+              #blankTransaction
+            >
+              <div>
+                <p class="fw-bold mb-1 ms-5">-</p>
+              </div>
+            </ng-template>
+          </div>
+        </td>
+        <td>
+          <p class="fw-normal mb-1">{{ data["total"] }}&#8377;</p>
+        </td>
+        <td>
+          <span class="text-dark">{{ data["status"] }}</span>
+        </td>
+        <td>{{ data["paymentStatus"] }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-danger text btn-rounded btn-sm fw-bold"
+            data-mdb-ripple-color="dark"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            (click)="paymentInHistory(data['_id'])"
+            *ngIf="data['paymentStatus'] == 'Pending'"
+          >
+            payment
+          </button>
+        </td>
+
+        <td>
+            <button
+              type="button"
+              class="btn btn-secondary text btn-rounded btn-sm fw-bold"
+              data-mdb-ripple-color="dark"
+              data-bs-toggle="modal"
+              data-bs-dismiss="modal"
+              (click)="cancelOrder(data['_id'],i)"
+            >
+              Cancel
+            </button>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="mt-5">
+<pagination-controls
+previousLabel="Prev"
+nextLabel="Next"
+(pageChange)="onTableDataChange($event)"
+>
+</pagination-controls>
+
+</div>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  data-bs-backdrop="static"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Payment</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form
+        [formGroup]="paymentGroup"
+        (ngSubmit)="sendPayment(paymentGroup.value)"
+      >
+        <div class="modal-body">
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              formControlName="nameOnCard"
+              name="nameOnCard"
+              class="form-control form-control-lg"
+              placeholder="Anna Doe"
+            />
+            <label class="form-label" for="formControlLgXsd"
+              >Cardholder's Name</label
+            >
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-7">
+              <div class="form-outline">
+                <input
+                  type="text"
+                  formControlName="cardNumber"
+                  name="cardNumber"
+                  class="form-control form-control-lg"
+                  placeholder="1234 5678 1234 5678"
+                />
+                <label class="form-label" for="formControlLgXM"
+                  >Card Number</label
+                >
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-outline">
+                <input
+                  type="password"
+                  formControlName="expiry"
+                  name="expiry"
+                  class="form-control form-control-lg"
+                  placeholder="MM/YYYY"
+                />
+                <label class="form-label" for="formControlLgExpk">Expire</label>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-outline">
+                <input
+                  type="password"
+                  formControlName="cvv"
+                  name="cvv"
+                  class="form-control form-control-lg"
+                  placeholder="Cvv"
+                />
+                <label class="form-label" for="formControlLgcvv">Cvv</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button> -->
+          <button
+            type="submit"
+            class="btn btn-success btn-lg btn-block"
+            data-bs-dismiss="modal"
+          >
+            Pay
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Product details</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- <ul *ngFor="let data of currentOrderProducts">
+
+            <li style="list-style-type: none;">{{data['name']}}</li>
+
+          </ul> -->
+
+          <!-- <div class="vh-100 d-flex justify-content-center align-items-center"> -->
+            <div class="col-md-6 m-auto">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Qty</th>
+                            <th scope="col">Total</th>
+                            <!-- <th scope="col">Delete</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of currentOrderProducts;index as i">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{data['name']}}</td>
+                            <td>{{data['price']}}&#8377;</td>
+                            <td>{{data['qty']}}</td>
+                            <td>{{data['subTotal']}}&#8377;</td>
+                            <!-- <td><button class="btn btn-sm btn-danger">Delete</button></td> -->
+                        </tr>
+                      
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- </div> -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>

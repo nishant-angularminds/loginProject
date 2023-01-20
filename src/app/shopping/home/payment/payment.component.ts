@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ShoppingapiService } from '../../services/shoppingapi.service';
+import { HotToastService } from '@ngneat/hot-toast';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-payment',
@@ -10,7 +12,7 @@ import { ShoppingapiService } from '../../services/shoppingapi.service';
 export class PaymentComponent implements OnInit {
   paymentGroup: FormGroup;
 
-  constructor(private apiObject: ShoppingapiService) {}
+  constructor(private apiObject: ShoppingapiService,private toast:HotToastService,private routerObject:Router) {}
 
   ngOnInit(): void {
     this.paymentGroup = new FormGroup({
@@ -29,6 +31,8 @@ export class PaymentComponent implements OnInit {
       .subscribe({
         next: (data) => {
           console.log(data);
+          this.toast.success("payment successfull");
+          this.routerObject.navigateByUrl('');
         },
         error: (err) => {
           console.log(err);

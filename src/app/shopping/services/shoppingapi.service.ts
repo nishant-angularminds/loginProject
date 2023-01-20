@@ -18,7 +18,7 @@ export class ShoppingapiService {
     return this.httpObject.get(`${this.baseUrl}${normalUrl}`);
   }
 
-  patch(normalUrl: any, payload: object) {
+  patch(normalUrl: any, payload: any) {
     return this.httpObject.patch(`${this.baseUrl}${normalUrl}`, payload);
   }
 

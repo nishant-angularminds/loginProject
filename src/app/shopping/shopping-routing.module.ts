@@ -9,6 +9,7 @@ import { ProductdetailsComponent } from './home/productdetails/productdetails.co
 import { CartlistComponent } from './home/cartlist/cartlist.component';
 import { PaymentComponent } from './home/payment/payment.component';
 import { OrderComponent } from './home/order/order.component';
+import { OrderHistoryComponent } from './home/order-history/order-history.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,11 +18,21 @@ const routes: Routes = [
   {
     path: 'payment',
     component: PaymentComponent,
+    canActivate:[CustProfileAuth]
   },
 
   {
-    path: 'order',
+
+    path:'orderHistory',
+    component:OrderHistoryComponent,
+    canActivate:[CustProfileAuth]
+
+  },
+
+  {
+    path: 'order-info',
     component: OrderComponent,
+    canActivate:[CustProfileAuth]
   },
 
   {
