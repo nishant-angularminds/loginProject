@@ -18,21 +18,19 @@ const routes: Routes = [
   {
     path: 'payment',
     component: PaymentComponent,
-    canActivate:[CustProfileAuth]
+    canActivate: [CustProfileAuth],
   },
 
   {
-
-    path:'orderHistory',
-    component:OrderHistoryComponent,
-    canActivate:[CustProfileAuth]
-
+    path: 'orderHistory',
+    component: OrderHistoryComponent,
+    canActivate: [CustProfileAuth],
   },
 
   {
     path: 'order-info',
     component: OrderComponent,
-    canActivate:[CustProfileAuth]
+    canActivate: [CustProfileAuth],
   },
 
   {

@@ -53,7 +53,7 @@ export class CartlistComponent implements OnInit {
     var checkToken = this.local.getTokenInLocalStorage();
 
     if (checkToken == null) {
-      alert('Login first');
+      this.toast.warning('Login first before create order');
       this.apiObject.loginCart = true;
       this.routeObject.navigateByUrl('/auth/login');
     } 

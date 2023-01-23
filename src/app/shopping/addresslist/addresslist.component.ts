@@ -79,7 +79,7 @@ export class AddresslistComponent implements OnInit {
   editAddressData(idAddress: any, iData: any) {
     this.editAddressId = idAddress;
     console.log(idAddress);
-    console.log(this.addressInfo[iData]);
+    console.log(this.addressInfo);
     this.addressUser.setValue(this.addressInfo[iData]);
   }
 

@@ -16,7 +16,8 @@ export class OrderHistoryComponent implements OnInit {
   currentOrder: any;
   currentOrderProducts: any;
   page:any=1;
-  limit:any=6;
+  limit:any=10;
+  dataResult:any;
 
   constructor(
     private apiObject: ShoppingapiService,
@@ -42,6 +43,7 @@ export class OrderHistoryComponent implements OnInit {
         this.orderInfo = data['results'];
         console.log(this.orderInfo);
         console.log(data);
+        this.dataResult =  data['totalResults'];
       },
 
       error: (err) => {

@@ -37,17 +37,14 @@ export class OrderComponent implements OnInit {
       console.log(this.deliveryFee);
     });
 
-    if(this.items.length==0) {
-
-      this.routerObject.navigateByUrl('')
-    }
-    
+    // if (this.items.length == 0) {
+    //   this.routerObject.navigateByUrl('');
+    // }
 
     this.getAddressData();
   }
 
   ngOnInit(): void {
-
     this.addressUser = new FormGroup({
       addressLine2: new FormControl(),
       street: new FormControl(),
@@ -57,15 +54,13 @@ export class OrderComponent implements OnInit {
     });
   }
 
-
   getAddressData() {
     this.apiObject.get(`/customers/address`).subscribe(
       (data: any) => {
         // this.address = data;
         console.log(data);
         this.address1 = data;
-        console.log(this.address1);
-        
+        console.log(this.address1.length == 0);
       },
       (err) => {
         console.log(err);
@@ -73,11 +68,9 @@ export class OrderComponent implements OnInit {
     );
   }
 
-  getData(data:any) {
-
-    this.addressInfo =  data;
+  getData(data: any) {
+    this.addressInfo = data;
     console.log(this.addressInfo);
-    
   }
 
   sendAddressData(addressData: any) {
@@ -87,7 +80,6 @@ export class OrderComponent implements OnInit {
       (data) => {
         console.log(data);
         this.getAddressData();
-
       },
       (err) => {
         console.log(err);
@@ -96,33 +88,66 @@ export class OrderComponent implements OnInit {
   }
 
   placeOrder() {
-    
-    if(this.addressInfo==undefined) {
+    if (this.address1.length == 0) {
+      this.toast.warning('Please add address!');
+    } else {
+      this.createOrder['items'] = this.items;
+      this.createOrder['deliveryFee'] = this.deliveryFee;
+      this.createOrder['total'] = this.total;
+      this.createOrder['address'] = this.addressInfo;
 
-      alert('select address first')
-    }
-
-    else {
-
-    this.createOrder['items'] = this.items;
-    this.createOrder['deliveryFee'] = this.deliveryFee;
-    this.createOrder['total'] = this.total;
-    this.createOrder['address'] = this.addressInfo;
-
-    this.apiObject.post(`/shop/orders`, this.createOrder).subscribe({
-      next: (data: any) => {
-        this.toast.success('placed successfully');
-        this.apiObject.orderId = data['order']['_id'];
-        this.routerObject.navigateByUrl('/payment');
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-
+      if (this.createOrder['address'] == undefined) {
+        this.toast.warning('Please select address!');
+      } else {
+        this.apiObject.post(`/shop/orders`, this.createOrder).subscribe({
+          next: (data: any) => {
+            this.toast.success('placed successfully');
+            this.apiObject.orderId = data['order']['_id'];
+            this.routerObject.navigateByUrl('/payment');
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      }
     }
 
     console.log(this.createOrder);
-    
+  }
+
+  editAddressData(idAddress: any, iData: any) {
+    this.editAddressId = idAddress;
+    console.log(idAddress);
+    console.log(this.addressInfo);
+    this.addressUser.setValue(this.address1[iData]);
+  }
+  sendUpdateAddressData(addressUpdate: any) {
+    console.log(addressUpdate);
+
+    this.apiObject
+      .put(`/customers/address/${this.editAddressId}`, addressUpdate)
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.getAddressData();
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+  }
+
+  deleteAddress(addressId: any) {
+    console.log(addressId);
+
+    this.apiObject.delete(`/customers/address/${addressId}`).subscribe(
+      (data) => {
+        console.log(data);
+        this.getAddressData();
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }
