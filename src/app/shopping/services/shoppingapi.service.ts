@@ -11,6 +11,7 @@ export class ShoppingapiService {
   loginCart:any = false;
   addressCart:any = false;
   orderId:any;
+  status:any=false;
 
   constructor(private httpObject: HttpClient) {}
 

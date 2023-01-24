@@ -13,10 +13,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SellershoppingInterceptor } from './sellershopping.interceptor';
-import { CustomerInterceptor } from './customer.interceptor';
 import { StoreModule } from '@ngrx/store';
 import { HotToastModule } from '@ngneat/hot-toast';
-import { cartReducer } from './shopping/states/cart.reducer';
+import { cartReducer, oneCartReducer } from './shopping/states/cart.reducer';
 
 
 @NgModule({
@@ -30,7 +29,7 @@ import { cartReducer } from './shopping/states/cart.reducer';
     ReactiveFormsModule,
     StoreModule.forRoot({}, {}),
     HotToastModule.forRoot(),
-    StoreModule.forRoot({state:cartReducer}),
+    StoreModule.forRoot({state:cartReducer,state1:oneCartReducer}),
   ],
   providers: [
     {

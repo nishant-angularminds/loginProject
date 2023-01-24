@@ -8,3 +8,5 @@ export const decrementQuantity = createAction('decrementQuantity',props<{dataInf
 export const totalPrice = createAction('totalPrice')
 export const addTotal = createAction('addTotal');
 export const subTotal = createAction('subTotal');
+export const subTotal1 = createAction('subTotal1');
+export const addOneCart = createAction('addOneCart',props<{dataInfo11:any}>());

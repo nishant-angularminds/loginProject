@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ShoppingapiService } from '../services/shoppingapi.service';
-import { addCart } from '../states/cart.action';
+import { addCart, addOneCart, subTotal, subTotal1 } from '../states/cart.action';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -120,5 +120,19 @@ export class HomeComponent implements OnInit {
     }
 
     this.getProductData();
+  }
+
+  addOneProduct(dataInfo11: any) {
+
+    console.log(dataInfo11);
+    
+
+    dataInfo11['qty'] = 1;
+    dataInfo11['subTotal'] = dataInfo11['price'];
+    dataInfo11['productId'] = dataInfo11['_id'];
+    this.apiObject.status = true;
+    this.store.dispatch(addOneCart({ dataInfo11: dataInfo11 }));
+    this.store.dispatch(subTotal1());
+    console.log(dataInfo11);
   }
 }

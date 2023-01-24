@@ -35,6 +35,8 @@ export class CartlistComponent implements OnInit {
 
       this.totalState = data.total;
     });
+
+    this.apiObject.status = false;
   }
 
   ngOnInit(): void {}

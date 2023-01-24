@@ -5,7 +5,10 @@
     <div class="main-search-input fl-wrap">
       <form>
         <div class="main-search-input-item">
-          <form [formGroup]="searchGroup" (ngSubmit)="searchProduct(searchGroup.value)">
+          <form
+            [formGroup]="searchGroup"
+            (ngSubmit)="searchProduct(searchGroup.value)"
+          >
             <input
               type="text"
               formControlName="searchProductName"
@@ -53,13 +56,16 @@
 
           <div class="d-flex justify-content-between">
             <button
-              class="btn btn-success"
+              class="btn btn-secondary"
               routerLink="/product-details"
               (click)="checkId(data['_id'])"
             >
-              Buy
+              Read
             </button>
 
+            <button class="btn btn-success" routerLink="/order-info" (click)="addOneProduct(data)">
+              Buy
+            </button>
           </div>
         </div>
       </div>
@@ -99,9 +105,7 @@
         </ul>
       </nav>
     </div>
-
-
   </div>
 </div>
 
-<h1>{{counter | async}}</h1>
+<h1>{{ counter | async }}</h1>

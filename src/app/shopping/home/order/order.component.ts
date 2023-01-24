@@ -20,22 +20,36 @@ export class OrderComponent implements OnInit {
   addressUser: FormGroup;
   addressInfo: any;
   editAddressId: any;
+  item1:any;
+  total1:number;
+  apiStatus:any;
 
   constructor(
-    private store: Store<{ state: any }>,
+    private store: Store<{ state: any,state1:any}>,
     private apiObject: ShoppingapiService,
     private routerObject: Router,
     private toast: HotToastService
   ) {
+
+    this.apiStatus = this.apiObject.status;
     this.store.select('state').subscribe((data) => {
       this.items = data.items;
       this.total = data.total;
       this.deliveryFee = data.deliveryFee;
 
       console.log(this.items);
-      console.log(this.total);
-      console.log(this.deliveryFee);
+      // console.log(this.total);
+      // console.log(this.deliveryFee);
     });
+
+    this.store.select('state1').subscribe((data)=>{
+
+     this.item1 = data.items;
+     this.total1 = data.total;
+     console.log(this.item1);
+     console.log(this.total1); 
+
+    })
 
     // if (this.items.length == 0) {
     //   this.routerObject.navigateByUrl('');
@@ -99,6 +113,19 @@ export class OrderComponent implements OnInit {
       if (this.createOrder['address'] == undefined) {
         this.toast.warning('Please select address!');
       } else {
+
+        if(this.apiObject.status==true) {
+
+          this.createOrder['items'] = this.item1;
+          this.createOrder['deliveryFee'] = this.deliveryFee;
+          this.createOrder['total'] = this.total1;
+          this.createOrder['address'] = this.addressInfo; 
+          
+          console.log(this.createOrder);
+          
+
+        }
+
         this.apiObject.post(`/shop/orders`, this.createOrder).subscribe({
           next: (data: any) => {
             this.toast.success('placed successfully');
