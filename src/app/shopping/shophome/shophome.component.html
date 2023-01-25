@@ -1,0 +1,116 @@
+<!-- <app-shopheader></app-shopheader> -->
+<!-- <app-shopheader></app-shopheader> -->
+
+<div class="container">
+  <div class="main-search-input-wrap mt-4 d-flex justify-content-between">
+    <div class="main-search-input fl-wrap">
+      <form>
+        <div class="main-search-input-item">
+          <form
+            [formGroup]="searchGroup"
+            (ngSubmit)="searchProduct(searchGroup.value)"
+          >
+            <input
+              type="text"
+              formControlName="searchProductName"
+              name="searchProductName"
+              value=""
+              class="sEdit p-1 me-3"
+              placeholder="Search Products..."
+            />
+            <button
+              class="main-search-button border no-border bg-warning p-1"
+              type="submit"
+            >
+              Search
+            </button>
+          </form>
+        </div>
+      </form>
+    </div>
+
+    <div>
+      <select class="p-1 border no-border" (change)="sortByMethod($event)">
+        <option>sortBy</option>
+        <option value="price">price</option>
+        <option value="name">name</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <div class="row row-cols-1 row-cols-md-3 row-cols-sm-2 row-cols-lg-4 g-4">
+    <div data-aos="fade-right" class="col" *ngFor="let data of productData">
+      <div class="card h-100">
+        <img
+          src="{{ data['images'][0]['url'] }}"
+          height="250px"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ data["name"] }}</h5>
+          <p class="card-text text-danger fs-5">
+            Price: {{ data["price"] }}&#8377;
+          </p>
+
+          <div class="d-flex justify-content-between">
+            <button
+              class="btn btn-secondary"
+              routerLink="/product-details"
+              (click)="checkId(data['_id'])"
+            >
+              Read
+            </button>
+
+            <button
+              class="btn btn-success"
+              routerLink="/order-info"
+              (click)="addOneProduct(data)"
+            >
+              Buy
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3 col-md-5 col-lg-7">
+      <select
+        class="form-select responsiveLimit mt-4"
+        (change)="pageChange($event)"
+        aria-label="Default select example"
+      >
+        <option selected>Items</option>
+        <option value="4">4</option>
+        <option value="6">6</option>
+        <option value="8">8</option>
+      </select>
+    </div>
+
+    <div class="col">
+      <nav aria-label="Page navigation example" class="mt-4">
+        <ul class="pagination" style="cursor: pointer">
+          <li class="page-item" (click)="previousData()">
+            <a class="page-link">Previous</a>
+          </li>
+          <div *ngFor="let data of pages; index as i">
+            <li class="page-item" id="nj" (click)="pageClick(i + 1)">
+              <a class="page-link" *ngIf="i < 3">{{ i + 1 }}</a>
+            </li>
+          </div>
+          <li class="page-item" (click)="nextData()">
+            <a class="page-link">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<h1>{{ counter | async }}</h1>

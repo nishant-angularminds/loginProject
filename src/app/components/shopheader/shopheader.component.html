@@ -1,0 +1,106 @@
+<nav class="navbar navbar-expand-lg" style="background-color: rgb(22, 109, 109);">
+    <div class="container-fluid">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <div class="d-flex" *ngIf="statusUser; else go">
+            <li class="nav-item me-3">
+              <button
+                class="btn btn-light"
+                aria-current="page"
+                routerLink="/auth/login"
+                >Sign in</button
+              >
+            </li>
+  
+            <li class="nav-item me-3">
+              <button
+              class="btn btn-light"
+  
+                aria-current="page"
+                routerLink="/auth/register"
+                >Sign up</button
+              >
+            </li>
+  
+            <li class="nav-item me-3">
+              <button
+              class="btn btn-light"
+  
+                aria-current="page"
+                routerLink="/seller"
+                >become a seller</button
+              >
+            </li>
+          
+          </div>
+  
+          <ng-template #go>
+  
+            <li class="nav-item me-3">
+              <a
+                class="nav-link active text-light fs-5"
+                aria-current="page"
+                routerLink=""
+                >Home</a
+              >
+            </li>
+  
+            <li class="nav-item me-3">
+              <a
+                class="nav-link active text-light fs-5"
+                aria-current="page"
+                routerLink="/customer-profile"
+                >Profile</a
+              >
+            </li>
+  
+  
+            <!-- <li class="nav-item me-3">
+              <a
+                class="nav-link active text-light fs-5"
+                aria-current="page"
+                routerLink="/address-list"
+                >AddressList</a
+              >
+            </li> -->
+  
+            <li class="nav-item me-3">
+              <a
+                class="nav-link active text-light fs-5"
+                aria-current="page"
+                routerLink="/orderHistory"
+                >Transactions</a
+              >
+            </li>
+          
+          </ng-template>
+        </ul>
+    
+        <div>
+  
+          <div class="position-relative me-5" style="cursor: pointer;">
+            <!-- Profile -->
+            <i class="fa-solid fa-cart-shopping" style="font-size: 30px;" routerLink="/cartlist"></i>
+            <span class="position-absolute top-0 start-100 translate-middle bg-light border border-light rounded-circle">
+             {{(state)?.length}}+
+            </span>
+          </div>
+        </div>
+  
+       
+        <div class="text-light fs-3">NjComapny</div>
+      </div>
+    </div>
+  </nav>
+  

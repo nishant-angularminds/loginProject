@@ -1,0 +1,57 @@
+.spacing {
+    margin: 10px;
+    padding: 6px;
+  }
+  
+  .loginFieldStyle {
+    margin: 10px;
+    padding: 5px;
+  }
+  
+  .spaceForButton {
+    margin-right: 10px;
+    padding: 3px;
+    margin-left: 10px;
+  }
+  
+  @import url("https://fonts.googleapis.com/css?family=Poppins");
+  
+  /* BASIC */
+  
+
+  /* @media (min-width: 1025px) {
+    .h-custom {
+    height: 100vh !important;
+    }
+    }
+ */
+
+ .demo {
+
+    margin-top: 70px;
+    background-color:rgb(168, 158, 158) ;
+    border-radius: 10px;
+ }
+
+ .mainReg {
+
+  width: 550px;
+ }
+
+ @media screen and (max-width:768px){
+  
+  .mainReg {
+
+    width: 420px;
+   }
+
+ }
+
+ @media screen and (max-width:425px){
+  
+  .mainReg {
+
+    width: 300px;
+   }
+
+ }

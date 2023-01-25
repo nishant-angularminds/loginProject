@@ -1,0 +1,192 @@
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  data-bs-backdrop="static"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div
+        class="modal-header border-0"
+        style="background-color: rgb(206, 143, 206)"
+      >
+        <h1 class="modal-title fs-6" id="exampleModalLabel">Edit Name</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form
+        [formGroup]="companyForm"
+        (ngSubmit)="editCompany(companyForm.value)"
+      >
+        <div class="modal-dialog-centered border-0 mt-3">
+          <input
+            class="m-auto m-3 p-2 border no-border"
+            formControlName="email"
+            name="email"
+            style="outline: none"
+            placeholder="Email"
+            type="text"
+          />
+        </div>
+
+        <div class="modal-dialog-centered border-0 mt-4">
+          <input
+            class="m-auto m-3 p-2 border no-border"
+            formControlName="name"
+            name="name"
+            style="outline: none"
+            placeholder="company name"
+            type="text"
+          />
+        </div>
+        <div class="modal-footer border-0">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+            Save changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal2"
+  data-bs-backdrop="static"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div
+        class="modal-header border-0"
+        style="background-color: rgb(206, 143, 206)"
+      >
+        <h1 class="modal-title fs-6" id="exampleModalLabel">Change Password</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form
+        [formGroup]="companyForm"
+        (ngSubmit)="sendPasswordData(companyForm.value)"
+      >
+        <div class="modal-dialog-centered border-0 mt-3">
+          <input
+            class="m-auto m-1 p-2 border no-border"
+            formControlName="old_password"
+            name="old_password"
+            style="outline: none"
+            placeholder="old password"
+            type="text"
+          />
+        </div>
+
+        <div class="modal-dialog-centered border-0 mt-3">
+          <input
+            class="m-auto m-3 p-2 border no-border"
+            formControlName="new_password"
+            name="new_password"
+            style="outline: none"
+            placeholder="new password"
+            type="text"
+          />
+        </div>
+        <div class="modal-footer border-0 mt-3">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+            Save changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-7">
+      <div class="bg-info card p-3 py-4 border border-primary">
+        <!-- <i class="fa-solid fa-ellipsis-vertical"></i> -->
+        <i
+          class="fa-solid fa-lock"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal2"
+        ></i>
+        <h3 class="text-center">My Profile</h3>
+        <div class="text-center">
+          <img
+            src="assets/nishant.jpeg"
+            alt="User"
+            width="150"
+            class="rounded-circle img-thumbnail img-fluid"
+          />
+        </div>
+        <div class="text-center mt-3">
+          <h1 class="mt-2 mb-0">{{ data1?.['name'] }}</h1>
+          <h3 class="mt-0 mb-0 text-danger">
+            {{ data1?.['_org']['name'] }}
+          </h3>
+          <span class="mt-0">{{ data1?.['_org']['email']}}</span>
+          <div class="px-4 mt-1">
+            <p class="fonts"></p>
+          </div>
+          <div class="buttons d-flex justify-content-center">
+            <button class="btn btn-light px-4 ms-3" (click)="deleteLocal()">
+              Logout
+            </button>
+            <div class="buttons">
+              <button
+                class="btn btn-light px-4 ms-3"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+                (click)="fillEmail()"
+              >
+                Edit
+              </button>
+
+              <span *ngIf="verify == false">
+                <button
+                  type="button"
+                  class="btn btn-light ms-3"
+                  (click)="verifyEmail()"
+                >
+                  Verify
+                </button>
+              </span>
+              <span *ngIf="verify == true">
+                <button type="button" class="btn btn-light ms-3">
+                  Verified
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

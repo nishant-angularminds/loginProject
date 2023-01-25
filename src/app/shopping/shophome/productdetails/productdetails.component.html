@@ -1,0 +1,18 @@
+<div class="d-flex justify-content-center align-items-center" style="width: 100vw;height: 100vh; background-color: rgb(230, 206, 206);">
+    <div class="card mb-3 w-75 bolo  d-flex justify-content-center align-items-center shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+      <div class="row g-0 w-100 h-100">
+        <div class="col-md-4 d-flex justify-content-center align-items-center" style="background-color: lightblue;">
+          <img src="{{currentProductInfo.images[0].url }}" class="img-fluid rounded-start" style="position: sticky;" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title fs-1">{{ currentProductInfo.name }}</h5>
+            <p class="card-text changedDes">{{ currentProductInfo.description }}</p>
+            <p class="card-text fs-1"><small class="text-danger">Price: {{ currentProductInfo.price }}  &#8377;</small></p>
+            <button class="btn btn-warning" (click)="addCart(currentProductInfo)" routerLink="/cartlist">Add to cart</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>

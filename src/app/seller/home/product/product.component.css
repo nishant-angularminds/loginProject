@@ -1,0 +1,17 @@
+.outContainer {
+  background-color: skyblue;
+}
+
+.styleText {
+ 
+font-size: 30px;
+}
+
+@media screen and (max-width:360px) {
+  
+.sEdit {
+
+  width: 200px;
+}
+
+}

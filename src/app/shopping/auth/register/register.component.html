@@ -1,0 +1,107 @@
+<!-- <app-headerpart></app-headerpart> -->
+<!-- <app-header-demo></app-header-demo> -->
+
+<div class="container mainReg p-5 demo">
+
+ <h1>Register</h1>
+  <form
+    class="row g-3"
+    [formGroup]="customerRegisterForm"
+    (ngSubmit)="submitCustData(customerRegisterForm.value)"
+  >
+    <div class="col-12">
+      <label for="inputEmail4" class="form-label">Email</label>
+      <input
+        type="email"
+        formControlName="email"
+        name="email"
+        class="form-control"
+        id="inputEmail4"
+      />
+    </div>
+    <div class="col-12">
+      <label for="inputPassword4" class="form-label">Password</label>
+      <input
+        type="password"
+        formControlName="password"
+        name="password"
+        class="form-control"
+        id="inputPassword4"
+      />
+    </div>
+    <div class="col-12">
+      <label for="name" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        formControlName="name"
+        name="name"
+      />
+    </div>
+
+    <div formGroupName="address">
+      <div class="col-12">
+        <label for="inputAddress2" class="form-label">Address</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inputAddress2"
+          formControlName="addressLine2"
+          name="addressLine2"
+        />
+      </div>
+      <div class="row row-cols-1 mt-4">
+        <div class="col col-sm-4">
+          <label for="inputCity" class="form-label">City</label>
+          <input
+            type="text"
+            formControlName="city"
+            name="city"
+            class="form-control"
+            id="inputCity"
+          />
+        </div>
+
+        <div class="col col-sm-4">
+          <label for="inputStreet" class="form-label">Street</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputStreet"
+            formControlName="street"
+            name="street"
+          />
+        </div>
+
+        <div class="col col-sm-4">
+          <label for="inputState" class="form-label">State</label>
+          <select
+            id="inputState"
+            class="form-select"
+            formControlName="state"
+            name="state"
+          >
+            <option selected>Choose...</option>
+            <option>Maharashtra</option>
+            <option>Chennai</option>
+            <option>Ahmdabad</option>
+          </select>
+        </div>
+        <div class="col">
+          <label for="inputPin" class="form-label">Pin</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputPin"
+            formControlName="pin"
+            name="pin"
+          />
+        </div>
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-dark mt-4">Sign up</button>
+      </div>
+    </div>
+  </form>
+</div>

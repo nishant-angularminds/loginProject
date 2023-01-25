@@ -1,0 +1,237 @@
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  data-bs-backdrop="static"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">User detail</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form
+        [formGroup]="userGroup"
+        (ngSubmit)="submitUserForm(userGroup); userGroup.reset()"
+      >
+        <div class="modal-body text-center">
+          <input
+            class="mb-5 p-1"
+            type="text"
+            formControlName="email"
+            placeholder="Email"
+          />
+          <input
+            class="mb-5 p-1"
+            type="text"
+            formControlName="password"
+            placeholder="Password"
+          />
+          <input
+            class="mb-5 p-1"
+            type="text"
+            formControlName="name"
+            placeholder="Name"
+          /><br />
+
+          <div class="d-flex justify-content-center">
+            <div class="me-2">Select Role:</div>
+
+            <div>
+              <input
+                type="radio"
+                value="user"
+                formControlName="role"
+              />User<br />
+              <input
+                type="radio"
+                value="admin"
+                class="mt-2"
+                formControlName="role"
+              />Admin
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+            Save user
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal1"
+  data-bs-backdrop="static"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit UserName</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form
+        [formGroup]="userGroup"
+        (ngSubmit)="submitEditUserForm(userGroup.value); userGroup.reset()"
+      >
+        <div class="modal-body text-center">
+          <input
+            class="mb-5 p-1"
+            type="text"
+            formControlName="email"
+            placeholder="Email"
+          />
+          <input
+            class="mb-5 p-1"
+            type="text"
+            formControlName="password"
+            placeholder="Password"
+          />
+          <input
+            class="mb-5 p-1"
+            type="text"
+            formControlName="name"
+            placeholder="Name"
+          /><br />
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+            Save user
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- <app-header></app-header> -->
+
+<div class="d-flex ms-4 mt-5">
+  <div>
+    <button
+      type="button"
+      class="btn btn-success"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+    >
+      Create user
+    </button>
+  </div>
+  <div class="ms-5">
+    <form class="d-flex" role="search" style="margin-right: 600px">
+      <input
+        class="form-control me-2"
+        type="search"
+        placeholder="Search customer"
+        name="search"
+        (keyup)="userSearch($event)"
+      />
+      <button class="btn btn-dark" type="button">Search</button>
+    </form>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <table class="table table-success table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let userImpData of userDataArray">
+        <td>
+          <i
+            class="fa-solid fa-pen-to-square ms-2 me-3"
+            (click)="userId(userImpData)"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal1"
+            style="cursor: pointer"
+          ></i
+          >{{ userImpData["name"] }}
+        </td>
+        <td>{{ userImpData["email"] }}</td>
+        <td>
+          <select
+            class="border no-border bg-success p-1 text-light rounded"
+            name="role"
+            (change)="sendRoleData($event, userImpData['_id'])"
+          >
+            <option value="user" selected>{{ userImpData["role"] }}</option>
+            <option value="admin" *ngIf="userImpData['role'] === 'user'">
+              admin
+            </option>
+            <option value="user" *ngIf="userImpData['role'] === 'admin'">
+              user
+            </option>
+          </select>
+          <i
+            class="fa-solid fa-trash marginForDelete"
+            (click)="deleteUser(userImpData['_id'])"
+          ></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <select
+    class="form-select widthStyle"
+    (change)="pageChange($event)"
+    aria-label="Default select example"
+  >
+    <option selected>ItemsList</option>
+    <option value="4">4</option>
+    <option value="6">6</option>
+    <option value="8">8</option>
+  </select>
+
+  <nav aria-label="Page navigation example" class="mt-4">
+    <ul class="pagination" style="cursor: pointer">
+      <li class="page-item" (click)="previousData()">
+        <a class="page-link">Previous</a>
+      </li>
+      <div *ngFor="let data of pages; index as i">
+        <li class="page-item" (click)="pageClick(i + 1)">
+          <a class="page-link">{{ i + 1 }}</a>
+        </li>
+      </div>
+      <li class="page-item" (click)="nextData()">
+        <a class="page-link">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>
