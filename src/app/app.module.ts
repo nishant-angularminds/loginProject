@@ -17,7 +17,6 @@ import { StoreModule } from '@ngrx/store';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { cartReducer, oneCartReducer } from './shopping/states/cart.reducer';
 
-
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent],
   imports: [
@@ -29,14 +28,14 @@ import { cartReducer, oneCartReducer } from './shopping/states/cart.reducer';
     ReactiveFormsModule,
     StoreModule.forRoot({}, {}),
     HotToastModule.forRoot(),
-    StoreModule.forRoot({state:cartReducer,state1:oneCartReducer}),
+    StoreModule.forRoot({ state: cartReducer, state1: oneCartReducer }),
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: SellershoppingInterceptor,
       multi: true,
-    }
+    },
   ],
   bootstrap: [AppComponent],
 })
