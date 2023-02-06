@@ -1,0 +1,106 @@
+<div class="container mt-5">
+  <h1>MANAGE ORDER</h1>
+  <table class="table align-middle mb-0 bg-white">
+    <thead class="bg-light">
+      <tr>
+        <th>Transation_No</th>
+        <th>Price</th>
+        <!-- <th>Order</th> -->
+        <!-- <th>Payment</th> -->
+        <th>Actions</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="designTable styleNew"
+        data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop"
+        *ngFor="let data of orderData"
+        (click)="orderDeatils(data['_id'])"
+      >
+        <td class="text-center">
+          <div class="d-flex align-items-center">
+            <div class="ms-3">
+              <p class="fw-bold mb-1">{{ data["transactionNo"] }}</p>
+            </div>
+
+            <ng-template
+              class="d-flex justify-content-center"
+              #blankTransaction
+            >
+              <div>
+                <p class="fw-bold mb-1 ms-5">-</p>
+              </div>
+            </ng-template>
+          </div>
+        </td>
+        <td>
+          <p class="fw-normal mb-1">{{ data["total"] }}&#8377;</p>
+        </td>
+        <!-- <td>
+            <span class="text-dark">{{data['status']}}</span>
+          </td> -->
+        <td>
+          <div *ngIf="data['status'] != 'Cancelled'; else changedToCancel">
+
+            <div *ngIf="data['status']!='Delivered';else go">
+            <button
+              type="button"
+              *ngIf="data['status'] != 'Dispatched'; else changeButton"
+              class="btn btn-success text btn-rounded btn-sm fw-bold"
+              data-mdb-ripple-color="dark"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              (click)="dispatchOrder(data['_id'], $event)"
+            >
+              dispatch
+            </button>
+
+            <ng-template #changeButton>
+              <button
+                type="button"
+                class="btn btn-primary text btn-rounded btn-sm fw-bold"
+                data-mdb-ripple-color="dark"
+                (click)="deliver($event,data['_id'])"
+              >
+                deliver
+              </button>
+            </ng-template>
+            </div>
+
+            <ng-template #go>
+
+              <p>delivered</p>
+            </ng-template>
+          </div>
+
+          <ng-template #changedToCancel>
+            <p>Cancelled</p>
+          </ng-template>
+        </td>
+        <td>
+          <button
+            *ngIf="data['status'] != 'Cancelled'"
+            class="btn btn-danger text btn-rounded btn-sm fw-bold"
+            (click)="cancelOrder($event, data['_id'])"
+          >
+            Cancel
+          </button>
+
+          <!-- <td>
+              <button
+                type="button"
+                class="btn btn-secondary text btn-rounded btn-sm fw-bold"
+                data-mdb-ripple-color="dark"
+                data-bs-toggle="modal"
+                data-bs-dismiss="modal"
+              >
+                Cancel
+              </button>
+            </td> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

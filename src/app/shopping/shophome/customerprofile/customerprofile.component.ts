@@ -58,6 +58,8 @@ export class CustomerprofileComponent implements OnInit {
 
   deleteUser() {
     this.localObject.removeToken();
+    document.location.reload();
+
     this.routerObj.navigateByUrl('');
   }
 

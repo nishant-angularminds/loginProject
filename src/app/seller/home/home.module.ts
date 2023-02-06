@@ -8,13 +8,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from './product/product.component';
 import { ProductdataComponent } from './productdata/productdata.component';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { OrderComponent } from './order/order.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     ProfileComponent,
     ProductComponent,
-    ProductdataComponent
+    ProductdataComponent,
+    OrderComponent,
+    OrderDetailsComponent
   ],
   imports: [CommonModule, HomeRoutingModule, FormsModule, ReactiveFormsModule,ComponentsModule],
 })

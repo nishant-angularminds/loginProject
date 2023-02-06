@@ -50,9 +50,8 @@ export class AddresslistComponent implements OnInit {
   getAddress() {
     this.apiobject.get(`/customers/address`).subscribe(
       (data: any) => {
+        localStorage.setItem('address', JSON.stringify(data));
 
-          localStorage.setItem('address',JSON.stringify(data));
-      
         this.addressInfo = data;
         // console.log("run");
       },
@@ -88,8 +87,6 @@ export class AddresslistComponent implements OnInit {
   }
 
   sendUpdateAddressData(editInfo: any) {
-    // console.log(editInfo);
-    // this.apiobject.p
     this.apiobject
       .put(`/customers/address/${this.editAddressId}`, editInfo)
       .subscribe(
