@@ -16,7 +16,10 @@
         class="designTable styleNew"
         data-bs-toggle="modal"
         data-bs-target="#staticBackdrop"
-        *ngFor="let data of orderData"
+        *ngFor="
+          let data of orderData
+            | paginate : { itemsPerPage: limit, currentPage: p }
+        "
         (click)="orderDeatils(data['_id'])"
       >
         <td class="text-center">
@@ -43,34 +46,32 @@
           </td> -->
         <td>
           <div *ngIf="data['status'] != 'Cancelled'; else changedToCancel">
-
-            <div *ngIf="data['status']!='Delivered';else go">
-            <button
-              type="button"
-              *ngIf="data['status'] != 'Dispatched'; else changeButton"
-              class="btn btn-success text btn-rounded btn-sm fw-bold"
-              data-mdb-ripple-color="dark"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-              (click)="dispatchOrder(data['_id'], $event)"
-            >
-              dispatch
-            </button>
-
-            <ng-template #changeButton>
+            <div *ngIf="data['status'] != 'Delivered'; else go">
               <button
                 type="button"
-                class="btn btn-primary text btn-rounded btn-sm fw-bold"
+                *ngIf="data['status'] != 'Dispatched'; else changeButton"
+                class="btn btn-success text btn-rounded btn-sm fw-bold"
                 data-mdb-ripple-color="dark"
-                (click)="deliver($event,data['_id'])"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+                (click)="dispatchOrder(data['_id'], $event)"
               >
-                deliver
+                dispatch
               </button>
-            </ng-template>
+
+              <ng-template #changeButton>
+                <button
+                  type="button"
+                  class="btn btn-primary text btn-rounded btn-sm fw-bold"
+                  data-mdb-ripple-color="dark"
+                  (click)="deliver($event, data['_id'])"
+                >
+                  deliver
+                </button>
+              </ng-template>
             </div>
 
             <ng-template #go>
-
               <p>delivered</p>
             </ng-template>
           </div>
@@ -103,4 +104,11 @@
       </tr>
     </tbody>
   </table>
+</div>
+
+<div class="mt-5">
+  <pagination-controls
+    class="text-center"
+    (pageChange)="p = $event"
+  ></pagination-controls>
 </div>

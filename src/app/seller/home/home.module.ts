@@ -10,6 +10,7 @@ import { ProductdataComponent } from './productdata/productdata.component';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { OrderComponent } from './order/order.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,6 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     OrderComponent,
     OrderDetailsComponent
   ],
-  imports: [CommonModule, HomeRoutingModule, FormsModule, ReactiveFormsModule,ComponentsModule],
+  imports: [CommonModule, HomeRoutingModule, FormsModule, ReactiveFormsModule,ComponentsModule,NgxPaginationModule],
 })
 export class HomeModule {}

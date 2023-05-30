@@ -11,6 +11,8 @@ import { SellerapiService } from '../../services/sellerapi.service';
 export class OrderComponent implements OnInit {
   orderData: any;
   status = true;
+  p:number = 1;
+  limit=4;
 
   constructor(
     private serviceObject: SellerapiService,

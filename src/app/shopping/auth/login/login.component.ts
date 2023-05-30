@@ -21,15 +21,13 @@ export class LoginComponent implements OnInit {
     private routerObject: Router,
     private local: ShoppinglocalstorageService,
     private toast: HotToastService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.custLogin = new FormGroup({
       email: new FormControl(),
       password: new FormControl(),
     });
-
   }
 
   changeData() {}
@@ -37,7 +35,7 @@ export class LoginComponent implements OnInit {
   submitCustLogin(custLoginData: any) {
     console.log(custLoginData);
 
-    this.apiObject.post(`/shop/auth/login`, custLoginData).subscribe(
+    this.apiObject.post(`/shop/auth/login?captcha=false`, custLoginData).subscribe(
       (data: any) => {
         // console.log(data);
 
@@ -47,17 +45,11 @@ export class LoginComponent implements OnInit {
 
         this.toast.success('login successfully');
 
-        if(this.apiObject.loginCart) {
-
+        if (this.apiObject.loginCart) {
           this.apiObject.loginCart = false;
           this.routerObject.navigateByUrl('/order-info');
-
-        }
-
-        else {
-
-        this.routerObject.navigateByUrl('');
-
+        } else {
+          this.routerObject.navigateByUrl('');
         }
       },
       (err) => {
