@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
   registerPage: FormGroup;
   emailSubmitStatus: any;
   queryParams: any;
-  captchaToken: any;
+  // captchaToken: any;
 
   constructor(
     private router1: Router,
@@ -22,11 +22,11 @@ export class RegisterComponent implements OnInit {
     private toast:HotToastService
   ) {
 
-    this.captchaObject.execute('importantAction').subscribe((token: any) => {
-      // console.log(token);
+    // this.captchaObject.execute('importantAction').subscribe((token: any) => {
+    //   // console.log(token);
 
-      this.captchaToken = token;
-    });
+    //   this.captchaToken = token;
+    // });
     
   }
 
@@ -52,13 +52,13 @@ export class RegisterComponent implements OnInit {
         Validators.pattern('^[a-zA-Z ]*$'),
       ]),
 
-      captcha: new FormControl('', Validators.required),
+      // captcha: new FormControl('', Validators.required),
     });
   }
 
   submitForm(formData: any) {
 
-    this.registerPage.value.captcha = this.captchaToken;
+    // this.registerPage.value.captcha = this.captchaToken;
 
     this.emailSubmitStatus = true;
 
@@ -67,7 +67,7 @@ export class RegisterComponent implements OnInit {
       this.registerPage.controls['email'].valid &&
       this.registerPage.controls['password'].valid &&
       this.registerPage.controls['company'].valid     ) {
-      this.serviceObject.post(`/auth/register`, formData).subscribe(
+      this.serviceObject.post(`/auth/register?captcha=false`, formData).subscribe(
         (data) => {
 
           this.router1.navigateByUrl('/seller/auth/login');
@@ -82,10 +82,10 @@ export class RegisterComponent implements OnInit {
   }
 
   onCaptchaChecked(event: any) {
-    if (event.target.checked == true) {
-      this.captchaObject.execute('importantAction').subscribe((token) => {
-        this.registerPage.value.captcha = token;
-      });
-    }
+    // if (event.target.checked == true) {
+    //   this.captchaObject.execute('importantAction').subscribe((token) => {
+    //     this.registerPage.value.captcha = token;
+    //   });
+    // }
   }
 }
