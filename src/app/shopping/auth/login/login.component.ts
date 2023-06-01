@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
   submitCustLogin(custLoginData: any) {
     console.log(custLoginData);
 
-    this.apiObject.post(`/shop/auth/login`, custLoginData).subscribe(
+    this.apiObject.post(`/shop/auth/login?captcha=false`, custLoginData).subscribe(
       (data: any) => {
         // console.log(data);
 

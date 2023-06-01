@@ -46,26 +46,23 @@ export class LoginComponent implements OnInit {
         Validators.required,
         Validators.minLength(6),
       ]),
-      captcha: new FormControl('', Validators.required),
     });
   }
   setCaptchaToken() {
-    this.loginCaptcha.execute('importantAction').subscribe((token) => {
-      this.captchaToken = token;
-    });
+    // this.loginCaptcha.execute('importantAction').subscribe((token) => {
+    //   this.captchaToken = token;
+    // });
   }
 
   submitLoginForm(loginData: any) {
-    this.loginPage.value.captcha = this.captchaToken;
-
-    console.log(loginData);
+    // this.loginPage.value.captcha = this.captchaToken;
 
     this.emailSubmitStatus1 = true;
     if (
       this.loginPage.controls['email'].valid &&
       this.loginPage.controls['password'].valid
     ) {
-      this.service.post(`/auth/login`, loginData).subscribe(
+      this.service.post(`/auth/login?captcha=false`, loginData).subscribe(
         (data: any) => {
           this.localstorageObject.setTokenInLocalStorage(data);
           this.routerObject.navigate(['/seller/home']);
